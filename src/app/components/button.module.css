@@ -4,3 +4,8 @@
     height: 3.125rem;
     width: 6.25rem;
 }
+
+.button:hover {
+    background: var(--primary-gold-120);
+    color: var(--primary-white-100);
+}
