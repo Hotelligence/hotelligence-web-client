@@ -1,0 +1,14 @@
+.footerWrapper {
+    padding: 0 100px 0 100px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #1F2C3F;
+    color: #C9AF8A;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    margin-top: 5rem;
+}

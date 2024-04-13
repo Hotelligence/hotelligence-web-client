@@ -1,0 +1,20 @@
+.discountWrapper {
+    display: flex;
+    background: var(--secondary-green-100);
+    align-items: center;
+    padding: 0.44rem 0.64rem;
+    border-radius: 0.3125rem;
+    width: 6.25rem;
+    height: 1.875rem;
+    gap: 0.31rem;
+}
+
+.leftSide {
+    color: var(--primary-white-100);
+}
+
+.rightSide {
+    display: flex;
+    color: var(--primary-white-100);
+    align-items: center;
+}

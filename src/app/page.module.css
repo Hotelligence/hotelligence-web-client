@@ -1,0 +1,30 @@
+.heading1 {
+  text-align: center;
+}
+
+.heading2 {
+  margin-top: 2.5rem;
+  text-align: left;
+}
+
+.searchContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.25rem;
+  align-items: center;
+  gap: 1.88rem;
+}
+
+.cardContainer {
+  display: flex;
+  gap: 1.25rem;
+  overflow-x: auto;
+  margin-top: 1.25rem;
+  padding-bottom: 0.7rem;
+}
+
+.cardContainer::-webkit-scrollbar {
+  display: none;
+}
+
+

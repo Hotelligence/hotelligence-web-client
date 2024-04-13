@@ -1,0 +1,24 @@
+.recentsearchCardWrapper {
+    display: flex;
+    min-width: 17.5rem;
+    height: 6.25rem;
+    padding: 0.4375rem 0.9375rem;
+    align-items: center;
+    gap: 0.625rem;
+    border-radius: 0.625rem;
+    border: 1px solid var(--Primary-Blue-50, #8E959E);
+}
+
+.recentsearchCardWrapper:hover {
+    cursor: pointer;
+}
+
+.leftSide {
+    width: 1.5rem;
+}
+
+.rightSide {
+    display: flex;
+    flex-direction: column;
+    gap: 0.05rem;
+}
