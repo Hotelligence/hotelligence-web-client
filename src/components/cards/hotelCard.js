@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import styles from './hotelCard.module.css'
-import '../../globals.css'
 import Discount from './discount'
 
 export default function HotelCard({img}) {
