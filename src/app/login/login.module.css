@@ -1,0 +1,42 @@
+.title {
+    text-align: center;
+    margin-bottom: 3.12rem;
+}
+
+.buttonWrapper {
+    width: 22.5rem;
+    height: 3.13rem;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.or {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-top: 1.56rem;
+    margin-bottom: 1.56rem;
+}
+
+.fieldsContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.buttonWrapper2 {
+    width: 22.5rem;
+    height: 3.13rem;
+    display: flex;
+    justify-content: right;
+}
+
+.txtWrapper {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-top: 1.25rem;
+    width: 22.5rem;
+}

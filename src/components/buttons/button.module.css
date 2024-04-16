@@ -2,7 +2,7 @@
     background: var(--primary-blue-100);
     color: var(--primary-gold-100);
     height: 3.125rem;
-    width: 6.25rem;
+    width: auto;    
 }
 
 .button:hover {
