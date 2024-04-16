@@ -4,10 +4,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #1F2C3F;
-    color: #C9AF8A;
+    background-color: var(--primary-blue-100);
+    color: var(--primary-gold-100);
     position: relative;
-    bottom: 0;
+    
     width: 100%;
     text-align: center;
     margin-top: 5rem;
