@@ -5,7 +5,7 @@ import { Checkbox, Input } from "@nextui-org/react";
 import CustomButton from "../../components/buttons/button";
 import CustomButtonOutline from "../../components/buttons/buttonOutline";
 
-export default function Login() {
+export default function LoginByOTP() {
     return (
         <>
             <div className={styles.header}>
