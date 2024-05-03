@@ -36,7 +36,6 @@ export default function Login() {
                             type="email" 
                             placeholder="Email"                            
                             isClearable="true">
-                            <h5>Đăng nhập bằng Google</h5>
                         </Input>
                     </div>
                 </div>
