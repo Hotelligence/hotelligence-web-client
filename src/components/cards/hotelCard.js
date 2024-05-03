@@ -6,7 +6,7 @@ export default function HotelCard({img}) {
     return (
         <div className={styles.hotelCardWrapper}>
             <div className={styles.upSide}>
-                <Image src={img} />
+                <Image className="rounded-t-lg" src={img} />
             </div>
 
             <div className={styles.downSide}>

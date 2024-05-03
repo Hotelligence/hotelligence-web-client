@@ -6,11 +6,13 @@
     align-items: center;
     gap: 0.625rem;
     border-radius: 0.625rem;
-    border: 1px solid var(--Primary-Blue-50, #8E959E);
+    border: 1px solid var(--primary-blue-50);
 }
 
 .recentsearchCardWrapper:hover {
     cursor: pointer;
+    border: 1px solid var(--primary-blue-100);
+    box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.15);
 }
 
 .leftSide {
