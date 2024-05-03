@@ -1,0 +1,57 @@
+.title {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 0 0;
+}
+
+.icon {
+    display: flex;
+    justify-content: flex-start;
+    margin: 0 auto 0 0;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.94rem;
+}
+
+.descriptionWrapper {
+    color: var(--primary-blue-50);
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    text-align: center;
+    margin-bottom: 1.56rem;
+}
+
+.description{
+    display: flex;
+    max-width: 22.5rem;    
+}
+
+.buttonWrapper2 {
+    width: 22.5rem;
+    height: 3.13rem;
+    display: flex;
+    justify-content: left;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 2.5rem;
+    margin-bottom: 1.25rem;
+}
+
+.buttonContainer2 {
+    display: flex;
+    justify-content: center;
+    margin-top: 5rem;
+}
+
+.countdown {
+    color: var(--primary-blue-50);
+}
