@@ -32,9 +32,9 @@ export default function Login() {
                             color="white" 
                             variant="bordered" 
                             fullWidth="true" 
-                            size="lg" 
-                            type="email" 
-                            placeholder="Email"                            
+                            size="md" 
+                            type="email"                         
+                            label="Email"                            
                             isClearable="true">
                         </Input>
                     </div>

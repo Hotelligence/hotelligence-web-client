@@ -31,6 +31,7 @@
     height: 3.13rem;
     display: flex;
     justify-content: right;
+    margin-top: 0.5rem;
 }
 
 .txtWrapper {
