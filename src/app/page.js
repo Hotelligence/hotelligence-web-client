@@ -7,7 +7,8 @@ import CityCard from "../components/cards/cityCard";
 import HotelCard from "../components/cards/hotelCard";
 import vt from "../images/vt.jpg"
 import fusion from "../images/fusion.jpg"
-import DatePickerWithRange from "../components/inputs/datepicker";
+import DatePicker from "../components/inputs/datepicker";
+import PopOver from "../components/inputs/popover";
 import { Calendar, MapPin, User } from "lucide-react"
 
 export default function Home() {
@@ -15,9 +16,10 @@ export default function Home() {
     <main>
       <h1 className={styles.heading1}>Bạn muốn đi đâu?</h1>
       <div className={styles.searchContainer}>
-        <Searchbar icon={<MapPin/>} label="Tìm địa điểm, khách sạn, v.v."/>
-        <Searchbar icon={<Calendar/>} label="Chọn ngày"/>
-        <Searchbar icon={<User/>} label="Chọn số lượng khách"/>
+        <Searchbar icon={<MapPin size={20} color="var(--primary-blue-50)"/>} label="Tìm địa điểm, khách sạn, v.v." placeholder="Vũng Tàu"/>
+        {/* <Searchbar icon={<Calendar/>} label="Chọn ngày"/> */}
+        <DatePicker/>
+        <PopOver icon={<User size={20} color="var(--primary-blue-50)"/>} label="Chọn số lượng khách"/>
         <CustomButton>Tìm</CustomButton>
       </div>
 
