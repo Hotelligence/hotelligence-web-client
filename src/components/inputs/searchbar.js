@@ -1,17 +1,29 @@
-import styles from "./searchbar.module.css"
+'use client'
+import React from "react";
 import { Input } from "@nextui-org/react"
+import {Autocomplete, AutocompleteItem, Avatar, Button} from "@nextui-org/react";
 
-export default function Searchbar({label, icon}) {
+export default function Searchbar({label, placeholder, icon}) {
     return (
-        <div className={styles.searchbarWrapper}>
-            <Input 
+        <div className="flex w-full">
+            {/* <Input 
             // labelPlacement="inside"
             // label={label}
-            placeholder={label}
+            label={label}
+            placeholder={placeholder}
             variant="bordered"
-            startContent={icon}
-            size="lg"
-            ></Input>
+            endContent={icon}
+            size="md"
+            ></Input> */}
+
+            <Autocomplete label={label}
+                placeholder={placeholder}
+                variant="bordered"
+                selectorIcon={icon}
+                disableSelectorIconRotation="true"
+            >
+
+            </Autocomplete>
         </div>
     )
 }
