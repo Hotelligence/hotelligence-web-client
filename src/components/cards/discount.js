@@ -1,7 +1,7 @@
 import { TicketPercent } from 'lucide-react'
 import styles from './discount.module.css'
 
-export default function Discount() {
+export default function Discount({discountPercentage}) {
     return (
         <div className={styles.discountWrapper}>
             <div className={styles.leftSide}>
@@ -9,7 +9,7 @@ export default function Discount() {
             </div>
 
             <div className={styles.rightSide}>
-                <text className='h8'>Giảm 50%</text>
+                <text className='h8'>Giảm {discountPercentage}%</text>
 
             </div>
         </div>
