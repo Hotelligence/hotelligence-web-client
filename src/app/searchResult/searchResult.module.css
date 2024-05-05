@@ -1,0 +1,49 @@
+.pageContainer {
+    display: flex;   
+    gap: 1.875rem;
+    margin-top: 1.875rem;
+}
+
+.leftSide {
+    width: 24rem;
+}
+
+.rightSide {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 24rem - 1.875rem);
+}
+
+.topHeading{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.result{
+    display: flex;
+}
+
+.sort{
+    display: flex;
+    justify-content: right; 
+    width: 21.875rem;
+}
+
+.nightlyPrice {
+    display: flex;
+    margin-top: 1.875rem;
+}
+
+.filterOptions{
+    display: flex;
+    flex-direction: column;
+    gap: 1.875rem;
+}
+
+.cardContainer{
+    display: flex;
+    flex-direction: column;
+    margin-top: 1.25rem;
+    justify-content: space-between;
+}
