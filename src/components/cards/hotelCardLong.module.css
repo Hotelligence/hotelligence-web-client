@@ -1,0 +1,102 @@
+.hotelCardLongWrapper {
+    display: flex;
+    border-radius: 0.625rem;
+    border: 1px solid var(--primary-blue-50);
+    height: 12.5rem;
+    width: 100%;
+}
+
+.hotelCardLongWrapper:hover {
+    border: 1px solid var(--primary-blue-100);
+    cursor: pointer;
+}
+
+.leftSide {
+    width: 33%;
+    height: 100%;
+    border-radius: 0.625rem 0 0 0.625rem;
+}
+
+.imgWrapper{
+    object-fit: fill;
+    border-radius: 0.625rem 0 0 0.625rem;
+    height: 100%;
+}
+
+.rightSide {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.25rem;
+    width: 67%;
+}
+
+.city {
+    color: var(--primary-gold-100);
+}
+
+.row1 {
+    display: flex;
+    flex-direction: column;
+}
+
+.row2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+}
+
+.rating {
+    display: flex;
+    gap: 0.3125rem;
+}
+
+.overallRating {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 2rem;
+    min-height: 1.625rem;
+    border-radius: 0.5rem;
+    background-color: var(--primary-gold-120);
+    color: var(--primary-white-100);
+    padding: 0 0.5rem;
+}
+
+.starAndReview {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.star {
+    color: var(--primary-gold-100);
+
+}
+
+.numOfReviews {
+    color: var(--primary-blue-50);
+}
+
+.price {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.3125rem;
+}
+
+.priceDetails {
+    display: flex;
+    gap: 0.6125rem;
+    align-items: baseline;
+}
+
+.oldPrice {
+    color: var(--primary-blue-50);
+    text-decoration: line-through;
+}
+
+.totalPrice {
+    color: var(--primary-blue-50);
+    margin-top: -1rem;
+}
