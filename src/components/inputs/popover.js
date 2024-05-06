@@ -2,6 +2,7 @@
 import React from "react"
 import { Button, Input, Popover, PopoverContent, PopoverTrigger } from "@nextui-org/react"
 import styles from "./popover.module.css"
+import { User } from "lucide-react"
 
 export default function PopOver({label, icon}) {
     const [adultCount, setAdultCount] = React.useState(1);
@@ -32,8 +33,8 @@ export default function PopOver({label, icon}) {
             <Popover placement="bottom-start" offset={20} >
                 <PopoverTrigger className="flex w-full">
                     <Input 
-                        label={label}                         
-                        endContent={icon}
+                        label="Chọn số lượng khách"                       
+                        endContent={<User size={20} color="var(--primary-blue-50)"/>}
                         variant="bordered"
                         value={`${adultCount + childCount} khách`}
                         className={styles.input}

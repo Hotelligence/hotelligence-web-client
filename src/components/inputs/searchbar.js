@@ -2,6 +2,7 @@
 import React from "react";
 import { Input } from "@nextui-org/react"
 import {Autocomplete, AutocompleteItem, Avatar, Button} from "@nextui-org/react";
+import { MapPin} from "lucide-react"
 
 export default function Searchbar({label, placeholder, icon}) {
     return (
@@ -16,10 +17,9 @@ export default function Searchbar({label, placeholder, icon}) {
             size="md"
             ></Input> */}
 
-            <Autocomplete label={label}
-                placeholder={placeholder}
+            <Autocomplete label="Tìm địa điểm, khách sạn, v.v."
                 variant="bordered"
-                selectorIcon={icon}
+                selectorIcon={<MapPin size={20} color="var(--primary-blue-50)"/>}
                 disableSelectorIconRotation="true"
             >
 
