@@ -1,0 +1,8 @@
+.overallRating {
+    min-width: 2rem;
+    min-height: 1.625rem;
+    border-radius: 0.5rem;
+    background-color: var(--primary-gold-120);
+    color: var(--primary-white-100);
+    padding: 0 0.5rem;
+}

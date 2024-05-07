@@ -51,18 +51,6 @@
     gap: 0.3125rem;
 }
 
-.overallRating {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    min-width: 2rem;
-    min-height: 1.625rem;
-    border-radius: 0.5rem;
-    background-color: var(--primary-gold-120);
-    color: var(--primary-white-100);
-    padding: 0 0.5rem;
-}
-
 .starAndReview {
     display: flex;
     flex-direction: column;
@@ -99,4 +87,5 @@
 .totalPrice {
     color: var(--primary-blue-50);
     margin-top: -1rem;
+    padding-bottom: 0;
 }

@@ -1,8 +1,9 @@
 import Image from 'next/image'
 import styles from './hotelCardLong.module.css'
 import Discount from "../../components/cards/discount"
+import OverallRatingScore from "../../components/views/overallRatingScore"
 
-export default function HotelCardLong({img, hotelName, city, rating, stars, numOfReviews, discount, oldPrice, newPrice, totalPrice}) {
+export default function HotelCardLong({img, hotelName, city, ratingScore, stars, numOfReviews, discount, oldPrice, newPrice, totalPrice}) {
     return (
         <div className={styles.hotelCardLongWrapper}>
             <div className={styles.leftSide}>
@@ -17,9 +18,7 @@ export default function HotelCardLong({img, hotelName, city, rating, stars, numO
                 
                 <div className={styles.row2}>
                     <div className={styles.rating}>
-                        <div className={styles.overallRating}>
-                            <text className='body1'>{rating}</text>
-                        </div>
+                        <OverallRatingScore score={ratingScore}/>
 
                         <div className={styles.starAndReview}>
                             <div className={styles.star}>
