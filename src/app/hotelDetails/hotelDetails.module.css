@@ -1,0 +1,65 @@
+.pageContainer {
+    display: flex;   
+    margin-top: 1.94rem;
+    flex-direction: column;
+}
+
+.imagesContainer {
+    display: grid;
+    column-gap: 0.1rem;
+    grid-template-columns: 1fr 2fr;
+}
+
+.firstOne {
+    height: 17.6rem;
+    object-fit: cover;
+}
+
+.others{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-gap: 0.1rem;
+}
+
+.item {
+    height: 8.75rem;
+    object-fit: cover;
+}
+
+.tabs {
+    display: flex;
+    margin-top: 1.25rem;
+    justify-content: space-between;
+}
+
+.overview {
+    margin-bottom: 3.125rem;
+}
+
+.amenity, .room {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-bottom: 3.125rem;
+}
+
+.searchAgain {
+    display: flex;
+    gap: 1.875rem;
+    width: 50vw;
+}
+
+.roomCards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    row-gap: 1.25rem;
+}
+
+.numOfRooms {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
