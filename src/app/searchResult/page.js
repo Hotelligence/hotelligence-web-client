@@ -8,7 +8,7 @@ import styles from "./searchResult.module.css"
 import Sort from "../../components/inputs/sort"
 import PriceSlider from "../../components/inputs/priceSlider"
 import RadioButton from "../../components/buttons/radioButton"
-import CheckBox from "../../components/buttons/checkbox"
+import CheckBox from "../../components/buttons/starCheckbox"
 import HotelCardLong from "../../components/cards/hotelCardLong"
 import vt from "../../images/vt.jpg"
 

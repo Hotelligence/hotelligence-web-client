@@ -28,10 +28,12 @@ export default function HotelDetails({numOfSelectedRooms, allRooms}) {
 
     return (
         <>
-            <Button className="flex justify-start mr-auto p-0" color="transparent" disableAnimation="true">
-                    <ArrowLeft size={19}/>
-                    <h6 className="underline underline-offset-4">Xem tất cả khách sạn</h6>
-            </Button>
+            <Link href="/searchResult">
+                <Button className="flex justify-start mr-auto p-0" color="transparent" disableAnimation="true">
+                        <ArrowLeft size={19}/>
+                        <h6 className="underline underline-offset-4">Xem tất cả khách sạn</h6>
+                </Button>
+            </Link>
 
             <div className={styles.pageContainer}>
                 <div id="overview" className={styles.imagesContainer}>                       
@@ -99,18 +101,18 @@ export default function HotelDetails({numOfSelectedRooms, allRooms}) {
                     <div className={styles.policyDetails}>
                         <div>
                             <h4>Phí tùy chọn</h4>
-                            <ul>
+                            <menu>
                                 <li>Khách có thể dùng bữa sáng buffet với phụ phí ước tính 290000 VND mỗi người</li>
                                 <li>Khách có thể nhận phòng sớm với khoản phụ phí nhỏ (tùy theo tình hình thực tế)</li>
                                 <li>Khách có thể trả phòng muộn với khoản phụ phí nhỏ (tùy theo tình hình thực tế)</li>
-                            </ul>
+                            </menu>
                         </div>
 
                         <div>
                             <h4>Hồ bơi, spa & gym (nếu có)</h4>
-                            <ul>
+                            <menu>
                                 <li>Cần đăng ký trước để sử dụng dịch vụ massage và dịch vụ spa. Khách có thể đặt trước khi đến bằng cách liên hệ nơi lưu trú qua số điện thoại được cung cấp trong xác nhận đặt phòng.</li>
-                            </ul>
+                            </menu>
                         </div>
 
                         <div>
@@ -124,11 +126,11 @@ export default function HotelDetails({numOfSelectedRooms, allRooms}) {
 
                         <div>
                             <h4>Tên khác </h4>
-                            <menu>
+                            <ul>
                                 <li>Fusion Suites Vung Tau Hotel</li>
                                 <li>Fusion Suites Vung Tau Vung Tau</li>
                                 <li>Fusion Suites Vung Tau Hotel Vung Tau</li>
-                            </menu>
+                            </ul>
                         </div>
                     </div>
                 </div>
