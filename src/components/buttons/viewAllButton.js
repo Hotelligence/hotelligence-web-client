@@ -1,6 +1,6 @@
 import { Button } from "@nextui-org/react"
 
-export default function viewAllButton({category}) {
+export default function ViewAllButton({category}) {
     return (
         <Button color='transparent' className='p-0 text-[var(--primary-gold-120)]' disableAnimation="true">
             <div>
