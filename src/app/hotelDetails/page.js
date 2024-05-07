@@ -1,3 +1,5 @@
+'use client'
+import React, { useRef } from "react";
 import { Button } from "@nextui-org/react";
 import { ArrowLeft } from "lucide-react";
 import styles from "./hotelDetails.module.css";
@@ -17,8 +19,10 @@ import DatePicker from "../../components/inputs/datepicker";
 import PopOver from "../../components/inputs/popover";
 import RoomCardHigh from "../../components/cards/roomCardHigh";
 import NumRoomRadio from "../../components/buttons/numRoomRadio";
+import Link from "next/link";
 
 export default function HotelDetails({numOfSelectedRooms, allRooms}) {
+
     return (
         <>
             <Button className="flex justify-start mr-auto p-0" color="transparent" disableAnimation="true">
@@ -27,34 +31,41 @@ export default function HotelDetails({numOfSelectedRooms, allRooms}) {
             </Button>
 
             <div className={styles.pageContainer}>
-                <div id="overview" className={styles.overview}>
-                    <div className={styles.imagesContainer}>                       
-                        <Image src={fusion} className={styles.firstOne}/>                        
+                <div id="overview" className={styles.imagesContainer}>                       
+                    <Image src={fusion} className={styles.firstOne}/>                        
 
-                        <div className={styles.others}>
-                            <Image src={fusion1} className={styles.item}/>
-                            <Image src={fusion2} className={styles.item}/>
-                            <Image src={fusion3} className={styles.item}/>
-                            <Image src={fusion4} className={styles.item}/>
-                            <Image src={fusion5} className={styles.item}/>
-                            <Image src={fusion6} className={styles.item}/>
-                        </div>
-                    </div>             
+                    <div className={styles.others}>
+                        <Image src={fusion1} className={styles.item}/>
+                        <Image src={fusion2} className={styles.item}/>
+                        <Image src={fusion3} className={styles.item}/>
+                        <Image src={fusion4} className={styles.item}/>
+                        <Image src={fusion5} className={styles.item}/>
+                        <Image src={fusion6} className={styles.item}/>
+                    </div>
+                </div>             
 
-                    <div className={styles.tabs}>
-                        <HotelTabs id1="overview" id2="amenity" id3="room" id4="policy" id5="review"/>
-                        <CustomButton>Đặt phòng</CustomButton>
-                    </div>           
+                <div className={styles.tabs}>
+                    <HotelTabs href1="#overview" href2="#amenity" href3="#room" href4="#policy" href5="#review"/>
+                    <CustomButton>
+                        <Link href="#room">
+                            Đặt phòng
+                        </Link>
+                    </CustomButton>
+                </div> 
 
+                <div>                              
                     <HotelOverview/>
                 </div>
 
-                <div id="amenity" className={styles.amenity}>
+                <div id="amenity" className="h-[3.125rem]"/>
+
+                <div className={styles.amenity}>
                     <h2 className="text-[var(--primary-gold-120)]">Tiện nghi, dịch vụ nổi bật</h2>
                     <HotelAmenity isVertical="false"/>
                 </div>
 
-                <div id="room" className={styles.room}>
+                <div id="room" className="h-[3.125rem]"/>
+                <div className={styles.room}>
                     <h2 className="text-[var(--primary-gold-120)]">Chọn phòng</h2>
 
                     <div className={styles.searchAgain}>
@@ -78,10 +89,12 @@ export default function HotelDetails({numOfSelectedRooms, allRooms}) {
                     </div>
                 </div>
 
-                <div id="policy" className={styles.policy}>
+                <div id="policy" className="h-[3.125rem]"/>
+                <div className={styles.policy}>
                 </div>
 
-                <div id="review" className={styles.review}>
+                <div id="review" className="h-[3.125rem]"/>
+                <div className={styles.review}>
                 </div>
             </div>
         </>
