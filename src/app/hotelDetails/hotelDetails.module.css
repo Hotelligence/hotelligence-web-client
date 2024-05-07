@@ -37,10 +37,10 @@
     top: 0;
 }
 
-.amenity, .room {
+.amenity, .room, .review {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 1rem;
 }
 
 .searchAgain {
@@ -61,4 +61,31 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+}
+
+.policy {
+    display: flex;
+    flex-direction: row;
+    gap: 3.125rem;
+}
+
+.policyDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding-top: 0.6rem;
+    
+}
+
+.ratingAndComment {
+    display: flex;
+    flex-direction: row;
+    gap: 1.875rem;
+}
+
+.comments {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
 }

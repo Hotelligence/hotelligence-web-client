@@ -20,6 +20,9 @@ import PopOver from "../../components/inputs/popover";
 import RoomCardHigh from "../../components/cards/roomCardHigh";
 import NumRoomRadio from "../../components/buttons/numRoomRadio";
 import Link from "next/link";
+import RatingScoreInReview from "../../components/views/ratingScoreInReview";
+import Comment from "../../components/views/comment";
+import ViewAllButton from "../../components/buttons/viewAllButton";
 
 export default function HotelDetails({numOfSelectedRooms, allRooms}) {
 
@@ -91,10 +94,58 @@ export default function HotelDetails({numOfSelectedRooms, allRooms}) {
 
                 <div id="policy" className="h-[3.125rem]"/>
                 <div className={styles.policy}>
+                    <h2 className="text-[var(--primary-gold-120)] w-fit text-nowrap">Phí & Chính sách</h2>
+
+                    <div className={styles.policyDetails}>
+                        <div>
+                            <h4>Phí tùy chọn</h4>
+                            <ul>
+                                <li>Khách có thể dùng bữa sáng buffet với phụ phí ước tính 290000 VND mỗi người</li>
+                                <li>Khách có thể nhận phòng sớm với khoản phụ phí nhỏ (tùy theo tình hình thực tế)</li>
+                                <li>Khách có thể trả phòng muộn với khoản phụ phí nhỏ (tùy theo tình hình thực tế)</li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h4>Hồ bơi, spa & gym (nếu có)</h4>
+                            <ul>
+                                <li>Cần đăng ký trước để sử dụng dịch vụ massage và dịch vụ spa. Khách có thể đặt trước khi đến bằng cách liên hệ nơi lưu trú qua số điện thoại được cung cấp trong xác nhận đặt phòng.</li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h4>Chính sách </h4>
+                            <menu>
+                                <li>Chỉ khách đã đăng ký được lưu trú tại phòng.</li>
+                                <li>Khách có thể an tâm nghỉ ngơi khi biết rằng có bình cứu hỏa và hệ thống an ninh trong khuôn viên.</li>
+                                <li>Nơi lưu trú này nhận thanh toán bằng thẻ tín dụng và tiền mặt.</li>
+                            </menu>
+                        </div>
+
+                        <div>
+                            <h4>Tên khác </h4>
+                            <menu>
+                                <li>Fusion Suites Vung Tau Hotel</li>
+                                <li>Fusion Suites Vung Tau Vung Tau</li>
+                                <li>Fusion Suites Vung Tau Hotel Vung Tau</li>
+                            </menu>
+                        </div>
+                    </div>
                 </div>
 
                 <div id="review" className="h-[3.125rem]"/>
                 <div className={styles.review}>
+                    <h2 className="text-[var(--primary-gold-120)]">Đánh giá</h2>
+                    <div className={styles.ratingAndComment}>
+                        <RatingScoreInReview/>
+                        <div className={styles.comments}>  
+                            <Comment/>
+                            <Comment/>
+                            <Comment/>
+                            <Comment/>
+                            <ViewAllButton category="Đánh giá"/>
+                        </div>
+                    </div>
                 </div>
             </div>
         </>
