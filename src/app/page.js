@@ -9,16 +9,16 @@ import vt from "../images/vt.jpg"
 import fusion from "../images/fusion.jpg"
 import DatePicker from "../components/inputs/datepicker";
 import PopOver from "../components/inputs/popover";
-import { MapPin, User } from "lucide-react"
+
 
 export default function Home() {
   return (
     <main>
       <h1 className={styles.heading1}>Bạn muốn đi đâu?</h1>
       <div className={styles.searchContainer}>
-        <Searchbar icon={<MapPin size={20} color="var(--primary-blue-50)"/>} label="Tìm địa điểm, khách sạn, v.v." placeholder="Vũng Tàu"/>        
+        <Searchbar />        
         <DatePicker/>
-        <PopOver icon={<User size={20} color="var(--primary-blue-50)"/>} label="Chọn số lượng khách"/>
+        <PopOver/>
         <CustomButton>Tìm</CustomButton>
       </div>
 
