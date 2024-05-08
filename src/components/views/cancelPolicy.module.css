@@ -1,0 +1,9 @@
+.cancelPolicyContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 1.25rem;
+    align-items: start;
+    border: 1px solid var(--primary-blue-50);
+    border-radius: 0.625rem;
+    gap: 0.5rem;
+}
