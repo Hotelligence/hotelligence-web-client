@@ -5,7 +5,7 @@ export default function CityCard({img}) {
     return (
         <div className={styles.cityCardWrapper}>
             <div className={styles.upSide} >
-                <Image class="rounded-t-lg"  src={img}/>
+                <Image className="rounded-t-lg" src={img}/>
             </div>
             <div className={styles.downSide}>
                 <h5>Vũng Tàu</h5>
