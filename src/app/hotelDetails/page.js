@@ -1,7 +1,5 @@
 'use client'
-import React, { useRef } from "react";
-import { Button } from "@nextui-org/react";
-import { ArrowLeft } from "lucide-react";
+import React from "react";
 import styles from "./hotelDetails.module.css";
 import Image from "next/image";
 import fusion from "../../images/fusion.jpg";
@@ -23,17 +21,13 @@ import Link from "next/link";
 import RatingScoreInReview from "../../components/views/ratingScoreInReview";
 import Comment from "../../components/views/comment";
 import ViewAllButton from "../../components/buttons/viewAllButton";
+import BackButton from "../../components/buttons/backButton";
 
 export default function HotelDetails({numOfSelectedRooms, allRooms}) {
 
     return (
         <>
-            <Link href="/searchResult">
-                <Button className="flex justify-start mr-auto p-0" color="transparent" disableAnimation="true">
-                        <ArrowLeft size={19}/>
-                        <h6 className="underline underline-offset-4">Xem tất cả khách sạn</h6>
-                </Button>
-            </Link>
+            <BackButton href="/searchResult" category="khách sạn"/>
 
             <div className={styles.pageContainer}>
                 <div id="overview" className={styles.imagesContainer}>                       
