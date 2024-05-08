@@ -1,0 +1,21 @@
+.pageContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 1.25rem;
+    gap: auto;
+}
+
+.forms {
+    display: flex;
+    flex-direction: column;
+    width: 66%;
+    gap: 1.25rem;
+}
+
+.receipt {
+    display: flex;
+    flex-direction: column;
+    width: 33%;
+    gap: 1.25rem;
+}
