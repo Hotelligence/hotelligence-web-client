@@ -27,7 +27,7 @@ export default function HotelDetails({numOfSelectedRooms, allRooms}) {
 
     return (
         <>
-            <BackButton href="/searchResult" category="khách sạn"/>
+            <BackButton href="/searchResult" label="Xem tất cả khách sạn"/>
 
             <div className={styles.pageContainer}>
                 <div id="overview" className={styles.imagesContainer}>                       

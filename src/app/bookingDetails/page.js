@@ -14,7 +14,7 @@ import CancelPolicy from "../../components/views/cancelPolicy";
 export default function BookingDetails() {
     return (
         <>
-            <BackButton href="/hotelDetails" category="phòng"/>
+            <BackButton href="/hotelDetails" label="Xem tất cả phòng"/>
 
             <h2 className="mt-[1.875rem]">Chi tiết đặt phòng</h2>
 
