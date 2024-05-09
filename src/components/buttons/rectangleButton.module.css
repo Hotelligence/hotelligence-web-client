@@ -1,0 +1,11 @@
+.button {
+    background: var(--primary-blue-100);
+    color: var(--primary-gold-100);
+    height: auto;
+    width: 12.5rem;    
+}
+
+.button:hover {
+    background: var(--primary-gold-120);
+    color: var(--primary-white-100);
+}
