@@ -1,7 +1,11 @@
 import { CarFront, Coffee, Utensils, Waves, Wifi, Wine } from "lucide-react";
 import ViewAllButton from "../buttons/viewAllButton";
+import RoomDetailsModal from "./roomDetailsModal";
+import { useDisclosure } from "@nextui-org/react";
 
-export default function HotelAmenity({isVertical}) {
+export default function HotelAmenity({isVertical, isRoomDetailModal}) {
+    const {isOpen, onOpen, onOpenChange} = useDisclosure();
+
     if (isVertical === "false") {
         return (
             <div className="grid grid-cols-2 gap-x-20 gap-y-0 w-96 grid-rows-[2rem_2rem_2rem_2rem]">
@@ -74,10 +78,12 @@ export default function HotelAmenity({isVertical}) {
                 <text className="body3">Bao gồm đậu xe</text>
             </div>
 
-            <div className="flex items-start">
-                <ViewAllButton />
+            {!isRoomDetailModal && (
+                <div className="flex items-start">
+                <RoomDetailsModal />
+                </div>
+            )}
             </div>
-        </div>
         )
     }
 }
