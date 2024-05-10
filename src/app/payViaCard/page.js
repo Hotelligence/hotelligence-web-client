@@ -20,7 +20,7 @@ export default function PayViaCard() {
                 <p className='body3 text-center'>Bằng việc bấm “Đồng ý”, số tiền thanh toán của Quý khách sẽ được thanh toán trực tiếp thông qua thẻ tín dụng Quý khách đã nhập trước đó.</p>
 
                 <div className='mt-[1.25rem]'>
-                <CustomButton href="/paymentStatus">Đồng ý</CustomButton>
+                    <CustomButton href="/paymentStatus">Đồng ý</CustomButton>
                 </div>
 
                 <ButtonOutline>Quay về Trang chủ</ButtonOutline>

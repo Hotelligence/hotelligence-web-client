@@ -3,6 +3,7 @@
     color: var(--primary-gold-100);
     height: 3.125rem;
     width: auto;    
+    padding: 0 1.25rem;
 }
 
 .button:hover {
