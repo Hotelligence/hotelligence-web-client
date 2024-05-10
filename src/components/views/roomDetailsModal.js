@@ -20,7 +20,7 @@ export default function RoomDetailsModal({roomName, breakfastPrice, breakfastFor
         <ModalContent className="overflow-hidden">
             <>
                 <ModalHeader className="flex justify-center"> <h5>Thông tin phòng</h5></ModalHeader>
-                <ModalBody className={styles.noScrollbar}>
+                <ModalBody className={styles.customScrollbar}>
                     <div className={styles.bodyContainer}>
                         <div className={styles.imgContainer}>
                             <Image src={fusion3} className={styles.imgWrapper}/>
