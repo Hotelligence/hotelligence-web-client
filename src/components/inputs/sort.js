@@ -11,11 +11,11 @@ export default function Sort() {
             variant="bordered" 
             label="Sắp xếp theo"
             startContent={<ArrowDownUp size={20}/>}
-            defaultSelectedKeys={[sortOptions[0]]}
+            defaultSelectedKeys={["Đề xuất"]}
         >
             
             {sortOptions.map((sortOption, index) => (
-                <SelectItem key={index} value={sortOption}>
+                <SelectItem key={index} value={sortOption} >
                     {sortOption}
                 </SelectItem>
             ))}

@@ -1,5 +1,5 @@
 import { Button } from '@nextui-org/react'
-import styles from './buttonOutline.module.css'
+import styles from './buttonOutlineGold.module.css'
 
 export default function CustomButton({ children, onPress }) {
     return (
