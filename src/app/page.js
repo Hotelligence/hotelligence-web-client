@@ -10,16 +10,18 @@ import fusion from "../images/fusion.jpg"
 import DatePicker from "../components/inputs/datepicker";
 import PopOver from "../components/inputs/popover";
 
+export default function Home({searchParams}) {
 
-export default function Home() {
+  const query = searchParams?.query || "";
+
   return (
     <main>
       <h1 className={styles.heading1}>Bạn muốn đi đâu?</h1>
       <div className={styles.searchContainer}>
-        <Searchbar />        
+        <Searchbar isRequired/>        
         <DatePicker/>
         <PopOver/>
-        <CustomButton>Tìm</CustomButton>
+        <CustomButton href={`/searchResult?query=${query}`}>Tìm</CustomButton>
       </div>
 
       <h2 className={styles.heading2}>Tìm kiếm gần đây</h2>

@@ -11,12 +11,27 @@ import RadioButton from "../../components/buttons/radioButton"
 import CheckBox from "../../components/buttons/starCheckbox"
 import HotelCardLong from "../../components/cards/hotelCardLong"
 import vt from "../../images/vt.jpg"
+import { useSearchParams } from "next/navigation"
 
-export default function SearchResult() {
+async function getSearchQuery(query) {
+    const response = await fetch(`http://localhost:8080/api/hotels/searchResult?query=${query}`, {
+        method: "GET"
+    });
+
+    return response.json();
+}
+
+
+export default async function SearchResult({searchParams}) {
+    const query = searchParams?.query || "";
+
+    const results = await getSearchQuery(query);
+
+
     return (
         <>
             <div className={styleHome.searchContainer}>
-                <Searchbar icon={<MapPin size={20} color="var(--primary-blue-50)"/>} label="Tìm địa điểm, khách sạn, v.v." placeholder="Vũng Tàu"/>
+                <Searchbar />
                 <DatePicker/>
                 <PopOver icon={<User size={20} color="var(--primary-blue-50)"/>} label="Chọn số lượng khách"/>
                 <CustomButton>Tìm</CustomButton>
@@ -38,19 +53,30 @@ export default function SearchResult() {
 
                 <div className={styles.rightSide}>
                     <div className={styles.topHeading}>
-                        <h5>123 kết quả trả về cho tìm kiếm của bạn</h5>
+                        <h5>{results.length} kết quả trả về cho tìm kiếm <span className="text-[var(--primary-gold-120)]">{query}</span> của bạn</h5>
                         <div className={styles.sort}>
                             <Sort/>
                         </div>                    
                     </div>
 
-                    <div className={styles.cardContainer}>
-                        <HotelCardLong 
-                            img={vt} 
-                            hotelName="Fusion Suites Vũng Tàu"
-                            city="Vũng Tàu"
-                            stars="4"/>
-                    </div>
+                    {results.map((hotel) => (
+                        <div className={styles.cardContainer} key={hotel.id}>
+                            <HotelCardLong 
+                                key={hotel.id}
+                                id={hotel.id}
+                                img={hotel.image}
+                                hotelName={hotel.hotelName}
+                                city={hotel.city}
+                                ratingScore={hotel.ratingScore}
+                                stars={hotel.star}
+                                numOfReviews={hotel.numOfReviews}
+                                discount={hotel.discount}
+                                oldPrice={hotel.oldPrice}
+                                newPrice={hotel.newPrice}
+                                totalPrice={hotel.totalPrice}
+                                />
+                        </div>
+                    ))}
 
                 </div>
 

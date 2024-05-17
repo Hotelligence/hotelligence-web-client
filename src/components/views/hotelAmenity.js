@@ -4,7 +4,6 @@ import RoomDetailsModal from "./roomDetailsModal";
 import { useDisclosure } from "@nextui-org/react";
 
 export default function HotelAmenity({isVertical, isRoomDetailModal}) {
-    const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
     if (isVertical === "false") {
         return (

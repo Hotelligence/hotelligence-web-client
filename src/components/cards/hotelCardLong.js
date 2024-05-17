@@ -4,12 +4,12 @@ import Discount from "../../components/cards/discount"
 import OverallRatingScore from "../../components/views/overallRatingScore"
 import Link from 'next/link'
 
-export default function HotelCardLong({img, hotelName, city, ratingScore, stars, numOfReviews, discount, oldPrice, newPrice, totalPrice}) {
+export default function HotelCardLong({id, img, hotelName, city, ratingScore, stars, numOfReviews, discount, oldPrice, newPrice, totalPrice}) {
     return (
-        <Link href="/hotelDetails">
+        <Link href={`/hotelDetails/${id}`}>
             <div className={styles.hotelCardLongWrapper}>
                 <div className={styles.leftSide}>
-                    <Image className={styles.imgWrapper} src={img} />
+                    <Image className={styles.imgWrapper} src={img} width={500} height={500} alt="Picture of a hotel" priority/>
                 </div>
 
                 <div className={styles.rightSide}>
@@ -20,7 +20,7 @@ export default function HotelCardLong({img, hotelName, city, ratingScore, stars,
                     
                     <div className={styles.row2}>
                         <div className={styles.rating}>
-                            <OverallRatingScore score={ratingScore}/>
+                            <OverallRatingScore score={ratingScore.toFixed(1)}/>
 
                             <div className={styles.starAndReview}>
                                 <div className={styles.star}>
@@ -36,18 +36,18 @@ export default function HotelCardLong({img, hotelName, city, ratingScore, stars,
                         </div>
 
                         <div className={styles.price}>
-                            <Discount discountPercentage={discount}/>
+                            <Discount discountPercentage={discount*100}/>
 
                             <div className={styles.priceDetails}>
                                 <div className={styles.oldPrice}>
-                                    <text className='body2'>{oldPrice}đ</text>
+                                    <text className='body2'>{oldPrice.toLocaleString('en-US')}đ</text>
                                 </div>
 
-                                <h4>{newPrice}đ</h4>
+                                <h4>{newPrice.toLocaleString('en-US')}đ</h4>
                             </div>
 
                             <div className={styles.totalPrice}>
-                                <text className='body5'>Tổng {totalPrice}đ bao gồm thuế và phí</text>
+                                <text className='body5'>Tổng {totalPrice.toLocaleString('en-US')}đ bao gồm thuế và phí</text>
                             </div>
                         </div>
                     </div>

@@ -1,3 +1,4 @@
+'use client'
 import React from "react";
 import {Modal, ModalContent, ModalHeader, ModalBody, useDisclosure} from "@nextui-org/react";
 import ViewAllButton from "../buttons/viewAllButton";

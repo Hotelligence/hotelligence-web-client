@@ -1,29 +1,28 @@
-'use client'
 import React from "react";
 import styles from "./hotelDetails.module.css";
+import fusion6 from "../../../images/fusion6.webp";
+import HotelTabs from "../../../components/buttons/hotelTabs";
+import CustomButton from "../../../components/buttons/button";
+import HotelOverview from "../../../components/views/hotelOverview";
+import HotelAmenity from "../../../components/views/hotelAmenity";
+import DatePicker from "../../../components/inputs/datepicker";
+import PopOver from "../../../components/inputs/popover";
+import RoomCardHigh from "../../../components/cards/roomCardHigh";
+import NumRoomRadio from "../../../components/buttons/numRoomRadio";
+import RatingScoreInReview from "../../../components/views/ratingScoreInReview";
+import Comment from "../../../components/views/comment";
+import ViewAllButton from "../../../components/buttons/viewAllButton";
+import BackButton from "../../../components/buttons/backButton";
 import Image from "next/image";
-import fusion from "../../images/fusion.jpg";
-import fusion1 from "../../images/fusion1.webp";
-import fusion2 from "../../images/fusion2.webp";
-import fusion3 from "../../images/fusion3.webp";
-import fusion4 from "../../images/fusion4.jpg";
-import fusion5 from "../../images/fusion5.jpg";
-import fusion6 from "../../images/fusion6.webp";
-import HotelTabs from "../../components/buttons/hotelTabs";
-import CustomButton from "../../components/buttons/button";
-import HotelOverview from "../../components/views/hotelOverview";
-import HotelAmenity from "../../components/views/hotelAmenity";
-import DatePicker from "../../components/inputs/datepicker";
-import PopOver from "../../components/inputs/popover";
-import RoomCardHigh from "../../components/cards/roomCardHigh";
-import NumRoomRadio from "../../components/buttons/numRoomRadio";
-import RatingScoreInReview from "../../components/views/ratingScoreInReview";
-import Comment from "../../components/views/comment";
-import ViewAllButton from "../../components/buttons/viewAllButton";
-import BackButton from "../../components/buttons/backButton";
 
 
-export default function HotelDetails({numOfSelectedRooms, allRooms}) {
+export default async function HotelDetails({ params }) {
+
+    const res = await fetch('http://localhost:8080/api/hotels/getAll', {
+        method: "GET"   
+    });
+    const hotels = await res.json();
+    const hotelDetails = hotels.find(h => h.id === params.hotelId);    
 
     return (
         <>
@@ -31,15 +30,15 @@ export default function HotelDetails({numOfSelectedRooms, allRooms}) {
 
             <div className={styles.pageContainer}>
                 <div id="overview" className={styles.imagesContainer}>                       
-                    <Image src={fusion} className={styles.firstOne}/>                        
+                    <Image src={hotelDetails.image} className={styles.firstOne} width={500} height={500} priority/>                        
 
                     <div className={styles.others}>
-                        <Image src={fusion1} className={styles.item}/>
-                        <Image src={fusion2} className={styles.item}/>
-                        <Image src={fusion3} className={styles.item}/>
-                        <Image src={fusion4} className={styles.item}/>
-                        <Image src={fusion5} className={styles.item}/>
-                        <Image src={fusion6} className={styles.item}/>
+                        <Image src={hotelDetails.image} className={styles.item} width={500} height={500} priority/>
+                        <Image src={hotelDetails.image} className={styles.item} width={500} height={500} priority/>
+                        <Image src={hotelDetails.image} className={styles.item} width={500} height={500} priority/>
+                        <Image src={hotelDetails.image} className={styles.item} width={500} height={500} priority/>
+                        <Image src={hotelDetails.image} className={styles.item} width={500} height={500} priority/>
+                        <Image src={hotelDetails.image} className={styles.item} width={500} height={500} priority/>
                     </div>
                 </div>             
 
@@ -51,7 +50,7 @@ export default function HotelDetails({numOfSelectedRooms, allRooms}) {
                 </div> 
 
                 <div>                              
-                    <HotelOverview/>
+                    <HotelOverview hotelName={hotelDetails.hotelName} stars={hotelDetails.star} address={hotelDetails.address} description={hotelDetails.description} ratingScore={hotelDetails.ratingScore}/>
                 </div>
 
                 <div id="amenity" className="h-[3.125rem]"/>
@@ -73,7 +72,7 @@ export default function HotelDetails({numOfSelectedRooms, allRooms}) {
 
                     <div className={styles.numOfRooms}>
                         <NumRoomRadio/>
-                        <text className="body3 text-[var(--primary-blue-50)]">Hiển thị {numOfSelectedRooms} trên {allRooms} phòng</text>
+                        <text className="body3 text-[var(--primary-blue-50)]">Hiển thị  trên  phòng</text>
                     </div>
 
                     <div className={styles.roomCards}>
