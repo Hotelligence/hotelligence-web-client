@@ -10,8 +10,6 @@ import PriceSlider from "../../components/inputs/priceSlider"
 import RadioButton from "../../components/buttons/radioButton"
 import CheckBox from "../../components/buttons/starCheckbox"
 import HotelCardLong from "../../components/cards/hotelCardLong"
-import vt from "../../images/vt.jpg"
-import { useSearchParams } from "next/navigation"
 
 async function getSearchQuery(query) {
     const response = await fetch(`http://localhost:8080/api/hotels/searchResult?query=${query}`, {
@@ -21,12 +19,12 @@ async function getSearchQuery(query) {
     return response.json();
 }
 
-
 export default async function SearchResult({searchParams}) {
     const query = searchParams?.query || "";
 
     const results = await getSearchQuery(query);
 
+    
 
     return (
         <>
@@ -53,13 +51,15 @@ export default async function SearchResult({searchParams}) {
 
                 <div className={styles.rightSide}>
                     <div className={styles.topHeading}>
-                        <h5>{results.length} kết quả trả về cho tìm kiếm <span className="text-[var(--primary-gold-120)]">{query}</span> của bạn</h5>
+                        {(query) && <h5>{results.length} kết quả trả về cho tìm kiếm <span className="text-[var(--primary-gold-120)]">{query}</span> của bạn</h5>}
+                        {(!query) && <h5>0 kết quả trả về cho tìm kiếm <span className="text-[var(--primary-gold-120)]">{query}</span> của bạn</h5>}
                         <div className={styles.sort}>
-                            <Sort/>
+                            <Sort />
                         </div>                    
                     </div>
-
-                    {results.map((hotel) => (
+                    
+                    {(query) &&
+                     results.map((hotel) => (
                         <div className={styles.cardContainer} key={hotel.id}>
                             <HotelCardLong 
                                 key={hotel.id}

@@ -11,7 +11,7 @@ import Discount from "../cards/discount";
 import CustomButton from "../buttons/button";
 import stylesRoomCardHigh from "../cards/roomCardHigh.module.css";
 
-export default function RoomDetailsModal({roomName, breakfastPrice, breakfastFor2Price, discountPercentage, numOfRemainingRooms, oldPrice, newPrice, totalPrice}) {
+export default function RoomDetailsModal({img, roomName, breakfastPrice, breakfastFor2Price, discountPercentage, numOfRemainingRooms, oldPrice, newPrice, totalPrice}) {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
   return (
@@ -24,10 +24,10 @@ export default function RoomDetailsModal({roomName, breakfastPrice, breakfastFor
                 <ModalBody className={styles.customScrollbar}>
                     <div className={styles.bodyContainer}>
                         <div className={styles.imgContainer}>
-                            <Image src={fusion3} className={styles.imgWrapper}/>
+                            <Image src={img} className={styles.imgWrapper} width={200} height={200} priority/>
                         </div>
 
-                        <h3>{roomName}Ahihi</h3>
+                        <h3>{roomName}</h3>
 
                         <HotelAmenity isVertical="true" isRoomDetailModal/>
 
@@ -46,14 +46,14 @@ export default function RoomDetailsModal({roomName, breakfastPrice, breakfastFor
                                             <Radio value="breakfast">                                    
                                                 <text className='body3'>Bữa sáng</text>                                                                          
                                             </Radio>
-                                            <h6 className='text-right'>+ {breakfastPrice}đ</h6>
+                                            <h6 className='text-right'>+ {breakfastPrice.toLocaleString('en-US')}đ</h6>
                                         </div>
 
                                         <div className="flex justify-between">
                                             <Radio value="breakfast-for2">
                                                 <text className='body3'>Bữa sáng cho 2 người</text>
                                             </Radio>
-                                            <h6>+ {breakfastFor2Price}đ</h6>
+                                            <h6>+ {breakfastFor2Price.toLocaleString('en-US')}đ</h6>
                                         </div>
                                     </RadioGroup>
                                 </div>
@@ -61,18 +61,18 @@ export default function RoomDetailsModal({roomName, breakfastPrice, breakfastFor
 
                             <div className={stylesRoomCardHigh.price}>
                                 <div className={stylesRoomCardHigh.row3}>
-                                    <Discount discountPercentage={discountPercentage}/>
+                                    <Discount discountPercentage={discountPercentage*100}/>
                                     <text className='h7 text-[var(--secondary-red-100)]'>Còn {numOfRemainingRooms} phòng</text>
                                 </div>
 
                                 <div className={stylesRoomCardHigh.row4}>
                                     <div className={stylesRoomCardHigh.price}>
                                         <div className={stylesRoomCardHigh.priceDetails}>
-                                            <h4>{newPrice}123456đ</h4>
-                                            <text className='body2 line-through text-[var(--primary-blue-50)]'>{oldPrice}1245789đ</text>
+                                            <h4>{newPrice.toLocaleString('en-US')}đ</h4>
+                                            <text className='body2 line-through text-[var(--primary-blue-50)]'>{oldPrice.toLocaleString('en-US')}đ</text>
                                         </div>
 
-                                        <text className='body5 text-[var(--primary-blue-50)]'>Tổng {totalPrice}đ bao gồm thuế và phí</text>
+                                        <text className='body5 text-[var(--primary-blue-50)]'>Tổng {totalPrice.toLocaleString('en-US')}đ bao gồm thuế và phí</text>
                                     </div>
 
                                     <CustomButton>Đặt</CustomButton>

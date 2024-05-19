@@ -24,9 +24,14 @@ export default async function HotelDetails({ params }) {
     const hotels = await res.json();
     const hotelDetails = hotels.find(h => h.id === params.hotelId);    
 
+    const response = await fetch('http://localhost:8080/api/rooms/getAll', {
+        method: "GET"   
+    });
+    const rooms = await response.json();
+
     return (
         <>
-            <BackButton href="/searchResult" label="Xem tất cả khách sạn"/>
+            <BackButton label="Xem tất cả khách sạn"/>
 
             <div className={styles.pageContainer}>
                 <div id="overview" className={styles.imagesContainer}>                       
@@ -76,13 +81,20 @@ export default async function HotelDetails({ params }) {
                     </div>
 
                     <div className={styles.roomCards}>
-                        <RoomCardHigh img={fusion6}/>
-                        <RoomCardHigh/>
-                        <RoomCardHigh/>
-                        <RoomCardHigh/>
-                        <RoomCardHigh/>
-                        <RoomCardHigh/>
-                    </div>
+                    {rooms.map((room) => (
+                            <RoomCardHigh
+                                key={room.id}
+                                id={room.id}
+                                roomName={room.roomName}
+                                breakfastPrice={room.breakfastPrice}
+                                breakfastFor2Price={room.breakfastFor2Price}
+                                discountPercentage={room.discount}
+                                oldPrice={room.oldPrice}
+                                newPrice={room.newPrice}
+                                totalPrice={room.totalPrice}
+                            />
+                        ))}
+                        </div>
                 </div>
 
                 <div id="policy" className="h-[3.125rem]"/>

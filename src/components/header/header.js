@@ -16,7 +16,7 @@ export default function Header({isCenter}) {
             <div className={styles.rightSide}>
                 <Link href="/aboutUs">Về chúng tôi</Link>
                 <Link href="/help">Hỗ trợ</Link>
-                <Link href="/signUp">Đăng ký</Link>
+                <Link href="/login">Đăng ký</Link>
                 <Link href="/login">Đăng nhập</Link>
             </div>
         </div>

@@ -7,6 +7,7 @@ import CustomButton from '../buttons/button';
 
 
 export default function RoomCardHigh({ 
+        id,
         img, 
         roomName, 
         amenity, 
@@ -25,8 +26,16 @@ export default function RoomCardHigh({
             </div>
 
             <div className={styles.infoContainer}>
-                <h4>{roomName}RoomBed 2 người</h4>
-                <HotelAmenity isVertical="true"/>
+                <h4>{roomName}</h4>
+                <HotelAmenity isVertical="true"
+                    roomName={roomName}
+                    breakfastPrice={breakfastPrice}
+                    breakfastFor2Price={breakfastFor2Price}
+                    discountPercentage={discountPercentage}
+                    numOfRemainingRooms={numOfRemainingRooms}
+                    oldPrice={oldPrice}
+                    newPrice={newPrice}
+                    totalPrice={totalPrice} />
             </div>
 
             <div className={styles.extraInfoContainer}>
@@ -42,14 +51,14 @@ export default function RoomCardHigh({
                                 <Radio value="breakfast">                                    
                                     <text className='body3'>Bữa sáng</text>                                                                          
                                 </Radio>
-                                <h6 className='text-right'>+ {breakfastPrice}đ</h6>
+                                <h6 className='text-right'>+ {breakfastPrice.toLocaleString('en-US')}đ</h6>
                             </div>
 
                             <div className="flex justify-between">
                                 <Radio value="breakfast-for2">
                                     <text className='body3'>Bữa sáng cho 2 người</text>
                                 </Radio>
-                                <h6>+ {breakfastFor2Price}đ</h6>
+                                <h6>+ {breakfastFor2Price.toLocaleString('en-US')}đ</h6>
                             </div>
                         </RadioGroup>
                     </div>
@@ -57,21 +66,21 @@ export default function RoomCardHigh({
 
                 <div className={styles.price}>
                     <div className={styles.row3}>
-                        <Discount discountPercentage={discountPercentage}/>
+                        <Discount discountPercentage={discountPercentage*100}/>
                         <text className='h7 text-[var(--secondary-red-100)]'>Còn {numOfRemainingRooms} phòng</text>
                     </div>
 
                     <div className={styles.row4}>
                         <div className={styles.price}>
                             <div className={styles.priceDetails}>
-                                <h4>{newPrice}123456đ</h4>
-                                <text className='body2 line-through text-[var(--primary-blue-50)]'>{oldPrice}1245789đ</text>
+                                <h4>{newPrice.toLocaleString('en-US')}đ</h4>
+                                <text className='body2 line-through text-[var(--primary-blue-50)]'>{oldPrice.toLocaleString('en-US')}đ</text>
                             </div>
 
-                            <text className='body5 text-[var(--primary-blue-50)]'>Tổng {totalPrice}đ bao gồm thuế và phí</text>
+                            <text className='body5 text-[var(--primary-blue-50)]'>Tổng {totalPrice.toLocaleString('en-US')}đ bao gồm thuế và phí</text>
                         </div>
 
-                        <CustomButton>Đặt</CustomButton>
+                        <CustomButton href={`/bookingDetails/${id}`}>Đặt</CustomButton>
                     </div>
                 </div>        
             </div>

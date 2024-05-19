@@ -1,20 +1,35 @@
-import BackButton from "../../components/buttons/backButton";
+import BackButton from "../../../components/buttons/backButton";
 import styles from "./bookingDetails.module.css";
-import BookingForm from "../../components/views/bookingForm";
+import BookingForm from "../../../components/views/bookingForm";
 import { Input, RadioGroup, Radio } from "@nextui-org/react";
 import Image from "next/image";
-import VisaLogo from "../../images/Visa_Logo.png"
-import MasterCardLogo from "../../images/MasterCard_Logo.png"
-import MomoLogo from "../../images/Momo_Logo.png"
-import VNPayLogo from "../../images/VNPay_Logo.png"
-import CustomButton from "../../components/buttons/button";
-import Receipt from "../../components/views/receipt";
-import CancelPolicy from "../../components/views/cancelPolicy";
+import VisaLogo from "../../../images/Visa_Logo.png"
+import MasterCardLogo from "../../../images/MasterCard_Logo.png"
+import MomoLogo from "../../../images/Momo_Logo.png"
+import VNPayLogo from "../../../images/VNPay_Logo.png"
+import CustomButton from "../../../components/buttons/button";
+import Receipt from "../../../components/views/receipt";
+import CancelPolicy from "../../../components/views/cancelPolicy";
 
-export default function BookingDetails() {
+export default async function BookingDetails({ params }) {
+
+    
+
+    const response = await fetch('http://localhost:8080/api/rooms/getAll', {
+        method: "GET"   
+    });
+    const rooms = await response.json();
+    const roomDetails = rooms.find(r => r.id === params.roomId);  
+
+    const res = await fetch('http://localhost:8080/api/hotels/getAll', {
+        method: "GET"   
+    });
+    const hotels = await res.json();
+    const hotelDetails = hotels.find(h => h.id === roomDetails.hotelId);
+
     return (
         <>
-            <BackButton href="/hotelDetails" label="Xem tất cả phòng"/>
+            <BackButton label="Xem tất cả phòng"/>
 
             <h2 className="mt-[1.875rem]">Chi tiết đặt phòng</h2>
 
@@ -31,7 +46,7 @@ export default function BookingDetails() {
                     </BookingForm>
 
                     <BookingForm step={2} title="Kiểm tra thông tin phòng">
-                        <h5>◆ &nbsp; Fusion Suites</h5>
+                        <h5>◆ &nbsp; {roomDetails.roomName}</h5>
                         <h6 className="text-[var(--secondary-green-100)]">✓ Bao gồm bữa sáng cho 2 người</h6>
                     </BookingForm>
 
@@ -69,7 +84,14 @@ export default function BookingDetails() {
                 </div>
 
                 <div className={styles.receipt}>
-                    <Receipt/>
+                    <Receipt 
+                        hotelName={hotelDetails.hotelName} 
+                        roomName={roomDetails.roomName}
+                        originPrice={roomDetails.oldPrice}
+                        taxPercentage={roomDetails.taxPercentage}
+                        tax={roomDetails.oldPrice}
+                        extraFee={roomDetails.oldPrice}
+                        totalPrice={roomDetails.newPrice}/>
                     <CancelPolicy/>
                 </div>
             </div>

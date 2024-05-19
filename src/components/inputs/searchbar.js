@@ -24,7 +24,7 @@ export default function Searchbar() {
 
     const [value, setValue] = React.useState(searchParams.get("query")?.toString() || "");
 
-    const validateInput = (value) => value.match(/^[a-zA-Z\s]+$/);
+    const validateInput = (value) => value.match(/^[a-zA-ZàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸđĐ\s]+$/);
 
     const isInvalid = React.useMemo(() => {
         if (value === "") return false;
