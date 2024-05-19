@@ -28,6 +28,7 @@ export default async function HotelDetails({ params }) {
         method: "GET"   
     });
     const rooms = await response.json();
+    const roomsInHotel = rooms.filter(r => r.hotelId === params.hotelId);
 
     return (
         <>
@@ -81,7 +82,7 @@ export default async function HotelDetails({ params }) {
                     </div>
 
                     <div className={styles.roomCards}>
-                    {rooms.map((room) => (
+                        {(roomsInHotel.length > 0) && roomsInHotel.map((room) => (
                             <RoomCardHigh
                                 key={room.id}
                                 id={room.id}
@@ -94,7 +95,9 @@ export default async function HotelDetails({ params }) {
                                 totalPrice={room.totalPrice}
                             />
                         ))}
-                        </div>
+
+                        <h5 className="text-[var(--secondary-red-100)]">Hiện tại khách sạn chưa có phòng nào. Quý khách vui lòng quay lại sau!</h5>
+                    </div>
                 </div>
 
                 <div id="policy" className="h-[3.125rem]"/>
