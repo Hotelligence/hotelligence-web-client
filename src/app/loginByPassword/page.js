@@ -2,12 +2,12 @@
 import React from 'react';
 import styleLoginByOTP from '../loginByOTP/loginByOTP.module.css';
 import styleLogin from '../login/login.module.css';
-import { ArrowLeft, Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
 import { Button, Input, Checkbox } from "@nextui-org/react";
 import CustomButton from "../../components/buttons/button";
 import CustomButtonOutline from "../../components/buttons/buttonOutline";
 import Link from 'next/link';
-
+import BackButtonIconOnly from "../../components/buttons/backButtonIconOnly";
 
 export default function LoginByPassword() {
     const [isVisible, setIsVisible] = React.useState(false);
@@ -17,9 +17,7 @@ export default function LoginByPassword() {
     return (
         <>
             <div className={styleLoginByOTP.header}>
-                <Button className="flex justify-start mr-auto" isIconOnly color="transparent" disableAnimation="true">
-                    <ArrowLeft size={24}/>
-                </Button>            
+                <BackButtonIconOnly/>
                 <h2 className={styleLoginByOTP.title}>Xác nhận bằng mật khẩu</h2>
             </div>
 

@@ -4,14 +4,13 @@ import { Checkbox, Input,Button } from "@nextui-org/react";
 import CustomButton from "../../components/buttons/button";
 import CustomButtonOutline from "../../components/buttons/buttonOutline";
 import Link from 'next/link';
+import BackButtonIconOnly from "../../components/buttons/backButtonIconOnly";
 
 export default function ForgetPasswordByOTP() {
     return (
         <>
             <div className={styles.header}>
-                <Button className="flex justify-start mr-auto" isIconOnly color="transparent" disableAnimation="true">
-                    <ArrowLeft size={24}/>
-                </Button>
+                <BackButtonIconOnly/>
                 <h2 className={styles.title}>Hãy xác nhận đó là bạn</h2>
             </div>
 

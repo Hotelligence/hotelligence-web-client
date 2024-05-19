@@ -1,18 +1,17 @@
-import { ArrowLeft } from "lucide-react";
+
 import styles from "./loginByOTP.module.css";
 import styleLogin from "../login/login.module.css";
-import { Checkbox, Input,Button } from "@nextui-org/react";
+import { Checkbox, Input } from "@nextui-org/react";
 import CustomButton from "../../components/buttons/button";
 import CustomButtonOutline from "../../components/buttons/buttonOutline";
 import Link from 'next/link';
+import BackButtonIconOnly from "../../components/buttons/backButtonIconOnly";
 
 export default function LoginByOTP() {
     return (
         <>
             <div className={styles.header}>
-                <Button className="flex justify-start mr-auto" isIconOnly color="transparent" disableAnimation="true">
-                    <ArrowLeft size={24}/>
-                </Button>
+                <BackButtonIconOnly/>
                 <h2 className={styles.title}>Hãy xác nhận đó là bạn</h2>
             </div>
 

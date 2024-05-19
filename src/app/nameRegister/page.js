@@ -2,14 +2,13 @@ import styles from './nameRegister.module.css'
 import { ArrowLeft } from "lucide-react";
 import { Button, Input } from '@nextui-org/react';
 import CustomButton from '../../components/buttons/button';
+import BackButtonIconOnly from "../../components/buttons/backButtonIconOnly";
 
 export default function NameRegister() {
     return (
         <>
             <div className={styles.header}>
-                <Button className="flex justify-start mr-auto" isIconOnly color="transparent" disableAnimation="true">
-                    <ArrowLeft size={24}/>
-                </Button>
+                <BackButtonIconOnly/>
                 <h2 className={styles.title}>Tạo tên tài khoản</h2>
             </div>
 

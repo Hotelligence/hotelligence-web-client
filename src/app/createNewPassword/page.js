@@ -4,6 +4,7 @@ import styles from './createNewPassword.module.css'
 import { ArrowLeft, Eye, EyeOff } from "lucide-react";
 import { Button, Input } from '@nextui-org/react';
 import CustomButton from '../../components/buttons/button';
+import BackButtonIconOnly from "../../components/buttons/backButtonIconOnly";
 
 export default function CreateNewPassword() {
     const [isVisible, setIsVisible] = React.useState(false);
@@ -13,9 +14,7 @@ export default function CreateNewPassword() {
     return (
         <>
             <div className={styles.header}>
-                <Button className="flex justify-start mr-auto" isIconOnly color="transparent" disableAnimation="true">
-                    <ArrowLeft size={24}/>
-                </Button>
+                <BackButtonIconOnly/>
                 <h2 className={styles.title}>Tạo mật khẩu mới  </h2>
             </div>
 
