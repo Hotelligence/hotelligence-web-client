@@ -82,21 +82,23 @@ export default async function HotelDetails({ params }) {
                     </div>
 
                     <div className={styles.roomCards}>
-                        {(roomsInHotel.length > 0) && roomsInHotel.map((room) => (
-                            <RoomCardHigh
-                                key={room.id}
-                                id={room.id}
-                                roomName={room.roomName}
-                                breakfastPrice={room.breakfastPrice}
-                                breakfastFor2Price={room.breakfastFor2Price}
-                                discountPercentage={room.discount}
-                                oldPrice={room.oldPrice}
-                                newPrice={room.newPrice}
-                                totalPrice={room.totalPrice}
-                            />
-                        ))}
-
-                        <h5 className="text-[var(--secondary-red-100)]">Hiện tại khách sạn chưa có phòng nào. Quý khách vui lòng quay lại sau!</h5>
+                        {(roomsInHotel.length > 0) ? (
+                            roomsInHotel.map((room) => (
+                                <RoomCardHigh
+                                    key={room.id}
+                                    id={room.id}
+                                    roomName={room.roomName}
+                                    breakfastPrice={room.breakfastPrice}
+                                    breakfastFor2Price={room.breakfastFor2Price}
+                                    discountPercentage={room.discount}
+                                    oldPrice={room.oldPrice}
+                                    newPrice={room.newPrice}
+                                    totalPrice={room.totalPrice}
+                                />
+                            ))
+                        ) : (
+                            <h5 className="text-[var(--secondary-red-100)]">Hiện tại khách sạn chưa có phòng nào. Quý khách vui lòng quay lại sau!</h5>
+                        )}
                     </div>
                 </div>
 
