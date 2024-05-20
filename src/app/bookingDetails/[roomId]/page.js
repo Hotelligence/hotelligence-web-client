@@ -13,19 +13,23 @@ import CancelPolicy from "../../../components/views/cancelPolicy";
 
 export default async function BookingDetails({ params }) {
 
-    
-
-    const response = await fetch('http://localhost:8080/api/rooms/getAll', {
+    const roomResponse = await fetch('http://localhost:8080/api/rooms/getAll', {
         method: "GET"   
     });
-    const rooms = await response.json();
+    const rooms = await roomResponse.json();
     const roomDetails = rooms.find(r => r.id === params.roomId);  
 
-    const res = await fetch('http://localhost:8080/api/hotels/getAll', {
+    const hotelResponse = await fetch('http://localhost:8080/api/hotels/getAll', {
         method: "GET"   
     });
-    const hotels = await res.json();
+    const hotels = await hotelResponse.json();
     const hotelDetails = hotels.find(h => h.id === roomDetails.hotelId);
+
+    const bookingResponse = await fetch('http://localhost:8081/api/bookings/getAll', {
+        method: "GET"   
+    });
+    const bookings = await bookingResponse.json();
+    const bookingDetails = bookings.find(b => b.roomId === params.roomId);
 
     return (
         <>
@@ -87,12 +91,16 @@ export default async function BookingDetails({ params }) {
                     <Receipt 
                         hotelName={hotelDetails.hotelName} 
                         roomName={roomDetails.roomName}
+                        checkinDate={bookingDetails.checkinDate}
+                        checkoutDate={bookingDetails.checkoutDate}
                         originPrice={roomDetails.oldPrice}
                         taxPercentage={roomDetails.taxPercentage}
                         tax={roomDetails.oldPrice}
                         extraFee={roomDetails.oldPrice}
                         totalPrice={roomDetails.newPrice}/>
-                    <CancelPolicy/>
+                    <CancelPolicy 
+                        cancelDue={bookingDetails.cancelDue}
+                        unCancelDue={bookingDetails.unCancelDue}/>
                 </div>
             </div>
         </>

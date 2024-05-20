@@ -24,8 +24,6 @@ export default async function SearchResult({searchParams}) {
 
     const results = await getSearchQuery(query);
 
-    
-
     return (
         <>
             <div className={styleHome.searchContainer}>
