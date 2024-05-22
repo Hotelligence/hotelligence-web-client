@@ -22,7 +22,7 @@ export default function RoomCardHigh({
     return (
         <div className={styles.roomCardHighContainer}>
             <div className={styles.imgContainer}>
-                <Image className={styles.imgWrapper} src={img}/>
+                <Image className={styles.imgWrapper} src={img} width={500} height={500} priority/>
             </div>
 
             <div className={styles.infoContainer}>

@@ -13,7 +13,10 @@ import HotelCardLong from "../../components/cards/hotelCardLong"
 
 async function getSearchQuery(query) {
     const response = await fetch(`http://localhost:8080/api/hotels/searchResult?query=${query}`, {
-        method: "GET"
+        method: "GET",
+        headers: {
+            'Cache-Control': 'no-cache'
+        }    
     });
 
     return response.json();

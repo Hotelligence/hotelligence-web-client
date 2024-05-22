@@ -1,7 +1,7 @@
 .cardContainer {
     display: flex;
     flex-direction: column;
-    gap: 0.94rem;
+    gap: 1.5rem;
 }
 
 .mainBody {
@@ -9,6 +9,7 @@
     flex-direction: row;
     justify-content: space-between;
     gap: 1.875rem;
+    margin-top: 0.5rem;;
 }
 
 .rightSide {

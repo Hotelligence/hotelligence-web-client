@@ -4,7 +4,7 @@ import Discount from "../../components/cards/discount"
 import OverallRatingScore from "../../components/views/overallRatingScore"
 import Link from 'next/link'
 
-export default function HotelCardLong({id, img, hotelName, city, ratingScore, stars, numOfReviews, discount, oldPrice, newPrice, totalPrice}) {
+export default function HotelCardLong({id, img, hotelName, city, ratingScore, stars, numOfReviews, originPrice, discount, discountPrice, totalPrice}) {
     return (
         <Link href={`/hotelDetails/${id}`}>
             <div className={styles.hotelCardLongWrapper}>
@@ -36,14 +36,14 @@ export default function HotelCardLong({id, img, hotelName, city, ratingScore, st
                         </div>
 
                         <div className={styles.price}>
-                            <Discount discountPercentage={discount*100}/>
+                            <Discount discountPercentage={discount}/>
 
                             <div className={styles.priceDetails}>
-                                <div className={styles.oldPrice}>
-                                    <text className='body2'>{oldPrice?.toLocaleString('en-US')}đ</text>
+                                <div className={styles.originPrice}>
+                                    <text className='body2'>{originPrice?.toLocaleString('en-US')}đ</text>
                                 </div>
 
-                                <h4>{newPrice?.toLocaleString('en-US')}đ</h4>
+                                <h4>{discountPrice?.toLocaleString('en-US')}đ</h4>
                             </div>
 
                             <div className={styles.totalPrice}>

@@ -9,7 +9,7 @@ export default function Discount({discountPercentage}) {
             </div>
 
             <div className={styles.rightSide}>
-                <text className='h8'>Giảm {discountPercentage}%</text>
+                <text className='h8'>Giảm {discountPercentage*100}%</text>
 
             </div>
         </div>

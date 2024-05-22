@@ -4,7 +4,7 @@ import { Button, Input, Popover, PopoverContent, PopoverTrigger } from "@nextui-
 import styles from "./popover.module.css"
 import { User } from "lucide-react"
 
-export default function PopOver({label, icon}) {
+export default function PopOver() {
     const [adultCount, setAdultCount] = React.useState(1);
     const [childCount, setChildCount] = React.useState(0);
 
@@ -37,7 +37,7 @@ export default function PopOver({label, icon}) {
                         endContent={<User size={20} color="var(--primary-blue-50)"/>}
                         variant="bordered"
                         value={`${adultCount + childCount} khách`}
-                        className={styles.input}
+                        classNames={{input: ["text-left"]}}
                         />
                 </PopoverTrigger>
 

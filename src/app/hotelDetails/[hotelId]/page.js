@@ -13,22 +13,33 @@ import RatingScoreInReview from "../../../components/views/ratingScoreInReview";
 import Comment from "../../../components/views/comment";
 import ViewAllButton from "../../../components/buttons/viewAllButton";
 import BackButton from "../../../components/buttons/backButton";
-import Image from "next/image";
+import ZoomableImage from "../../../components/buttons/ZoomableImage";
 
 
 export default async function HotelDetails({ params }) {
 
     const res = await fetch('http://localhost:8080/api/hotels/getAll', {
-        method: "GET"   
+        method: "GET",
+        headers: {
+            'Cache-Control': 'no-cache',
+            'Pragma': 'no-cache', // HTTP/1.0 caches
+            'Expires': '0'
+        }    
     });
     const hotels = await res.json();
     const hotelDetails = hotels.find(h => h.id === params.hotelId);    
 
     const response = await fetch('http://localhost:8080/api/rooms/getAll', {
-        method: "GET"   
+        method: "GET",
+        headers: {
+            'Cache-Control': 'no-cache',
+            'Pragma': 'no-cache', // HTTP/1.0 caches
+            'Expires': '0'
+        }    
     });
     const rooms = await response.json();
     const roomsInHotel = rooms.filter(r => r.hotelId === params.hotelId);
+    // console.log(roomsInHotel);
 
     return (
         <>
@@ -36,15 +47,12 @@ export default async function HotelDetails({ params }) {
 
             <div className={styles.pageContainer}>
                 <div id="overview" className={styles.imagesContainer}>                       
-                    <Image src={hotelDetails.image} className={styles.firstOne} width={500} height={500} priority/>                        
+                    <ZoomableImage src={hotelDetails.images && hotelDetails.images.length > 0 ? hotelDetails.images[0] : ""} className={styles.firstOne} width={500} height={500} priority/>                        
 
                     <div className={styles.others}>
-                        <Image src={hotelDetails.image} className={styles.item} width={500} height={500} priority/>
-                        <Image src={hotelDetails.image} className={styles.item} width={500} height={500} priority/>
-                        <Image src={hotelDetails.image} className={styles.item} width={500} height={500} priority/>
-                        <Image src={hotelDetails.image} className={styles.item} width={500} height={500} priority/>
-                        <Image src={hotelDetails.image} className={styles.item} width={500} height={500} priority/>
-                        <Image src={hotelDetails.image} className={styles.item} width={500} height={500} priority/>
+                        {hotelDetails.images && hotelDetails.images.length > 0 && hotelDetails.images.slice(1, 7).map((image, index) => (
+                            <ZoomableImage key={index} src={image || ""} className={styles.item} width={500} height={500} priority/>
+                        ))}
                     </div>
                 </div>             
 
@@ -72,8 +80,7 @@ export default async function HotelDetails({ params }) {
 
                     <div className={styles.searchAgain}>
                         <DatePicker/>
-                        <PopOver/>
-                        
+                        <PopOver/>                        
                     </div>        
 
                     <div className={styles.numOfRooms}>
@@ -82,11 +89,12 @@ export default async function HotelDetails({ params }) {
                     </div>
 
                     <div className={styles.roomCards}>
-                        {(roomsInHotel.length > 0) ? (
+                        {roomsInHotel.length > 0 ? (
                             roomsInHotel.map((room) => (
                                 <RoomCardHigh
                                     key={room.id}
                                     id={room.id}
+                                    img={room.image}
                                     roomName={room.roomName}
                                     breakfastPrice={room.breakfastPrice}
                                     breakfastFor2Price={room.breakfastFor2Price}

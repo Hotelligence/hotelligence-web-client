@@ -14,19 +14,28 @@ import CancelPolicy from "../../../components/views/cancelPolicy";
 export default async function BookingDetails({ params }) {
 
     const roomResponse = await fetch('http://localhost:8080/api/rooms/getAll', {
-        method: "GET"   
+        method: "GET",
+        headers: {
+            'Cache-Control': 'no-cache'
+        }    
     });
     const rooms = await roomResponse.json();
     const roomDetails = rooms.find(r => r.id === params.roomId);  
 
     const hotelResponse = await fetch('http://localhost:8080/api/hotels/getAll', {
-        method: "GET"   
+        method: "GET",
+        headers: {
+            'Cache-Control': 'no-cache'
+        }     
     });
     const hotels = await hotelResponse.json();
     const hotelDetails = hotels.find(h => h.id === roomDetails.hotelId);
 
     const bookingResponse = await fetch('http://localhost:8081/api/bookings/getAll', {
-        method: "GET"   
+        method: "GET",
+        headers: {
+            'Cache-Control': 'no-cache'
+        }    
     });
     const bookings = await bookingResponse.json();
     const bookingDetails = bookings.find(b => b.roomId === params.roomId);
