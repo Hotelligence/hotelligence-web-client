@@ -17,6 +17,9 @@
 .upSide{
     height: 12.5rem;
     border-radius: 0.625rem 0.625rem 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .downSide{
@@ -59,4 +62,8 @@
     color: var(--primary-blue-50);
 }
 
-
+.imgWrapper{
+    object-fit: fill;
+    border-radius: 0.625rem 0.625rem 0 0;
+    height: 12.5rem;
+}
