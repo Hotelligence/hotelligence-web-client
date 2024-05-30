@@ -15,7 +15,9 @@ async function getSearchQuery(query) {
     const response = await fetch(`http://localhost:8080/api/hotels/searchResult?query=${query}`, {
         method: "GET",
         headers: {
-            'Cache-Control': 'no-cache'
+            'Cache-Control': 'no-cache',
+            'Pragma': 'no-cache', // HTTP/1.0 caches
+            'Expires': '0'
         }    
     });
 
@@ -26,6 +28,7 @@ export default async function SearchResult({searchParams}) {
     const query = searchParams?.query || "";
 
     const results = await getSearchQuery(query);
+    // console.log(results);
 
     return (
         <>
@@ -65,7 +68,7 @@ export default async function SearchResult({searchParams}) {
                             <HotelCardLong 
                                 key={hotel.id}
                                 id={hotel.id}
-                                img={hotel.image}
+                                img={hotel.images && hotel.images.length > 0 ? hotel.images[0] : ""}
                                 hotelName={hotel.hotelName}
                                 city={hotel.city}
                                 ratingScore={hotel.ratingScore}

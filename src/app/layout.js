@@ -4,6 +4,7 @@ import "./globals.css";
 import { Providers } from "./providers";
 import Header from "../components/header/header";
 import Footer from "../components/footer/footer";
+import { ClerkProvider } from "@clerk/nextjs";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -45,13 +46,17 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="vi">
-      <body className={sfPro.className}>
-        <Providers>
-          <Header />
-          <main className="pageContainer"> {children} </main>
-          <Footer />
-        </Providers>
-      </body>
-    </html>
+        <body className={sfPro.className}>
+          <Providers>
+            <ClerkProvider>
+              <Header />
+              <main className="pageContainer"> 
+                {children} 
+              </main>
+              <Footer />
+            </ClerkProvider>
+          </Providers>
+        </body>
+      </html>
   );
 }

@@ -7,6 +7,7 @@ import HotelCard from "../components/cards/hotelCard";
 import vt from "../images/vt.jpg"
 import DatePicker from "../components/inputs/datepicker";
 import PopOver from "../components/inputs/popover";
+import Link from "next/link";
 
 export default async function Home({searchParams}) {
 
@@ -37,7 +38,7 @@ export default async function Home({searchParams}) {
         <Searchbar isRequired/>        
         <DatePicker/>
         <PopOver/>
-        <CustomButton href={`/searchResult?query=${query}`}>Tìm</CustomButton>
+        <CustomButton isDisabled={query === ""}><Link href={`/searchResult?query=${query}`}>Tìm </Link></CustomButton>
       </div>
 
       <h2 className={styles.heading2}>Tìm kiếm gần đây</h2>

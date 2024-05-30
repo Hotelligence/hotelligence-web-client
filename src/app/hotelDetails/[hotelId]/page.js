@@ -14,6 +14,7 @@ import Comment from "../../../components/views/comment";
 import ViewAllButton from "../../../components/buttons/viewAllButton";
 import BackButton from "../../../components/buttons/backButton";
 import ZoomableImage from "../../../components/buttons/ZoomableImage";
+import Link from "next/link";
 
 
 export default async function HotelDetails({ params }) {
@@ -27,7 +28,9 @@ export default async function HotelDetails({ params }) {
         }    
     });
     const hotels = await res.json();
+    // console.log(hotels);
     const hotelDetails = hotels.find(h => h.id === params.hotelId);    
+    // console.log(hotelDetails);
 
     const response = await fetch('http://localhost:8080/api/rooms/getAll', {
         method: "GET",
@@ -58,8 +61,10 @@ export default async function HotelDetails({ params }) {
 
                 <div className={styles.tabs}>
                     <HotelTabs href1="#overview" href2="#amenity" href3="#room" href4="#policy" href5="#review"/>
-                    <CustomButton href="#room">                        
+                    <CustomButton>
+                        <Link href="#room">
                             Đặt phòng
+                        </Link>                        
                     </CustomButton>
                 </div> 
 

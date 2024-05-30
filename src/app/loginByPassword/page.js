@@ -1,7 +1,7 @@
 'use client'
 import React from 'react';
 import styleLoginByOTP from '../loginByOTP/loginByOTP.module.css';
-import styleLogin from '../login/login.module.css';
+import styleLogin from '../loginOrSignUp/loginOrSignUp.module.css';
 import { Eye, EyeOff } from "lucide-react";
 import { Button, Input, Checkbox } from "@nextui-org/react";
 import CustomButton from "../../components/buttons/button";

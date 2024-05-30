@@ -3,13 +3,21 @@ import styles from './hotelCardLong.module.css'
 import Discount from "../../components/cards/discount"
 import OverallRatingScore from "../../components/views/overallRatingScore"
 import Link from 'next/link'
+import { ImageOff } from 'lucide-react'
 
 export default function HotelCardLong({id, img, hotelName, city, ratingScore, stars, numOfReviews, originPrice, discount, discountPrice, totalPrice}) {
     return (
         <Link href={`/hotelDetails/${id}`}>
             <div className={styles.hotelCardLongWrapper}>
                 <div className={styles.leftSide}>
-                    <Image className={styles.imgWrapper} src={img} width={500} height={500} alt="Picture of a hotel" priority/>
+                    {img ? (
+                            <Image className={styles.imgWrapper} src={img} width={280} height={200} alt="Picture of a hotel" priority/>
+                    ) : (
+                        <div className="flex flex-col items-center gap-1">
+                            <text className='body5 italic'>Chưa có hình ảnh</text>
+                            <ImageOff size={60} />
+                        </div>
+                    )}
                 </div>
 
                 <div className={styles.rightSide}>

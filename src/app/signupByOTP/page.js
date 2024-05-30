@@ -1,5 +1,5 @@
 'use client'
-import styles from "./loginByOTP.module.css";
+import styles from "../loginByOTP/loginByOTP.module.css";
 import styleLogin from "../loginOrSignUp/loginOrSignUp.module.css";
 import { Checkbox, Input } from "@nextui-org/react";
 import CustomButton from "../../components/buttons/button";
@@ -7,28 +7,28 @@ import CustomButtonOutline from "../../components/buttons/buttonOutline";
 import Link from 'next/link';
 import BackButtonIconOnly from "../../components/buttons/backButtonIconOnly";
 import { useState } from "react";
-import { useSignIn } from "@clerk/nextjs";
+import { useSignUp } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 
-export default function LoginByOTP() {
-    const { setActive, signIn} = useSignIn();
+export default function SignUpByOTP() {
+    const {signUp} = useSignUp();
     const [code, setCode] = useState("");
     const router = useRouter();
-    
 
     const onPressVerify = async () => {
-
         try {
-            const completeSignIn = await signIn.attemptFirstFactor({
+            const completeSignUp = await signUp.attemptEmailAddressVerification({
                 code,
             });
 
-            if (completeSignIn.status === 'complete') {
-                await setActive({ session: completeSignIn.createdSessionId });
-                router.push("/");
+            if (completeSignUp.status === 'complete' || completeSignUp.status === 'missing_requirements') {
+                router.push("/nameAndPasswordRegister");
+            } else {
+                console.log('Unexpected status:', completeSignUp.status);
             }
-        } catch (err) {
-            console.log(err);
+
+        } catch (error) {
+            console.log(error);
         }
     };
 
@@ -78,12 +78,6 @@ export default function LoginByOTP() {
                 <div className={styles.countdown}>
                     <text className="body4">Gửi lại mã sau 30 giây</text>
                 </div>
-            </div>
-
-            <div className={styles.buttonContainer2}>
-                <CustomButtonOutline>
-                    <Link href="/loginByPassword">Xác nhận bằng mật khẩu</Link>
-                </CustomButtonOutline>
             </div>
         </>
     )
