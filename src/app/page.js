@@ -8,27 +8,21 @@ import vt from "../images/vt.jpg"
 import DatePicker from "../components/inputs/datepicker";
 import PopOver from "../components/inputs/popover";
 import Link from "next/link";
+import getAllHotels from "../api/hotel/getAllHotels";
 
 export default async function Home({searchParams}) {
 
   const query = searchParams?.query || "";
 
-  const res = await fetch('http://localhost:8080/api/hotels/getAll', {
-      method: "GET",
-      headers: {
-          'Cache-Control': 'no-cache',
-          'Pragma': 'no-cache', // HTTP/1.0 caches
-          'Expires': '0'
-      }
-  });
-  const hotels = await res.json();
-  // console.log(hotels);
+  const hotels = await getAllHotels();
+  
   const sortedHotels = hotels.sort((a, b) => {
     if (a.discount === b.discount) {
       return a.discountPrice - b.discountPrice;
     }
     return b.discount - a.discount;
   });
+
   const top10Hotels = sortedHotels.slice(0, 10);
 
   return (

@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./hotelDetails.module.css";
-import fusion6 from "../../../images/fusion6.webp";
 import HotelTabs from "../../../components/buttons/hotelTabs";
 import CustomButton from "../../../components/buttons/button";
 import HotelOverview from "../../../components/views/hotelOverview";
@@ -15,34 +14,17 @@ import ViewAllButton from "../../../components/buttons/viewAllButton";
 import BackButton from "../../../components/buttons/backButton";
 import ZoomableImage from "../../../components/buttons/ZoomableImage";
 import Link from "next/link";
+import getHotelById from "../../../api/hotel/getHotelById";
+import getRoomsInHotel from "../../../api/room/getRoomsInHotel";
 
 
-export default async function HotelDetails({ params }) {
+export default async function HotelDetails({ params}) {
 
-    const res = await fetch('http://localhost:8080/api/hotels/getAll', {
-        method: "GET",
-        headers: {
-            'Cache-Control': 'no-cache',
-            'Pragma': 'no-cache', // HTTP/1.0 caches
-            'Expires': '0'
-        }    
-    });
-    const hotels = await res.json();
-    // console.log(hotels);
-    const hotelDetails = hotels.find(h => h.id === params.hotelId);    
-    // console.log(hotelDetails);
+    
+    const hotelDetails = await getHotelById(params.hotelId);
 
-    const response = await fetch('http://localhost:8080/api/rooms/getAll', {
-        method: "GET",
-        headers: {
-            'Cache-Control': 'no-cache',
-            'Pragma': 'no-cache', // HTTP/1.0 caches
-            'Expires': '0'
-        }    
-    });
-    const rooms = await response.json();
-    const roomsInHotel = rooms.filter(r => r.hotelId === params.hotelId);
-    // console.log(roomsInHotel);
+    const roomsInHotel = await getRoomsInHotel(params.hotelId);
+
 
     return (
         <>
@@ -104,8 +86,8 @@ export default async function HotelDetails({ params }) {
                                     breakfastPrice={room.breakfastPrice}
                                     breakfastFor2Price={room.breakfastFor2Price}
                                     discountPercentage={room.discount}
-                                    oldPrice={room.oldPrice}
-                                    newPrice={room.newPrice}
+                                    originPrice={room.originPrice}
+                                    discountPrice={room.discountPrice}
                                     totalPrice={room.totalPrice}
                                 />
                             ))

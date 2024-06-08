@@ -25,7 +25,7 @@ export default function LoginOrSignUp() {
                     strategy: "email_code",
                 });
         
-                console.log(JSON.stringify(signInAttempt, null, 2));
+                // console.log(JSON.stringify(signInAttempt, null, 2));
                 await signIn.prepareFirstFactor({ 
                     strategy: "email_code",
                     email_address_id: signInAttempt.verifications.email_address.id,
