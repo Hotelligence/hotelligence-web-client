@@ -4,7 +4,7 @@ import HotelAmenity from '../views/hotelAmenity';
 import { RadioGroup, Radio } from '@nextui-org/react';
 import Discount from './discount';
 import CustomButton from '../buttons/button';
-
+import Link from 'next/link';
 
 export default function RoomCardHigh({ 
         id,
@@ -15,8 +15,8 @@ export default function RoomCardHigh({
         breakfastFor2Price, 
         discountPercentage, 
         numOfRemainingRooms, 
-        oldPrice,
-        newPrice,
+        originPrice,
+        discountPrice,
         totalPrice
     }) {
     return (
@@ -33,8 +33,8 @@ export default function RoomCardHigh({
                     breakfastFor2Price={breakfastFor2Price}
                     discountPercentage={discountPercentage}
                     numOfRemainingRooms={numOfRemainingRooms}
-                    oldPrice={oldPrice}
-                    newPrice={newPrice}
+                    oldPrice={originPrice}
+                    newPrice={discountPrice}
                     totalPrice={totalPrice} />
             </div>
 
@@ -66,21 +66,25 @@ export default function RoomCardHigh({
 
                 <div className={styles.price}>
                     <div className={styles.row3}>
-                        <Discount discountPercentage={discountPercentage*100}/>
+                        <Discount discountPercentage={discountPercentage}/>
                         <text className='h7 text-[var(--secondary-red-100)]'>Còn {numOfRemainingRooms} phòng</text>
                     </div>
 
                     <div className={styles.row4}>
                         <div className={styles.price}>
                             <div className={styles.priceDetails}>
-                                <h4>{newPrice.toLocaleString('en-US')}đ</h4>
-                                <text className='body2 line-through text-[var(--primary-blue-50)]'>{oldPrice.toLocaleString('en-US')}đ</text>
+                                <h4>{discountPrice?.toLocaleString('en-US')}đ</h4>
+                                <text className='body2 line-through text-[var(--primary-blue-50)]'>{originPrice?.toLocaleString('en-US')}đ</text>
                             </div>
 
-                            <text className='body5 text-[var(--primary-blue-50)]'>Tổng {totalPrice.toLocaleString('en-US')}đ bao gồm thuế và phí</text>
+                            <text className='body5 text-[var(--primary-blue-50)]'>Tổng {totalPrice?.toLocaleString('en-US')}đ bao gồm thuế và phí</text>
                         </div>
 
-                        <CustomButton href={`/bookingDetails/${id}`}>Đặt</CustomButton>
+                        <CustomButton>
+                            <Link href={`/bookingDetails/${id}`}>
+                                Đặt
+                            </Link>
+                        </CustomButton>
                     </div>
                 </div>        
             </div>

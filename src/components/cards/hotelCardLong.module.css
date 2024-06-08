@@ -54,7 +54,7 @@
 .starAndReview {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .star {
@@ -79,7 +79,7 @@
     align-items: baseline;
 }
 
-.oldPrice {
+.originPrice {
     color: var(--primary-blue-50);
     text-decoration: line-through;
 }

@@ -11,7 +11,7 @@ export default function HotelCardLong({id, img, hotelName, city, ratingScore, st
             <div className={styles.hotelCardLongWrapper}>
                 <div className={styles.leftSide}>
                     {img ? (
-                            <Image className={styles.imgWrapper} src={img} width={280} height={200} alt="Picture of a hotel" priority/>
+                            <Image className={styles.imgWrapper} src={img} width={350} height={200} alt="Picture of a hotel" priority/>
                     ) : (
                         <div className="flex flex-col items-center gap-1">
                             <text className='body5 italic'>Chưa có hình ảnh</text>
@@ -31,14 +31,14 @@ export default function HotelCardLong({id, img, hotelName, city, ratingScore, st
                             <OverallRatingScore score={ratingScore?.toFixed(1)}/>
 
                             <div className={styles.starAndReview}>
-                                <div className={styles.star}>
+                                {/* <div className={styles.star}>
                                     {Array.from({ length: stars }, (_, index) => (
                                         <span key={index}>★</span>
                                     ))}
-                                </div>
+                                </div> */}
 
                                 <div className={styles.numOfReviews}>
-                                    <text className='body5'>({numOfReviews} đánh giá)</text>
+                                    <text className='body4'>({numOfReviews} đánh giá)</text>
                                 </div>
                             </div>
                         </div>

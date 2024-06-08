@@ -13,7 +13,7 @@ export default function Header() {
         <div className={styles.headerWrapper}>
             <div className={styles.leftSide}>
                     <Link href="/">
-                        <Image src={Logo} height={60} alt="Hotelligence Logo"></Image>
+                        <Image src={Logo} height={60} alt="Hotelligence Logo" priority></Image>
                     </Link>
             </div>
 
@@ -21,7 +21,10 @@ export default function Header() {
                 <Link href="/aboutUs">Về chúng tôi</Link>
                 <Link href="/help">Hỗ trợ</Link>
                 {userId ? (
+                    <>
+                    <Link href="/bookingHistory">Lịch sử đặt phòng</Link>
                     <UserButton afterSignOutUrl="/"/>
+                    </>
                 ) : (
                     <>
                         <Link href="/loginOrSignUp">Đăng ký/Đăng nhập</Link>

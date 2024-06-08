@@ -11,7 +11,7 @@ import Discount from "../cards/discount";
 import CustomButton from "../buttons/button";
 import stylesRoomCardHigh from "../cards/roomCardHigh.module.css";
 
-export default function RoomDetailsModal({img, roomName, breakfastPrice, breakfastFor2Price, discountPercentage, numOfRemainingRooms, oldPrice, newPrice, totalPrice}) {
+export default function RoomDetailsModal({img, roomName, breakfastPrice, breakfastFor2Price, discountPercentage, numOfRemainingRooms, originPrice, discountPrice, totalPrice}) {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
   return (
@@ -46,14 +46,14 @@ export default function RoomDetailsModal({img, roomName, breakfastPrice, breakfa
                                             <Radio value="breakfast">                                    
                                                 <text className='body3'>Bữa sáng</text>                                                                          
                                             </Radio>
-                                            <h6 className='text-right'>+ {breakfastPrice.toLocaleString('en-US')}đ</h6>
+                                            <h6 className='text-right'>+ {breakfastPrice?.toLocaleString('en-US')}đ</h6>
                                         </div>
 
                                         <div className="flex justify-between">
                                             <Radio value="breakfast-for2">
                                                 <text className='body3'>Bữa sáng cho 2 người</text>
                                             </Radio>
-                                            <h6>+ {breakfastFor2Price.toLocaleString('en-US')}đ</h6>
+                                            <h6>+ {breakfastFor2Price?.toLocaleString('en-US')}đ</h6>
                                         </div>
                                     </RadioGroup>
                                 </div>
@@ -68,11 +68,11 @@ export default function RoomDetailsModal({img, roomName, breakfastPrice, breakfa
                                 <div className={stylesRoomCardHigh.row4}>
                                     <div className={stylesRoomCardHigh.price}>
                                         <div className={stylesRoomCardHigh.priceDetails}>
-                                            <h4>{newPrice.toLocaleString('en-US')}đ</h4>
-                                            <text className='body2 line-through text-[var(--primary-blue-50)]'>{oldPrice.toLocaleString('en-US')}đ</text>
+                                            <h4>{discountPrice?.toLocaleString('en-US')}đ</h4>
+                                            <text className='body2 line-through text-[var(--primary-blue-50)]'>{originPrice?.toLocaleString('en-US')}đ</text>
                                         </div>
 
-                                        <text className='body5 text-[var(--primary-blue-50)]'>Tổng {totalPrice.toLocaleString('en-US')}đ bao gồm thuế và phí</text>
+                                        <text className='body5 text-[var(--primary-blue-50)]'>Tổng {totalPrice?.toLocaleString('en-US')}đ bao gồm thuế và phí</text>
                                     </div>
 
                                     <CustomButton>Đặt</CustomButton>

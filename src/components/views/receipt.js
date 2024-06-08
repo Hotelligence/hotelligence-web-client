@@ -47,22 +47,22 @@ export default function Receipt({hotelName, checkinDate, checkoutDate, roomName,
 
                 <div className={styles.rowBill}>
                     <h6>Giá phòng</h6>
-                    <text className="body3 text-right">{originPrice.toLocaleString('en-US')}đ</text>
+                    <text className="body3 text-right">{originPrice?.toLocaleString('en-US')}đ</text>
                 </div>
 
                 <div className={styles.rowBill}>
                     <h6>Thuế</h6>
-                    <text className="body3 text-right">{`(${taxPercentage*100}% = ) ${tax.toLocaleString('en-US')}đ`}</text>
+                    <text className="body3 text-right">{`(${taxPercentage*100}% = ) ${tax?.toLocaleString('en-US')}đ`}</text>
                 </div>
 
                 <div className={styles.rowBill}>
                     <h6>Phí phát sinh</h6>
-                    <text className="body3 text-right">{extraFee.toLocaleString('en-US')}đ</text>
+                    <text className="body3 text-right">{extraFee?.toLocaleString('en-US')}đ</text>
                 </div>
 
                 <div className={styles.rowBill2}>
                     <h6>Tổng cộng</h6>
-                    <h3 className="text-[var(--primary-gold-120)]">{totalPrice.toLocaleString('en-US')}đ</h3>
+                    <h3 className="text-[var(--primary-gold-120)]">{totalPrice?.toLocaleString('en-US')}đ</h3>
                 </div>
             </div>
         </div>
