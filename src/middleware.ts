@@ -10,11 +10,14 @@ const isPublicRoute = createRouteMatcher([
   '/hotelDetails(.*)',
   '/nameAndPasswordRegister',
   '/passwordRegister',
+  '/aboutUs',
+  '/help',
 ]);
 
 export default clerkMiddleware((auth, request) =>{ 
   if(!isPublicRoute(request)){
     auth().protect();
+    // auth().redirectToSignIn();
   }
 });
 
