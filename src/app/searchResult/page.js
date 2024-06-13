@@ -2,7 +2,6 @@ import Searchbar from "../../components/inputs/searchbar"
 import CustomButton from "../../components/buttons/button"
 import DatePicker from "../../components/inputs/datepicker"
 import PopOver from "../../components/inputs/popover"
-import { MapPin, Radio, User } from "lucide-react"
 import styleHome from "../page.module.css"
 import styles from "./searchResult.module.css"
 import Sort from "../../components/inputs/sort"
@@ -10,32 +9,28 @@ import PriceSlider from "../../components/inputs/priceSlider"
 import RadioButton from "../../components/buttons/radioButton"
 import CheckBox from "../../components/buttons/starCheckbox"
 import HotelCardLong from "../../components/cards/hotelCardLong"
-
-async function getSearchQuery(query) {
-    const response = await fetch(`http://localhost:8080/api/hotels/searchResult?query=${query}`, {
-        method: "GET",
-        headers: {
-            'Cache-Control': 'no-cache',
-            'Pragma': 'no-cache', // HTTP/1.0 caches
-            'Expires': '0'
-        }    
-    });
-
-    return response.json();
-}
+import getSearchResult from "../../api/getSearchResult"
+import getRoomsInHotel from "../../api/room/getRoomsInHotel"
+import secureLocalStorage from "react-secure-storage"
 
 export default async function SearchResult({searchParams}) {
     const query = searchParams?.query || "";
+    console.log("query: ",query);
+    const from = searchParams?.from || "";
+    console.log("from: ",from);
+    const to = searchParams?.to || "";
+    console.log("to: ",to);
+    const guests = searchParams?.guests || "";
+    console.log("guests: ",guests);
 
-    const results = await getSearchQuery(query);
-    // console.log(results);
+    const results = await getSearchResult(query, from, to, guests);  
 
     return (
         <>
             <div className={styleHome.searchContainer}>
                 <Searchbar />
-                <DatePicker/>
-                <PopOver icon={<User size={20} color="var(--primary-blue-50)"/>} label="Chọn số lượng khách"/>
+                <DatePicker />
+                <PopOver />
                 <CustomButton>Tìm</CustomButton>
             </div>
 
@@ -58,7 +53,7 @@ export default async function SearchResult({searchParams}) {
                         {(query) && <h5>{results.length} kết quả trả về cho tìm kiếm <span className="text-[var(--primary-gold-120)]">{query}</span> của bạn</h5>}
                         {(!query) && <h5>0 kết quả trả về cho tìm kiếm <span className="text-[var(--primary-gold-120)]">{query}</span> của bạn</h5>}
                         <div className={styles.sort}>
-                            <Sort />
+                            <Sort result={results}/>
                         </div>                    
                     </div>
                     
@@ -71,13 +66,13 @@ export default async function SearchResult({searchParams}) {
                                 img={hotel.images && hotel.images.length > 0 ? hotel.images[0] : ""}
                                 hotelName={hotel.hotelName}
                                 city={hotel.city}
-                                ratingScore={hotel.ratingScore}
-                                stars={hotel.star}
-                                numOfReviews={hotel.numOfReviews}
-                                discount={hotel.discount}
-                                oldPrice={hotel.oldPrice}
-                                newPrice={hotel.newPrice}
-                                totalPrice={hotel.totalPrice}
+                                // ratingScore={hotel.ratingScore}
+                                // stars={hotel.star}
+                                // numOfReviews={hotel.numOfReviews}
+                                // originPrice={hotel.originPrice}
+                                // discount={hotel.discount}
+                                // discountPrice={hotel.discountPrice}
+                                // totalPrice={hotel.totalPrice}
                                 />
                         </div>
                     ))}

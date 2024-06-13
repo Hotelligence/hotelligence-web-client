@@ -1,5 +1,6 @@
 import styles from './payOffline.module.css'
 import ButtonOutline from '../../components/buttons/buttonOutline'
+import Link from 'next/link'
 
 export default function PayOffline() {
     return (
@@ -11,7 +12,9 @@ export default function PayOffline() {
             <p className='body3 text-center'>Quý khách vui lòng thanh toán sau khi nhận phòng hoặc trả phòng tại khách sạn theo hướng dẫn của lễ tân/quản lý khách sạn.</p>
 
             <div className='mt-[1.25rem]'>
-                <ButtonOutline>Quay về Trang chủ</ButtonOutline>
+                <ButtonOutline>
+                    <Link href='/'>Quay về Trang chủ</Link>
+                </ButtonOutline>
             </div>
         </div>
     )

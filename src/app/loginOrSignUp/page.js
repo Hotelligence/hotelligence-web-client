@@ -104,7 +104,7 @@ export default function LoginOrSignUp() {
                     </div>
                 </div>
 
-                <div className={styles.or}>
+                {/* <div className={styles.or}>
                     <h5>hoặc</h5>
                 </div>
                 
@@ -135,7 +135,7 @@ export default function LoginOrSignUp() {
 
                 <div className={styles.buttonContainer}>
                     <CustomButton onPress={handleSubmit}>Tiếp tục</CustomButton>
-                </div>
+                </div> */}
 
                 <div className={styles.buttonContainer}>
                     <div className="body4">
