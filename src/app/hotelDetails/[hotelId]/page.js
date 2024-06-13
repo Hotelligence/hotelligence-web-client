@@ -1,4 +1,4 @@
-import React from "react";
+    import React from "react";
 import styles from "./hotelDetails.module.css";
 import HotelTabs from "../../../components/buttons/hotelTabs";
 import CustomButton from "../../../components/buttons/button";
@@ -16,6 +16,7 @@ import ZoomableImage from "../../../components/buttons/ZoomableImage";
 import Link from "next/link";
 import getHotelById from "../../../api/hotel/getHotelById";
 import getRoomsInHotel from "../../../api/room/getRoomsInHotel";
+import getReviewsByRoomId from "../../../api/review/getReviewsByRoomId";
 
 
 export default async function HotelDetails({ params}) {
@@ -24,6 +25,12 @@ export default async function HotelDetails({ params}) {
     const hotelDetails = await getHotelById(params.hotelId);
 
     const roomsInHotel = await getRoomsInHotel(params.hotelId);
+    console.log(roomsInHotel);
+
+    const reviewsOfRooms = await Promise.all(roomsInHotel.map((room) => getReviewsByRoomId(room.id)));
+    const allReviews = reviewsOfRooms.flat();
+    console.log(allReviews);
+
 
 
     return (
@@ -142,13 +149,22 @@ export default async function HotelDetails({ params}) {
                 <div className={styles.review}>
                     <h2 className="text-[var(--primary-gold-120)]">Đánh giá</h2>
                     <div className={styles.ratingAndComment}>
-                        <RatingScoreInReview/>
+                        {/* <RatingScoreInReview/> */}
                         <div className={styles.comments}>  
-                            <Comment/>
-                            <Comment/>
-                            <Comment/>
-                            <Comment/>
-                            <ViewAllButton category="Đánh giá"/>
+                            {allReviews.length > 0 ? allReviews.map((review) => (
+                                <Comment
+                                    key={review.id}
+                                    id={review.id}
+                                    overallScore={review.overallPoint}
+                                    ranking={review.pointCategory}
+                                    date={review.reviewDate}
+                                    comment={review.comment}
+                                    author={review.userName}
+                                />
+                            )) : (
+                                <h5 className="text-[var(--secondary-red-100)]">Hiện tại chưa có đánh giá nào!</h5>
+                            )}
+                            {/* <ViewAllButton category="Đánh giá"/> */}
                         </div>
                     </div>
                 </div>
