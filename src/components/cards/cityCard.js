@@ -9,7 +9,7 @@ export default function CityCard({img, city, province}) {
             </div>
             <div className={styles.downSide}>
                 <h5>{city}</h5>
-                <text>{province}</text>
+                <p>{province}</p>
             </div>
         </div>
     )

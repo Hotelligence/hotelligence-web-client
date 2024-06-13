@@ -10,8 +10,8 @@ export default function recentsearchSearchCard({cityName}) {
 
             <div className={styles.rightSide}>
                 <h5> Khách sạn tại {cityName}</h5>
-                <text>T2, 25/03/24 - T6, 29/03/24 </text>
-                <text>2 khách | 1 phòng</text>
+                <p>T2, 25/03/24 - T6, 29/03/24 </p>
+                <p>2 khách | 1 phòng</p>
             </div>
         </div>
     )

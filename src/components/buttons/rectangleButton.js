@@ -4,10 +4,12 @@ import Link from 'next/link'
 
 export default function RectangleButton({children, href}) {
     return (
-        <Link href={href}>
-            <Button radius="sm" className={styles.button}> 
-                <div className={styles.btnTxt}>{children}</div> 
-            </Button>    
-        </Link>
+        <Button radius="sm" className={styles.button}> 
+            <Link href={href}>
+                <div >
+                    <h4>{children}</h4>
+                </div> 
+            </Link>
+        </Button>    
     )
 }

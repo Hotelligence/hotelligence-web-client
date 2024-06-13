@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { auth } from '@clerk/nextjs/server';
 import { UserButton } from "@clerk/nextjs";
+import { CreateOrganization } from "@clerk/nextjs";
 
 export default function Header() {
     const {userId} = auth();
@@ -17,7 +18,7 @@ export default function Header() {
                     </Link>
             </div>
 
-            <div className={styles.rightSide}>
+            <div className={styles.rightSide}>                
                 <Link href="/aboutUs">Về chúng tôi</Link>
                 <Link href="/help">Hỗ trợ</Link>
                 {userId ? (
@@ -27,6 +28,7 @@ export default function Header() {
                     </>
                 ) : (
                     <>
+                        {/* <Link href="/partnerRegister">Đăng ký đối tác</Link>                     */}
                         <Link href="/loginOrSignUp">Đăng ký/Đăng nhập</Link>
                     </>
                 )}

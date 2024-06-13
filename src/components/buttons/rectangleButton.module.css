@@ -1,8 +1,9 @@
 .button {
     background: var(--primary-blue-100);
     color: var(--primary-gold-100);
-    height: auto;
+    height: 5rem;
     width: 12.5rem;    
+
 }
 
 .button:hover {

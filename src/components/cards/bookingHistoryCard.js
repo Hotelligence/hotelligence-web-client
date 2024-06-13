@@ -3,8 +3,10 @@ import HotelCardLong from "../cards/hotelCardLong"
 import CustomButton from "../buttons/button"
 import CancelBookingModal from "../views/cancelBookingModal"
 import ReviewModal from "../views/reviewModal"
+import Link from "next/link"
 
 export default async function BookingHistoryCard({
+    roomId,
     roomName, 
     hotelId, 
     image, 
@@ -14,14 +16,25 @@ export default async function BookingHistoryCard({
     star, 
     numOfReviews, 
     discount, 
-    oldPrice, 
-    newPrice, 
+    originPrice, 
+    discountPrice, 
     totalPrice, 
     bookingId, 
     bookingDate, 
     checkinDate, 
     checkoutDate, 
-    status}) {
+    status,
+    action,
+    cleanPointName,
+    servicePointName,
+    staffPointName,
+    facilityPointName,
+    ecoPointName,
+    commentName,
+    roomIdName,
+    cancelAction,
+    bookingIdName
+    }) {
     
     function formatDate(date) {
         const d = new Date(date);
@@ -35,7 +48,8 @@ export default async function BookingHistoryCard({
     }
 
     const digitsOnlyBookingId = bookingId.replace(/\D/g, '');
-    
+
+
     return (
         <div className={styles.cardContainer}>
                 <div>
@@ -52,8 +66,8 @@ export default async function BookingHistoryCard({
                                 stars={star}
                                 numOfReviews={numOfReviews}
                                 discount={discount}
-                                oldPrice={oldPrice}
-                                newPrice={newPrice}
+                                originPrice={originPrice}
+                                discountPrice={discountPrice}
                                 totalPrice={totalPrice} />
                         </div>
 
@@ -63,28 +77,28 @@ export default async function BookingHistoryCard({
                                     <div className={styles.title}>
                                         <h6 className="w-[6rem]">Mã đặt phòng</h6>
                                     </div>
-                                    <text className="body3">#{digitsOnlyBookingId}</text>
+                                    <p className="body3">#{digitsOnlyBookingId}</p>
                                 </div>
 
                                 <div className={styles.details}>
                                     <div className={styles.title}>
                                         <h6 className="w-[6rem]">Đặt phòng</h6>
                                     </div>
-                                    <text className="body3">{formatDate(bookingDate)}</text>
+                                    <p className="body3">{formatDate(bookingDate)}</p>
                                 </div>
 
                                 <div className={styles.details}>
                                     <div className={styles.title}>
                                         <h6 className="w-[6rem]">Nhận phòng</h6>
                                     </div>
-                                    <text className="body3">{formatDate(checkinDate)}</text>
+                                    <p className="body3">{formatDate(checkinDate)}</p>
                                 </div>
 
                                 <div className={styles.details}>
                                     <div className={styles.title}>
                                         <h6 className="w-[6rem]">Trả phòng</h6>
                                     </div>
-                                    <text className="body3">{formatDate(checkoutDate)}</text>
+                                    <p className="body3">{formatDate(checkoutDate)}</p>
                                 </div>
 
                                 <div className={styles.details2}>
@@ -93,30 +107,65 @@ export default async function BookingHistoryCard({
                                     </div>
                         
                                     {status === "Đang chờ thanh toán" && (
-                                        <text className="body3 text-[var(--secondary-blue-100)]">
+                                        <p className="body3 text-[var(--secondary-blue-100)]">
                                             Đang chờ thanh toán
-                                        </text>
+                                        </p>
                                     )}
 
                                     {status === "Hoàn tất" && (
-                                        <text className="body3 text-[var(--secondary-green-100)]">
+                                        <p className="body3 text-[var(--secondary-green-100)]">
                                             Hoàn tất
-                                        </text>
+                                        </p>
                                     )}
 
                                     {status === "Đã hủy" && (
-                                        <text className="body3 text-[var(--secondary-red-100)]">
+                                        <p className="body3 text-[var(--secondary-red-100)]">
                                             Đã hủy
-                                        </text>
+                                        </p>
                                     )}
-                                
+
+                                    {status === "Đã đánh giá" && (
+                                        <p className="body3 text-[var(--primary-gold-120)]">
+                                            Đã đánh giá
+                                        </p>
+                                    )}
                                 </div>
                             </div>
 
                             <div className={styles.row2}>
-                                {(status === "Hoàn tất") && <ReviewModal />}
-                                {(status === "Đang chờ thanh toán") && <CustomButton>Thanh toán</CustomButton>}
-                                {(status === "Đang chờ thanh toán") && <CancelBookingModal />}                    
+                                {(status === "Hoàn tất") &&
+                                    <ReviewModal 
+                                    action={action}
+                                    cleanPointName={cleanPointName} 
+                                    servicePointName={servicePointName}
+                                    staffPointName={staffPointName}
+                                    facilityPointName={facilityPointName}
+                                    ecoPointName={ecoPointName}
+                                    commentName={commentName}
+                                    roomId={roomId}
+                                    roomIdName={roomIdName}
+                                    bookingId={bookingId}
+                                    bookingIdName={bookingIdName}
+                                    />
+                                }
+
+                                {(status === "Đang chờ thanh toán") && 
+                                    <CustomButton>
+                                        <Link href={`/payOnline/${bookingId}`}>
+                                            Thanh toán
+                                        </Link>
+                                    </CustomButton>
+                                }
+                                {(status === "Đang chờ thanh toán") && 
+                                    <CancelBookingModal 
+                                        action={cancelAction}
+                                        bookingId={bookingId}
+                                        bookingIdName={bookingIdName}/>
+                                }                 
+
+                                {status === "Đã đánh giá" && 
+                                    <>
+                                    </>}   
                             </div>
                         </div>
                     </div>

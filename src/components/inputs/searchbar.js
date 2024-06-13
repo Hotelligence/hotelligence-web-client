@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Input } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import { useSearchParams, usePathname } from "next/navigation";
+import secureLocalStorage from "react-secure-storage";
 
 export default function Searchbar() {    
     const searchParams = useSearchParams();
@@ -21,6 +22,7 @@ export default function Searchbar() {
     }
 
     const [value, setValue] = useState(searchParams.get("query")?.toString() || "");
+    
 
     return (
         <div className="flex w-full">

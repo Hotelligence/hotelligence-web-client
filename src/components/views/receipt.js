@@ -36,7 +36,7 @@ export default function Receipt({hotelName, checkinDate, checkoutDate, roomName,
                     <div className="w-[8rem]">
                         <h6 className="w-[8rem]">Số lượng</h6>
                     </div>
-                    <text className="body3 text-justify">{numOfNights}</text>
+                    <text className="body3 text-justify">{numOfNights} đêm</text>
                 </div>
             </div>
 

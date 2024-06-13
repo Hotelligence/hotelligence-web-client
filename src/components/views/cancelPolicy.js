@@ -23,7 +23,7 @@ export default function CancelPolicy({ cancelDue, unCancelDue }) {
                 <li>&nbsp;Nếu Quý khách thay đổi hoặc hủy đặt phòng sau {formatDate(unCancelDue)}, Quý khách sẽ không được hoàn trả bất kỳ khoản thanh toán nào.</li>
             </ol>
 
-            <text className="body3 text-justify">*Thời gian được tính theo giờ địa phương hiện tại của Quý khách (GMT +7)</text>
+            <p className="body3 text-justify">*Thời gian được tính theo giờ địa phương hiện tại của Quý khách (GMT +7)</p>
         </div>
     )
 }

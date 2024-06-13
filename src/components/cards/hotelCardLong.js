@@ -28,7 +28,7 @@ export default function HotelCardLong({id, img, hotelName, city, ratingScore, st
                     
                     <div className={styles.row2}>
                         <div className={styles.rating}>
-                            <OverallRatingScore score={ratingScore?.toFixed(1)}/>
+                            {/* <OverallRatingScore score={ratingScore?.toFixed(1)}/> */}
 
                             <div className={styles.starAndReview}>
                                 {/* <div className={styles.star}>
@@ -37,14 +37,14 @@ export default function HotelCardLong({id, img, hotelName, city, ratingScore, st
                                     ))}
                                 </div> */}
 
-                                <div className={styles.numOfReviews}>
+                                {/* <div className={styles.numOfReviews}>
                                     <text className='body4'>({numOfReviews} đánh giá)</text>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
 
                         <div className={styles.price}>
-                            <Discount discountPercentage={discount}/>
+                            {/* <Discount discountPercentage={discount}/>
 
                             <div className={styles.priceDetails}>
                                 <div className={styles.originPrice}>
@@ -56,7 +56,7 @@ export default function HotelCardLong({id, img, hotelName, city, ratingScore, st
 
                             <div className={styles.totalPrice}>
                                 <text className='body5'>Tổng {totalPrice?.toLocaleString('en-US')}đ bao gồm thuế và phí</text>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>
