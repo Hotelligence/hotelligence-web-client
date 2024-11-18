@@ -12,7 +12,12 @@ import getAllHotels from "../api/hotel/getAllHotels";
 
 export default async function Home({searchParams}) {
 
-  const query = searchParams?.query || "";
+  const keys = Object.keys(searchParams)
+  const values = Object.values(searchParams)
+  const paramsStr = keys.map((key, index) => `${key}=${values[index]}`).join('&')
+
+  console.log("searchparam: ",Object.keys(searchParams)
+);
 
   const hotels = await getAllHotels();
   
@@ -32,7 +37,7 @@ export default async function Home({searchParams}) {
         <Searchbar isRequired/>        
         <DatePicker/>
         <PopOver/>
-        <CustomButton isDisabled={query === ""}><Link href={`/searchResult?query=${query}`}>Tìm </Link></CustomButton>
+        <CustomButton isDisabled={searchParams.query === ""}><Link href={`/searchResult?${paramsStr}`}>Tìm </Link></CustomButton>
       </div>
 
       <h2 className={styles.heading2}>Tìm kiếm gần đây</h2>

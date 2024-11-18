@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, use } from "react"
 import { Button, Input, Popover, PopoverContent, PopoverTrigger } from "@nextui-org/react"
 import styles from "./popover.module.css"
 import { User } from "lucide-react"
@@ -16,15 +16,19 @@ export default function PopOver() {
 
         if (number > 1)
             params.set("guests", number);
-        else
-            params.delete("guests");
+        // else
+        //     params.delete("guests");
 
         replace(`${pathname}?${params.toString()}`);
     };
 
     const [adultCount, setAdultCount] = useState(1);
     const [childCount, setChildCount] = useState(0);
-    const [totalGuests, setTotalGuests] = useState(searchParams.get("guests"));
+    const [totalGuests, setTotalGuests] = useState(1);
+    useEffect(() => {
+        const guests = searchParams.get("guests")?.toString();
+        setTotalGuests(guests);
+    }, [searchParams] );
 
     useEffect(() => {
         const newTotalGuests = adultCount + childCount;
@@ -62,7 +66,7 @@ export default function PopOver() {
                         label="Chọn số lượng khách"                       
                         endContent={<User size={20} color="var(--primary-blue-50)"/>}
                         variant="bordered"
-                        value={`${totalGuests} khách`}
+                        value={`${totalGuests || 1} khách`}
                         onValueChange={setTotalGuests}
                         onChange={(e) => handleSearch(e.target.value) }
                         classNames={{input: ["text: text-left"]}}

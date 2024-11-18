@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Input } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import { useSearchParams, usePathname } from "next/navigation";
@@ -21,7 +21,11 @@ export default function Searchbar() {
         replace(`${pathname}?${params.toString()}`);
     }
 
-    const [value, setValue] = useState(searchParams.get("query")?.toString() || "");
+    const [value, setValue] = useState("");
+    useEffect (() => {
+        const query = searchParams.get("query")?.toString();
+        setValue(query);
+    }, [searchParams]);
     
 
     return (
