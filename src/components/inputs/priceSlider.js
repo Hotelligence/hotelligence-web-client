@@ -1,18 +1,41 @@
 'use client'
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { Slider, Input } from "@nextui-org/react"
+import { useSearchParams, usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function PriceSlider({ minValue, maxValue, defaultMinValue, defaultMaxValue, step }) {
-    const [value, setValue] = React.useState([defaultMinValue, defaultMaxValue]);
-
-    const [minValueInput, setMinValueInput] = React.useState(minValue);
-    const [maxValueInput, setMaxValueInput] = React.useState(maxValue);
+    const searchParams = useSearchParams();
+    const pathname = usePathname();
+    const { replace } = useRouter();
 
     const handleSliderChange = (newValue) => {
+        const [min, max] = newValue;
+        const params = new URLSearchParams(searchParams);
+
+        if (min !== undefined)
+            params.set("minPrice", min);
+        else
+            params.delete("minPrice");
+
+        if (max !== undefined)
+            params.set("maxPrice", max);
+        else
+            params.delete("maxPrice");
+
+        replace(`${pathname}?${params.toString()}`);
         setValue(newValue);
-        setMinValueInput(newValue[0]);
-        setMaxValueInput(newValue[1]);
-    };
+    }
+
+    const [value, setValue] = useState([defaultMinValue, defaultMaxValue]);
+    useEffect(() => {
+        const minPrice = parseInt(searchParams.get("minPrice")) || defaultMinValue;
+        const maxPrice = parseInt(searchParams.get("maxPrice")) || defaultMaxValue;
+        setValue([minPrice, maxPrice]);
+    }, [searchParams]);
+
+    const [minValueInput, setMinValueInput] = useState(minValue);
+    const [maxValueInput, setMaxValueInput] = useState(maxValue);
 
     const handleMinValueInputChange = (event) => {
         const newValue = parseInt(event.target.value);
@@ -28,7 +51,7 @@ export default function PriceSlider({ minValue, maxValue, defaultMinValue, defau
             setMaxValueInput(newValue);
             setValue([value[0], newValue]);
         }
-    }
+    };
     
 
     return (

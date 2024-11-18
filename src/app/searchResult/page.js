@@ -15,15 +15,27 @@ import secureLocalStorage from "react-secure-storage"
 
 export default async function SearchResult({searchParams}) {
     const query = searchParams?.query || "";
-    console.log("query: ",query);
+    console.log("query: ", query);
     const from = searchParams?.from || "";
-    console.log("from: ",from);
+    console.log("from: ", from);
     const to = searchParams?.to || "";
     console.log("to: ",to);
     const guests = searchParams?.guests || "";
-    console.log("guests: ",guests);
+    console.log("guests: ", guests);
+    const sortBy = searchParams?.sortBy || "";
+    console.log("sortBy: ", sortBy);
+    const sortOrder = searchParams?.sortOrder || "";
+    console.log("sortOrder: ", sortOrder);
+    const minPrice = searchParams?.minPrice || "";
+    console.log("minPrice: ", minPrice);
+    const maxPrice = searchParams?.maxPrice || "";
+    console.log("maxPrice: ", maxPrice);
+    const minRatingScore = searchParams?.minRatingScore || "";
+    console.log("minRatingScore: ", minRatingScore);
+    const stars = searchParams?.stars || "";
+    console.log("stars: ", stars);
 
-    const results = await getSearchResult(query, from, to, guests);  
+    const results = await getSearchResult(query, from, to, guests, sortBy, sortOrder, minPrice, maxPrice, minRatingScore, stars);  
 
     return (
         <>
@@ -53,7 +65,7 @@ export default async function SearchResult({searchParams}) {
                         {(query) && <h5>{results.length} kết quả trả về cho tìm kiếm <span className="text-[var(--primary-gold-120)]">{query}</span> của bạn</h5>}
                         {(!query) && <h5>0 kết quả trả về cho tìm kiếm <span className="text-[var(--primary-gold-120)]">{query}</span> của bạn</h5>}
                         <div className={styles.sort}>
-                            <Sort result={results}/>
+                            <Sort />
                         </div>                    
                     </div>
                     
@@ -66,13 +78,13 @@ export default async function SearchResult({searchParams}) {
                                 img={hotel.images && hotel.images.length > 0 ? hotel.images[0] : ""}
                                 hotelName={hotel.hotelName}
                                 city={hotel.city}
-                                // ratingScore={hotel.ratingScore}
-                                // stars={hotel.star}
-                                // numOfReviews={hotel.numOfReviews}
-                                // originPrice={hotel.originPrice}
-                                // discount={hotel.discount}
-                                // discountPrice={hotel.discountPrice}
-                                // totalPrice={hotel.totalPrice}
+                                ratingScore={hotel.ratingScore}
+                                stars={hotel.star}
+                                numOfReviews={hotel.numOfReviews}
+                                originPrice={hotel.originPrice}
+                                discount={hotel.discount}
+                                discountPrice={hotel.discountPrice}
+                                totalPrice={hotel.totalPrice}
                                 />
                         </div>
                     ))}

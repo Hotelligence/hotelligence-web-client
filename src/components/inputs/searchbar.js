@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Input } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import { useSearchParams, usePathname } from "next/navigation";
@@ -9,6 +9,8 @@ export default function Searchbar() {
     const searchParams = useSearchParams();
     const pathname = usePathname();
     const { replace } = useRouter();
+    const [value, setValue] = useState("");
+    const debounceTimeout = useRef(null);
 
     const handleSearch = (term) => {
         const params = new URLSearchParams(searchParams);
@@ -21,25 +23,34 @@ export default function Searchbar() {
         replace(`${pathname}?${params.toString()}`);
     }
 
-    const [value, setValue] = useState("");
-    useEffect (() => {
+    useEffect(() => {
         const query = searchParams.get("query")?.toString();
-        setValue(query);
+        setValue(query || "");
     }, [searchParams]);
-    
+
+    const handleChange = (e) => {
+        const { value } = e.target;
+        setValue(value);
+
+        if (debounceTimeout.current) {
+            clearTimeout(debounceTimeout.current);
+        }
+
+        debounceTimeout.current = setTimeout(() => {
+            handleSearch(value);
+        }, 300); // Adjust the delay as needed
+    };
 
     return (
         <div className="flex w-full">
             <Input
                 label="Tìm địa điểm, khách sạn, v.v."
                 variant="bordered"
-                onChange={(e) => handleSearch(e.target.value)}
-                defaultValue={searchParams.get("query")?.toString()}
+                onChange={handleChange}
                 value={value}
-                onValueChange={setValue}                
+                clearable
             >
             </Input>
         </div>
     );
 }
-
