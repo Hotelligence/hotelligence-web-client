@@ -16,8 +16,7 @@ export default async function Home({searchParams}) {
   const values = Object.values(searchParams)
   const paramsStr = keys.map((key, index) => `${key}=${values[index]}`).join('&')
 
-  console.log("searchparam: ",Object.keys(searchParams)
-);
+  console.log("searchparam: ", Object.keys(searchParams));
 
   const hotels = await getAllHotels();
   

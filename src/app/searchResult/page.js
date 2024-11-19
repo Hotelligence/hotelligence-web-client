@@ -22,9 +22,9 @@ export default async function SearchResult({searchParams}) {
     console.log("to: ",to);
     const guests = searchParams?.guests || "";
     console.log("guests: ", guests);
-    const sortBy = searchParams?.sortBy || "";
+    const sortBy = searchParams?.sortBy;
     console.log("sortBy: ", sortBy);
-    const sortOrder = searchParams?.sortOrder || "";
+    const sortOrder = searchParams?.sortOrder;
     console.log("sortOrder: ", sortOrder);
     const minPrice = searchParams?.minPrice || "";
     console.log("minPrice: ", minPrice);
@@ -35,7 +35,37 @@ export default async function SearchResult({searchParams}) {
     const stars = searchParams?.stars || "";
     console.log("stars: ", stars);
 
-    const results = await getSearchResult(query, from, to, guests, sortBy, sortOrder, minPrice, maxPrice, minRatingScore, stars);  
+    // Create params object excluding undefined/empty values
+    const apiParams = {
+        query,
+        from,
+        to,
+        guests,
+        minPrice,
+        maxPrice,
+        minRatingScore,
+        stars
+    };
+    
+    // Only add sort params if they exist
+    if (searchParams?.sortBy && searchParams?.sortOrder) {
+        apiParams.sortBy = searchParams.sortBy;
+        apiParams.sortOrder = searchParams.sortOrder;
+    }
+
+    const results = await getSearchResult(
+        query,
+        from,
+        to,
+        guests,
+        searchParams.sortBy || undefined,  // Pass undefined instead of empty string
+        searchParams.sortOrder || undefined,
+        minPrice,
+        maxPrice,
+        minRatingScore,
+        stars
+    );  
+    console.log("results: ", results);
 
     return (
         <>
@@ -62,14 +92,18 @@ export default async function SearchResult({searchParams}) {
 
                 <div className={styles.rightSide}>
                     <div className={styles.topHeading}>
-                        {(query) && <h5>{results.length} kết quả trả về cho tìm kiếm <span className="text-[var(--primary-gold-120)]">{query}</span> của bạn</h5>}
-                        {(!query) && <h5>0 kết quả trả về cho tìm kiếm <span className="text-[var(--primary-gold-120)]">{query}</span> của bạn</h5>}
+                        {results && results.length > 0 && 
+                            <h5>{results.length} kết quả trả về cho tìm kiếm <span className="text-[var(--primary-gold-120)]">{query}</span> của bạn</h5>
+                        }
+                        {(!results || results.length === 0) && 
+                            <h5>0 kết quả trả về cho tìm kiếm <span className="text-[var(--primary-gold-120)]">{query}</span> của bạn</h5>
+                        }
                         <div className={styles.sort}>
                             <Sort />
                         </div>                    
                     </div>
                     
-                    {(query) &&
+                    {results && results.length > 0 &&
                      results.map((hotel) => (
                         <div className={styles.cardContainer} key={hotel.id}>
                             <HotelCardLong 

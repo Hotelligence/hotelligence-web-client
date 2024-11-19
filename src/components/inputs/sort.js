@@ -15,28 +15,26 @@ export default function Sort() {
         const params = new URLSearchParams(searchParams);
         const selectedOption = options.find(opt => opt.key === value);
 
-        if (selectedOption?.sortBy)
+        if (selectedOption?.sortBy && selectedOption?.sortOrder) {
             params.set("sortBy", selectedOption.sortBy);
-        else
-            params.delete("sortBy");
-
-        if (selectedOption?.sortOrder)
             params.set("sortOrder", selectedOption.sortOrder);
-        else
+        } else {
+            params.delete("sortBy");
             params.delete("sortOrder");
+        }
 
         replace(`${pathname}?${params.toString()}`);
     }
 
     const options = [
-        { "key": "suggest", "sortBy": "", "sortOrder": "", "label": "Đề xuất" },
+        { "key": "suggest", "sortBy": null, "sortOrder": null, "label": "Đề xuất" },
         { "key": "priceUp", "sortBy": "discountPrice", "sortOrder": "asc", "label": "Giá thấp đến cao" },
         { "key": "priceDown", "sortBy": "discountPrice", "sortOrder": "desc", "label": "Giá cao đến thấp" },
         { "key": "ratingDown", "sortBy": "ratingScore", "sortOrder": "desc", "label": "Đánh giá cao nhất" },
         { "key": "ratingUp", "sortBy": "ratingScore", "sortOrder": "asc",  "label": "Đánh giá thấp nhất" }
     ]
 
-    const [value, setValue] = useState("suggest");
+    const [value, setValue] = useState(options[0].key);
     
     useEffect(() => {
         const sortBy = searchParams.get("sortBy");
@@ -44,7 +42,7 @@ export default function Sort() {
         const currentOption = options.find(
             opt => opt.sortBy === sortBy && opt.sortOrder === sortOrder
         );
-        setValue(currentOption?.key || "suggest");
+        setValue(currentOption?.key || options[0].key);
     }, [searchParams]);
     
     return (
@@ -54,7 +52,7 @@ export default function Sort() {
             startContent={<ArrowDownUp size={20}/>}
             onChange={(e) => handleSort(e.target.value)}
             value={value}
-            defaultSelectedKeys={["suggest"]}
+            defaultSelectedKeys={[options[0].key]}
         >
             {options.map((option) => (
                 <SelectItem key={option.key} value={option.key}>{option.label}</SelectItem>
