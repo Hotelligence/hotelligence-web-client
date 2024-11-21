@@ -12,10 +12,11 @@
   --primary-gold-100: #C9AF8A;
 
   --secondary-red-100: #D73232;
-
   --secondary-blue-100: #1F8AA2;
-
   --secondary-green-100: #29A21F;
+
+  --tertiary-red-100: #F05555;
+  --tertiary-blue-20: #8DAFE0;
 }
 
 /* @media (prefers-color-scheme: dark) {

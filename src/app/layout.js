@@ -6,7 +6,7 @@ import { Providers } from "./providers";
 import Header from "../components/header/header";
 import Footer from "../components/footer/footer";
 import { ClerkProvider } from "@clerk/nextjs";
-
+import TawkToMessenger from "../components/chat/TawkToMessenger"
 
 const inter = Inter({ subsets: ["latin"] });
 const sfPro = localFont({
@@ -57,6 +57,7 @@ export default function RootLayout({ children }) {
               <Footer />
             </ClerkProvider>
           </Providers>
+          <TawkToMessenger />
         </body>
       </html>
   );
