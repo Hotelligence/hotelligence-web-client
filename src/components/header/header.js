@@ -13,14 +13,17 @@ export default function Header() {
     return (
         <div className={styles.headerWrapper}>
             <div className={styles.leftSide}>
-                    <Link href="/">
-                        <Image src={Logo} height={60} alt="Hotelligence Logo" priority></Image>
-                    </Link>
+                <Link href="/aboutUs">Về chúng tôi</Link>
+                <Link href="/help">Hỗ trợ</Link>   
+            </div>
+
+            <div className={styles.middle}>
+                <Link href="/">
+                    <Image src={Logo} height={60} alt="Hotelligence Logo" priority></Image>
+                </Link>
             </div>
 
             <div className={styles.rightSide}>                
-                <Link href="/aboutUs">Về chúng tôi</Link>
-                <Link href="/help">Hỗ trợ</Link>
                 {userId ? (
                     <>
                     <Link href="/bookingHistory">Lịch sử đặt phòng</Link>
@@ -28,8 +31,9 @@ export default function Header() {
                     </>
                 ) : (
                     <>
-                        {/* <Link href="/partnerRegister">Đăng ký đối tác</Link>                     */}
-                        <Link href="/loginOrSignUp">Đăng ký/Đăng nhập</Link>
+                        <Link href="/partnerRegister">Đăng ký trở thành Đối tác</Link>                    
+                        <Link href="/loginOrSignUp">Đăng ký</Link>
+                        <Link href="/loginOrSignUp">Đăng nhập</Link>
                     </>
                 )}
 

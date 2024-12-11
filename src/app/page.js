@@ -36,7 +36,9 @@ export default async function Home({searchParams}) {
         <Searchbar isRequired/>        
         <DatePicker/>
         <PopOver/>
-        <CustomButton isDisabled={searchParams.query === ""}><Link href={`/searchResult?${paramsStr}`}>Tìm </Link></CustomButton>
+        <CustomButton isDisabled={!searchParams.query || searchParams.query === ""} >
+          <Link href={`/searchResult?${paramsStr}`}>Tìm </Link>
+        </CustomButton>
       </div>
 
       <h2 className={styles.heading2}>Tìm kiếm gần đây</h2>
