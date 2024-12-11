@@ -17,7 +17,7 @@ const sfPro = localFont({
       style: "bold",
     },
     {
-      path: "../fonts/SFProDisplay/SFProDisplay-Semibold.ttf",
+      path: "../fonts/SFProDisplay/SFProDisplay-SemiBold.ttf",
       weight: "600",
       style: "semibold",
     },
