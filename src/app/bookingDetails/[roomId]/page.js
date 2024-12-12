@@ -5,7 +5,7 @@ import { Input, RadioGroup, Radio } from "@nextui-org/react";
 import Image from "next/image";
 import VisaLogo from "../../../images/Visa_Logo.png"
 import MasterCardLogo from "../../../images/MasterCard_Logo.png"
-import MomoLogo from "../../../images/MoMo_Logo.png"
+import MomoLogo from "../../../images/Momo_Logo.png"
 import VNPayLogo from "../../../images/VNPay_Logo.png"
 import CustomButton from "../../../components/buttons/button";
 import Receipt from "../../../components/views/receipt";
