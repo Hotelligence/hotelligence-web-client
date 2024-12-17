@@ -1,6 +1,6 @@
 import BackButton from "../../../components/buttons/backButton";
 import styles from "./bookingDetails.module.css";
-import BookingForm from "../../../components/views/bookingForm";
+import BookingForm from "../../../components/forms/bookingForm";
 import { Input, RadioGroup, Radio } from "@nextui-org/react";
 import Image from "next/image";
 import VisaLogo from "../../../images/Visa_Logo.png"

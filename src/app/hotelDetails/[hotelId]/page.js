@@ -1,4 +1,4 @@
-    import React from "react";
+import React from "react";
 import styles from "./hotelDetails.module.css";
 import HotelTabs from "../../../components/buttons/hotelTabs";
 import CustomButton from "../../../components/buttons/button";
