@@ -26,6 +26,7 @@ export default function Header() {
             <div className={styles.rightSide}>                
                 {userId ? (
                     <>
+                    <Link href="/partnerRegister">Đăng ký trở thành Đối tác</Link>                    
                     <Link href="/bookingHistory">Lịch sử đặt phòng</Link>
                     <UserButton afterSignOutUrl="/"/>
                     </>
