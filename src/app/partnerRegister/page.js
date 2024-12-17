@@ -4,8 +4,10 @@ import Link from 'next/link'
 import ButtonOutline from '../../components/buttons/buttonOutline'
 import { auth } from '@clerk/nextjs/server';
 import PartnerRegisterForm from '../../components/forms/partnerRegisterForm'
+import createHotel from '../../api/hotel/createHotel'
+import { redirect } from 'next/navigation'
 
-export default function PartnerRegister() {
+export default async function PartnerRegister() {
     const {userId} = auth();
     console.log(userId);
 
@@ -23,14 +25,20 @@ export default function PartnerRegister() {
             postalCode: formData.get("postalCode"),
             businessType: formData.get("businessType"),
         }
-    }
 
-    // await
+        console.log(hotelData);
+
+        await createHotel(hotelData);
+
+        if (hotelData) {
+            redirect('/partnerRegisterSuccess');
+        }
+    }
 
     return (
         <div className={styles.pageContainer}>
             <h2>Đăng ký trở thành Đối tác</h2>
-            { userId ? (
+            { !userId ? (
             <>
                 <h6 className='text-center'>
                     Quý khách vui lòng Đăng nhập hoặc Đăng ký để có thể <br />
@@ -48,8 +56,7 @@ export default function PartnerRegister() {
             </>
             ) : (
                 <>
-                    <PartnerRegisterForm />
-                    <CustomButton type="submit">Xác nhận</CustomButton>
+                    <PartnerRegisterForm action={handleRegisterHotel}/>
                 </>
             ) }
         </div>
