@@ -1,30 +1,19 @@
-'use client'
 
 import styles from "./header.module.css";
 import Logo from "../../images/Hotelligence Logo.png"
 import Image from "next/image";
 import Link from "next/link";
-import { useAuth } from '@clerk/nextjs';  
+// import { useAuth } from '@clerk/nextjs';  
 import { UserButton } from "@clerk/nextjs";
 import { CreateOrganization } from "@clerk/nextjs";
 import getCountByUserId from "../../api/hotel/getCountByUserId"
-import { useState, useEffect } from "react";
+import { auth } from '@clerk/nextjs/server'
 
+export default async function Header() {
+    const { userId } = auth();  
 
-export default function Header() {
-    const { userId } = useAuth();  
-    const [count, setCount] = useState(null);
-
-    useEffect(() => {
-        async function fetchCount() {
-            if (userId) {
-                const result = await getCountByUserId(userId);
-                setCount(result);
-            }
-        }
-        fetchCount();
-    }, [userId]);
-
+    const count = await getCountByUserId(userId);
+    
     return (
         <div className={styles.headerWrapper}>
             <div className={styles.leftSide}>
@@ -41,11 +30,14 @@ export default function Header() {
             <div className={styles.rightSide}>                
                 {userId ? (
                     <>
-                        {count !== null && count < 0 && (
+                        {(count <= 0 || count === null) && (
                             <Link href="/partnerRegister">Đăng ký trở thành Đối tác</Link>                    
                         )}
 
-                        <Link href={`/hotelManagement/${userId}`}>Quản lý khách sạn</Link>
+                        {(count > 0) && (
+                            <Link href={`/hotelManagement/${userId}`}>Quản lý khách sạn</Link>
+                        )}
+
                         <Link href="/bookingHistory">Lịch sử đặt phòng</Link>
                         <UserButton afterSignOutUrl="/"/>
                     </>
