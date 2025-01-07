@@ -3,7 +3,16 @@ import ViewAllButton from "../buttons/viewAllButton";
 import RoomDetailsModal from "./roomDetailsModal";
 import { useDisclosure } from "@nextui-org/react";
 
-export default function HotelAmenity({isVertical, isRoomDetailModal, roomName, breakfastPrice, breakfastFor2Price, discountPercentage, numOfRemainingRooms, oldPrice, newPrice, totalPrice}) {
+export default function HotelAmenity({
+    isVertical, 
+    isRoomDetailModal, 
+    roomName, 
+    extraOptions,
+    discountPercentage,
+    originPrice,
+    discountedPrice,
+    taxPercentage
+    }) {
 
     if (isVertical === "false") {
         return (
@@ -79,7 +88,14 @@ export default function HotelAmenity({isVertical, isRoomDetailModal, roomName, b
 
             {!isRoomDetailModal && (
                 <div className="flex items-start">
-                <RoomDetailsModal roomName={roomName} breakfastPrice={breakfastPrice} breakfastFor2Price={breakfastFor2Price} discountPercentage={discountPercentage} oldPrice={oldPrice} newPrice={newPrice} totalPrice={totalPrice}/>
+                <RoomDetailsModal 
+                    roomName={roomName} 
+                    extraOptions={extraOptions}
+                    discountPercentage={discountPercentage}
+                    originPrice={originPrice}
+                    discountedPrice={discountedPrice}
+                    taxPercentage={taxPercentage}
+                />
                 </div>
             )}
             </div>

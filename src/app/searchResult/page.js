@@ -12,6 +12,7 @@ import HotelCardLong from "../../components/cards/hotelCardLong"
 import getSearchResult from "../../api/getSearchResult"
 import getRoomsInHotel from "../../api/room/getRoomsInHotel"
 import secureLocalStorage from "react-secure-storage"
+import Link from "next/link"
 
 export default async function SearchResult({searchParams}) {
     const query = searchParams?.query || "";
@@ -34,6 +35,10 @@ export default async function SearchResult({searchParams}) {
     console.log("minRatingScore: ", minRatingScore);
     const stars = searchParams?.stars || "";
     console.log("stars: ", stars);
+
+    const keys = Object.keys(searchParams)
+    const values = Object.values(searchParams)
+    const paramsStr = keys.map((key, index) => `${key}=${values[index]}`).join('&')
 
     // Create params object excluding undefined/empty values
     const apiParams = {
@@ -70,10 +75,12 @@ export default async function SearchResult({searchParams}) {
     return (
         <>
             <div className={styleHome.searchContainer}>
-                <Searchbar />
+                <Searchbar isRequired/>
                 <DatePicker />
                 <PopOver />
-                <CustomButton>Tìm</CustomButton>
+                <CustomButton isDisabled={!searchParams.query || searchParams.query === ""} >
+                    <Link href={`/searchResult?${paramsStr}`}>Tìm</Link>
+                </CustomButton>
             </div>
 
             <div className={styles.pageContainer}>
@@ -112,13 +119,13 @@ export default async function SearchResult({searchParams}) {
                                 img={hotel.images && hotel.images.length > 0 ? hotel.images[0] : ""}
                                 hotelName={hotel.hotelName}
                                 city={hotel.city}
-                                ratingScore={hotel.ratingScore}
-                                stars={hotel.star}
-                                numOfReviews={hotel.numOfReviews}
-                                originPrice={hotel.originPrice}
-                                discount={hotel.discount}
-                                discountPrice={hotel.discountPrice}
-                                totalPrice={hotel.totalPrice}
+                                star={hotel.star}
+                                reviewCount={hotel.reviewCount}
+                                roomLowestOriginPrice={hotel.roomLowestOriginPrice}
+                                roomLowestDiscountPercentage={hotel.roomLowestDiscountPercentage}
+                                roomLowestDiscountedPrice={hotel.roomLowestDiscountedPrice}
+                                roomLowestTotalPrice={hotel.roomLowestTotalPrice}
+                                reviewAverageOverallPoint={hotel.reviewAverageOverallPoint}
                                 />
                         </div>
                     ))}

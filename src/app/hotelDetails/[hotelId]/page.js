@@ -16,23 +16,19 @@ import ZoomableImage from "../../../components/buttons/ZoomableImage";
 import Link from "next/link";
 import getHotelById from "../../../api/hotel/getHotelById";
 import getRoomsInHotel from "../../../api/room/getRoomsInHotel";
-import getReviewsByRoomId from "../../../api/review/getReviewsByRoomId";
+import getReviewsByHotelId from "../../../api/review/getReviewsByHotelId";
 
 
 export default async function HotelDetails({ params}) {
-
-    
     const hotelDetails = await getHotelById(params.hotelId);
 
     const roomsInHotel = await getRoomsInHotel(params.hotelId);
-    console.log(roomsInHotel);
+    // console.log(roomsInHotel);
 
-    const reviewsOfRooms = await Promise.all(roomsInHotel.map((room) => getReviewsByRoomId(room.id)));
-    const allReviews = reviewsOfRooms.flat();
-    console.log(allReviews);
+    const reviewsOfHotel = await getReviewsByHotelId(params.hotelId);
 
-
-
+    // console.log(roomsInHotel.extraOptions);
+    console.log(hotelDetails.policies);
     return (
         <>
             <BackButton label="Xem tất cả khách sạn"/>
@@ -58,7 +54,17 @@ export default async function HotelDetails({ params}) {
                 </div> 
 
                 <div>                              
-                    <HotelOverview hotelName={hotelDetails.hotelName} stars={hotelDetails.star} address={hotelDetails.address} description={hotelDetails.description} ratingScore={hotelDetails.ratingScore}/>
+                    <HotelOverview 
+                        hotelName={hotelDetails.hotelName} 
+                        stars={hotelDetails.star} 
+                        address={hotelDetails.address} 
+                        city={hotelDetails.city}
+                        district={hotelDetails.district}
+                        province={hotelDetails.province}
+                        description={hotelDetails.description} 
+                        reviewAverageOverallPoint={hotelDetails.reviewAverageOverallPoint}
+                        reviewAveragePointCategory={hotelDetails.reviewAveragePointCategory}
+                        />
                 </div>
 
                 <div id="amenity" className="h-[3.125rem]"/>
@@ -79,7 +85,7 @@ export default async function HotelDetails({ params}) {
 
                     <div className={styles.numOfRooms}>
                         <NumRoomRadio/>
-                        <text className="body3 text-[var(--primary-blue-50)]">Hiển thị  trên  phòng</text>
+                        <text className="body3 text-[var(--primary-blue-50)]">Hiển thị  trên {hotelDetails.roomCount} phòng</text>
                     </div>
 
                     <div className={styles.roomCards}>
@@ -88,14 +94,15 @@ export default async function HotelDetails({ params}) {
                                 <RoomCardHigh
                                     key={room.id}
                                     id={room.id}
-                                    img={room.image}
+                                    images={room.images[0]}
                                     roomName={room.roomName}
-                                    breakfastPrice={room.breakfastPrice}
-                                    breakfastFor2Price={room.breakfastFor2Price}
-                                    discountPercentage={room.discount}
                                     originPrice={room.originPrice}
-                                    discountPrice={room.discountPrice}
-                                    totalPrice={room.totalPrice}
+                                    discountPercentage={room.discountPercentage}
+                                    discountedPrice={room.discountedPrice}
+                                    taxPercentage={room.taxPercentage}
+                                    extraOptions={room.extraOptions || []}
+                                    amenityType={room.amenityType}
+                                    amenityName={room.amenityName}
                                 />
                             ))
                         ) : (
@@ -111,36 +118,40 @@ export default async function HotelDetails({ params}) {
                     <div className={styles.policyDetails}>
                         <div>
                             <h4>Phí tùy chọn</h4>
-                            <menu>
+                            {/* <menu>
                                 <li>Khách có thể dùng bữa sáng buffet với phụ phí ước tính 290000 VND mỗi người</li>
                                 <li>Khách có thể nhận phòng sớm với khoản phụ phí nhỏ (tùy theo tình hình thực tế)</li>
                                 <li>Khách có thể trả phòng muộn với khoản phụ phí nhỏ (tùy theo tình hình thực tế)</li>
-                            </menu>
+                            </menu> */}
+                            <p>{hotelDetails.optionalFees}</p>
                         </div>
 
                         <div>
                             <h4>Hồ bơi, spa & gym (nếu có)</h4>
-                            <menu>
+                            {/* <menu>
                                 <li>Cần đăng ký trước để sử dụng dịch vụ massage và dịch vụ spa. Khách có thể đặt trước khi đến bằng cách liên hệ nơi lưu trú qua số điện thoại được cung cấp trong xác nhận đặt phòng.</li>
-                            </menu>
+                            </menu> */}
+                            <p>{hotelDetails.amenities}</p>
                         </div>
 
                         <div>
                             <h4>Chính sách </h4>
-                            <menu>
+                            {/* <menu>
                                 <li>Chỉ khách đã đăng ký được lưu trú tại phòng.</li>
                                 <li>Khách có thể an tâm nghỉ ngơi khi biết rằng có bình cứu hỏa và hệ thống an ninh trong khuôn viên.</li>
                                 <li>Nơi lưu trú này nhận thanh toán bằng thẻ tín dụng và tiền mặt.</li>
-                            </menu>
+                            </menu> */}
+                            <p>{hotelDetails.policies}</p>
                         </div>
 
                         <div>
                             <h4>Tên khác </h4>
-                            <ul>
+                            {/* <ul>
                                 <li>Fusion Suites Vung Tau Hotel</li>
                                 <li>Fusion Suites Vung Tau Vung Tau</li>
                                 <li>Fusion Suites Vung Tau Hotel Vung Tau</li>
-                            </ul>
+                            </ul> */}
+                            <p>{hotelDetails.otherNames}</p>
                         </div>
                     </div>
                 </div>
@@ -149,9 +160,18 @@ export default async function HotelDetails({ params}) {
                 <div className={styles.review}>
                     <h2 className="text-[var(--primary-gold-120)]">Đánh giá</h2>
                     <div className={styles.ratingAndComment}>
-                        {/* <RatingScoreInReview/> */}
+                        <RatingScoreInReview 
+                            reviewAverageOverallPoint={hotelDetails.reviewAverageOverallPoint}
+                            reviewAveragePointCategory={hotelDetails.reviewAveragePointCategory}
+                            reviewCount={hotelDetails.reviewCount}
+                            reviewAverageCleanPoint={hotelDetails.reviewAverageCleanPoint}
+                            reviewAverageStaffPoint={hotelDetails.reviewAverageStaffPoint}
+                            reviewAverageServicePoint={hotelDetails.reviewAverageServicePoint}
+                            reviewAverageFacilityPoint={hotelDetails.reviewAverageFacilityPoint}
+                            reviewAverageEnvironmentPoint={hotelDetails.reviewAverageEnvironmentPoint}
+                            />
                         <div className={styles.comments}>  
-                            {allReviews.length > 0 ? allReviews.map((review) => (
+                            {reviewsOfHotel.length > 0 ? reviewsOfHotel.map((review) => (
                                 <Comment
                                     key={review.id}
                                     id={review.id}

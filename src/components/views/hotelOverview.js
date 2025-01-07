@@ -3,7 +3,7 @@ import OverallRatingScore from "../../components/views/overallRatingScore"
 import { MapPin } from 'lucide-react'
 import ViewAllButton from '../../components/buttons/viewAllButton'
 
-export default function HotelOverview({hotelName, stars, address, description, ratingScore, ranking}) {
+export default function HotelOverview({hotelName, stars, address, city, district, province, description, reviewAverageOverallPoint, reviewAveragePointCategory}) {
     return (
         <div className={styles.contentContainer}>
             <div className={styles.group1}>
@@ -18,7 +18,7 @@ export default function HotelOverview({hotelName, stars, address, description, r
 
                 <div className={styles.address}>
                     <MapPin size={19}/>
-                    <text className='body3'>{address}</text>
+                    <text className='body3'>{address}, {(city !== province) && city && "," } {district}, {province} </text>
                 </div>
             </div>
 
@@ -28,8 +28,10 @@ export default function HotelOverview({hotelName, stars, address, description, r
 
             <div className={styles.group3}>
                 <div className={styles.rating}>
-                    <OverallRatingScore score={ratingScore}/>
-                    <h4>{ranking}</h4>
+                    <OverallRatingScore 
+                        reviewAverageOverallPoint={reviewAverageOverallPoint}
+                        />
+                    <h4>{reviewAveragePointCategory}</h4>
                 </div>
 
                 <ViewAllButton category="Đánh giá"/>
