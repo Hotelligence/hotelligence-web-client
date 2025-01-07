@@ -7,6 +7,7 @@ import Discount from './discount';
 import CustomButton from '../buttons/button';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 
 export default function RoomCardHigh({ 
         id,
@@ -22,6 +23,7 @@ export default function RoomCardHigh({
     }) {
     const [selectedOptions, setSelectedOptions] = useState([]);
     const [selectedValue, setSelectedValue] = useState("option0");
+    const searchParams = useSearchParams();
     
     useEffect(() => {
         if (extraOptions && extraOptions.length > 0) {
@@ -40,6 +42,16 @@ export default function RoomCardHigh({
         const optionIndex = parseInt(value.replace('option', ''));
         const selectedOption = extraOptions[optionIndex];
         setSelectedOptions(selectedOption ? [selectedOption] : []);
+    };
+
+    const createBookingUrl = () => {
+        const params = new URLSearchParams();
+        params.set('from', searchParams.get('from'));
+        params.set('to', searchParams.get('to'));
+        if (selectedOptions.length > 0) {
+            params.set('options', JSON.stringify(selectedOptions));
+        }
+        return `/bookingDetails/${id}?${params.toString()}`;
     };
 
     return (
@@ -62,10 +74,12 @@ export default function RoomCardHigh({
 
             <div className={styles.extraInfoContainer}>
                 <div className={styles.breakfast}>
-                    {extraOptions ? <div className={styles.row1}>
-                        <h6>Bổ sung</h6>
-                        <text className='body5'>Giá mỗi đêm</text>
-                    </div> : null}
+                    {extraOptions.length > 0 && (
+                        <div className={styles.row1}>
+                            <h6>Bổ sung</h6>
+                            <text className='body5'>Giá mỗi đêm</text>
+                        </div>
+                    )}
 
                     <div className={styles.row2}>
                         <RadioGroup 
@@ -102,7 +116,7 @@ export default function RoomCardHigh({
                         </div>
 
                         <CustomButton>
-                            <Link href={`/bookingDetails/${id}`}>
+                            <Link href={createBookingUrl()}>
                                 Đặt
                             </Link>
                         </CustomButton>

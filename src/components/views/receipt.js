@@ -1,6 +1,21 @@
 import styles from "./receipt.module.css"
 
-export default function Receipt({hotelName, checkinDate, checkoutDate, roomName, numOfNights, originPrice, taxPercentage, tax, extraFee, totalPrice}) {
+export default function Receipt({
+    hotelName, 
+    roomName, 
+    checkinDate, 
+    checkoutDate, 
+    numOfNights, 
+    originPrice, 
+    discountPercentage,
+    discountedPrice,
+    taxPercentage, 
+    extraOptions, 
+}) {
+
+    const subTotal = originPrice - originPrice * (discountPercentage / 100) + 
+        (extraOptions?.reduce((acc, option) => acc + option.optionPrice, 0) || 0);
+    const totalPrice = subTotal + subTotal * taxPercentage / 100;
         
     function formatDate(date) {
         const d = new Date(date);
@@ -51,13 +66,31 @@ export default function Receipt({hotelName, checkinDate, checkoutDate, roomName,
                 </div>
 
                 <div className={styles.rowBill}>
-                    <h6>Thuế</h6>
-                    <text className="body3 text-right">{`(${taxPercentage*100}% = ) ${tax?.toLocaleString('en-US')}đ`}</text>
+                    <h6>Chiết khấu</h6>
+                    <text className="body3 text-right">{discountPercentage?.toLocaleString('en-US')}%</text>
                 </div>
 
+                {discountPercentage > 0 && <div className={styles.rowBill}>
+                    <h6>Giá khi áp dụng chiết khấu</h6>
+                    <text className="body3 text-right">{discountedPrice?.toLocaleString('en-US')}đ</text>
+                </div>}
+
+                {extraOptions && extraOptions.length > 0 && (
+                    <div className={styles.rowBill}>
+                        <h6>Phí phát sinh</h6>
+                        <div className="flex flex-col items-end">
+                            {extraOptions.map((option, index) => (
+                                <text key={index} className="body3 text-right">
+                                    {option.optionName}: {option.optionPrice?.toLocaleString('en-US')}đ
+                                </text>
+                            ))}
+                        </div>
+                    </div>
+                )}
+
                 <div className={styles.rowBill}>
-                    <h6>Phí phát sinh</h6>
-                    <text className="body3 text-right">{extraFee?.toLocaleString('en-US')}đ</text>
+                    <h6>Thuế</h6>
+                    <text className="body3 text-right">{`(${taxPercentage}% = ) ${totalPrice?.toLocaleString('en-US')}đ`}</text>
                 </div>
 
                 <div className={styles.rowBill2}>

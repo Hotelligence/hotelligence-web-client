@@ -13,23 +13,41 @@ import CancelPolicy from "../../../components/views/cancelPolicy";
 import getAllHotels from "../../../api/hotel/getAllHotels"
 import getAllRooms from "../../../api/room/getAllRooms";
 import getAllBookings from "../../../api/booking/getAllBookings";
+import getRoomsInHotel from "../../../api/room/getRoomsInHotel";
 import placeBooking from "../../../api/booking/placeBooking";
 import { auth } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation'
 import getBookingById from "../../../api/booking/getBookingById";
 import { getLocalTimeZone, today, parseDate } from "@internationalized/date";
+import getRoomById from "../../../api/room/getRoomById";
+import getHotelById from "../../../api/hotel/getHotelById";
+import { format } from 'date-fns';
+import getActiveBookingByRoomId from "../../../api/booking/getActiveBookingByRoomId";
 
-export default async function BookingDetails({ params }) {
+export default async function BookingDetails({ params, searchParams }) {
     
     const {userId} = auth();
 
-    const hotels = await getAllHotels();
-    const rooms = await getAllRooms();
-    const bookings = await getAllBookings();
+    const roomId = params.roomId;
+    console.log(roomId);
+    console.log(params.roomId);
 
-    const roomDetails = rooms.find(r => r.id === params.roomId); 
-    const hotelDetails = hotels.find(h => h.id === roomDetails.hotelId);
-    const bookingDetails = bookings.find(b => b.roomId === params.roomId);
+    const roomDetails = await getRoomById(roomId);
+    console.log(roomDetails);
+
+    const hotelDetails = await getHotelById(roomDetails.hotelId);
+    console.log(hotelDetails);
+    // const bookingDetails = bookings.find(b => b.roomId === params.roomId);
+
+    const checkinDate = searchParams.from || format(new Date(), 'yyyy-MM-dd');
+    const checkoutDate = searchParams.to || format(new Date(), 'yyyy-MM-dd');
+
+    const selectedOptions = searchParams.options ? JSON.parse(decodeURIComponent(searchParams.options)) : [];
+
+    const formatToLocalDateTime = (dateString) => {
+        // Append default time (12:00:00) to make it a valid LocalDateTime
+        return `${dateString}T12:00:00`;
+    };
 
     async function handlePlaceBooking(formData){
         'use server'
@@ -39,37 +57,27 @@ export default async function BookingDetails({ params }) {
 
         const bookingData = {
             userId: formData.get("userId"),
+            hotelId: formData.get("hotelId"),
             fullName: formData.get("fullName"),
             email: formData.get("email"),
             phoneNumber: formData.get("phoneNumber"),
-            paymentMethod: formData.get("paymentMethod"),
-            bookingDate: localDate,
-            checkinDate: localDate,
-            checkoutDate: localDate,
-            cancelDue: localDate,
-            unCancelDue: localDate,
-            bookingStatus: "Đang chờ thanh toán" 
-            // cardNumber: formData.get("cardNumber"),
-            // expiredDate: formData.get("expiredDate"),
-            // cvv: formData.get("cvv"),
-            // roomId: params.roomId,
+            paymentMethod: formData.get("paymentMethod"),            
+            checkinDate: formData.get("checkinDate"),
+            checkoutDate: formData.get("checkoutDate"),        
         }
 
         console.log(bookingData.checkinDate);
         console.log(bookingData)
 
-        await placeBooking(roomDetails.id, bookingData);
+        await placeBooking(roomId, bookingData);
 
-        const bookings = await getAllBookings();
-        console.log(bookings);
-        const booking = await getBookingById(bookings[bookings.length - 1].id);
-        console.log(booking);
+        const activeBooking = await getActiveBookingByRoomId(roomId);
 
         let paymentRedirectUrl = '';
-        if (bookingData.paymentMethod === "offline") {
+        if (activeBooking.paymentMethod === "offline") {
             paymentRedirectUrl = "/payOffline";
         } else {
-            paymentRedirectUrl = `/payOnline/${booking.id}`; 
+            paymentRedirectUrl = `/payOnline/${activeBooking.id}`; 
         }
 
         if (paymentRedirectUrl) {
@@ -104,7 +112,13 @@ export default async function BookingDetails({ params }) {
 
                     <BookingForm step={2} title="Kiểm tra thông tin phòng">
                         <h5>◆ &nbsp; {roomDetails.roomName}</h5>
-                        {/* <h6 className="text-[var(--secondary-green-100)]">✓ Bao gồm bữa sáng cho 2 người</h6> */}
+                        {selectedOptions && selectedOptions.length > 0 && (
+                            <div className="text-[var(--secondary-green-100)]">
+                                {selectedOptions.map((option, index) => (
+                                    <h6 key={index}>✓ {option.optionName}: {option.optionPrice?.toLocaleString('en-US')}đ</h6>
+                                ))}
+                            </div>
+                        )}
                     </BookingForm>
 
                     <BookingForm step={3} title="Phương thức thanh toán">
@@ -136,12 +150,11 @@ export default async function BookingDetails({ params }) {
                         </div> */}
                     </BookingForm>
 
-                    {/* Hidden inputs to pass additional data */}                    
-                    <input type="hidden" name="checkinDate" value={Date.parse("2024-08-15")} />
-                    <input type="hidden" name="checkoutDate" value={Date.parse("2024-08-15")} />
-                    <input type="hidden" name="cancelDue" value={Date.parse("2024-08-15")} />
-                    <input type="hidden" name="unCancelDue" value={Date.parse("2024-08-15")} />
+                    {/* Hidden inputs to pass additional data */}                              
+                    <input type="hidden" name="checkinDate" value={formatToLocalDateTime(checkinDate)} />
+                    <input type="hidden" name="checkoutDate" value={formatToLocalDateTime(checkoutDate)} />                    
                     <input type="hidden" name="userId" value={userId} />
+                    <input type="hidden" name="hotelId" value={roomDetails.hotelId} />
 
                     <p className="body3 text-justify">Bằng việc bấm "Đặt phòng", chúng tôi mặc định Quý khách xác nhận đã đọc và đồng ý Điều khoản & Điều kiện, Chính sách bảo mật và Hướng dẫn du lịch của chính phủ của Hotelligence.</p>
 
@@ -156,17 +169,18 @@ export default async function BookingDetails({ params }) {
                     <Receipt 
                         hotelName={hotelDetails.hotelName} 
                         roomName={roomDetails.roomName}
-                        checkinDate={bookingDetails.checkinDate}
-                        checkoutDate={bookingDetails.checkoutDate}
-                        numOfNights={roomDetails.numOfGuests}
+                        checkinDate={checkinDate}
+                        checkoutDate={checkoutDate}                        
+                        numOfNights={Math.ceil((new Date(checkoutDate) - new Date(checkinDate)) / (1000 * 60 * 60 * 24))}
                         originPrice={roomDetails.originPrice}
+                        discountPercentage={roomDetails.discountPercentage}
+                        discountedPrice={roomDetails.discountedPrice}
                         taxPercentage={roomDetails.taxPercentage}
-                        tax={roomDetails.tax}
-                        extraFee={roomDetails.extraFee}
-                        totalPrice={roomDetails.totalPrice}/>
+                        extraOptions={selectedOptions}
+                        />
                     <CancelPolicy 
-                        cancelDue={today(getLocalTimeZone()).add({ days: 1 })}
-                        unCancelDue={today(getLocalTimeZone()).add({ days: 7 })}
+                        cancelDue={new Date(Date.now() + (3 * 24 * 60 * 60 * 1000)).toISOString().split('T')[0]}
+                        unCancelDue={new Date(Date.now() + (7 * 24 * 60 * 60 * 1000)).toISOString().split('T')[0]}
                         />
                 </div>
             </div>
