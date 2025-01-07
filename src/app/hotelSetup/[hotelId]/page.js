@@ -13,7 +13,8 @@ export default async function HotelSetup({params}) {
 
     //hotelToGet is the hotel that has the id = params.hotelId
     const hotelToGet = hotels.filter(hotel => hotel.id === params.hotelId)[0];
-    console.log(hotelToGet);    
+    console.log(hotelToGet);
+
 
     async function handleUpdateHotel(formData) {
         'use server'
@@ -64,8 +65,8 @@ export default async function HotelSetup({params}) {
                 </div>
 
                 <div className="flex flex-col gap-[1.875rem] w-[19rem]">
-                    <RectangleButton2 href={"/roomManagement"}> Quản lý Phòng </RectangleButton2>
-                    <RectangleButton2 href={"/updatePaymentStatus"}> Cập nhật Tình trạng <br/> Đơn đặt phòng </RectangleButton2>
+                    <RectangleButton2 href={`/roomManagement/${hotelToGet.id}`}> Quản lý Phòng </RectangleButton2>
+                    <RectangleButton2 href={`/bookingManagement/${hotelToGet.id}`}> Quản lý Đơn đặt phòng </RectangleButton2>
                     <RectangleButton2 href={"/cancelParnership"}> Hủy Đối tác </RectangleButton2>
                 </div>
             </div>
