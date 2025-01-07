@@ -10,7 +10,7 @@ export default function HotelCard({id, image, ratingScore, numOfReviews, hotelNa
             <div className={styles.hotelCardWrapper}>
                 <div className={styles.upSide}>
                     {image ? (
-                        <Image className={styles.imgWrapper} src={image} width={280} height={200} alt="Picture of a hotel" priority/>
+                        <Image className={styles.imgWrapper} src={image} width={280} height={200} alt="Picture of a hotel" priority isZoomed/>
                     ) : (
                         <div className="flex flex-col items-center gap-1">
                             <text className='body5 italic'>Chưa có hình ảnh</text>

@@ -1,3 +1,4 @@
+'use client'
 import styles from './roomCardHigh.module.css';
 import Image from 'next/image';
 import HotelAmenity from '../views/hotelAmenity';
@@ -5,61 +6,81 @@ import { RadioGroup, Radio } from '@nextui-org/react';
 import Discount from './discount';
 import CustomButton from '../buttons/button';
 import Link from 'next/link';
+import { useState, useEffect } from 'react';
 
 export default function RoomCardHigh({ 
         id,
-        img, 
-        roomName, 
-        amenity, 
-        breakfastPrice, 
-        breakfastFor2Price, 
-        discountPercentage, 
-        numOfRemainingRooms, 
+        roomName,
+        images,
         originPrice,
-        discountPrice,
-        totalPrice
+        discountPercentage,
+        discountedPrice,
+        taxPercentage,
+        extraOptions,  // Changed from optionName, optionPrice to extraOptions array
+        amenityType,
+        amenityName
     }) {
+    const [selectedOptions, setSelectedOptions] = useState([]);
+    const [selectedValue, setSelectedValue] = useState("option0");
+    
+    useEffect(() => {
+        if (extraOptions && extraOptions.length > 0) {
+            setSelectedOptions([extraOptions[0]]);
+        }
+    }, [extraOptions]);
+
+    const subTotal = discountedPrice + selectedOptions.reduce((acc, option) => acc + option.optionPrice, 0);
+    const totalPrice = subTotal + subTotal * taxPercentage / 100;
+
+    console.log('selectedOptions: ', selectedOptions);
+    console.log('totalPrice: ', totalPrice);
+
+    const handleOptionChange = (value) => {
+        setSelectedValue(value);
+        const optionIndex = parseInt(value.replace('option', ''));
+        const selectedOption = extraOptions[optionIndex];
+        setSelectedOptions(selectedOption ? [selectedOption] : []);
+    };
+
     return (
         <div className={styles.roomCardHighContainer}>
             <div className={styles.imgContainer}>
-                <Image className={styles.imgWrapper} src={img} width={500} height={500} priority/>
+                <Image className={styles.imgWrapper} src={images} width={500} height={500} priority/>
             </div>
 
             <div className={styles.infoContainer}>
                 <h4>{roomName}</h4>
                 <HotelAmenity isVertical="true"
                     roomName={roomName}
-                    breakfastPrice={breakfastPrice}
-                    breakfastFor2Price={breakfastFor2Price}
+                    extraOptions={extraOptions}
                     discountPercentage={discountPercentage}
-                    numOfRemainingRooms={numOfRemainingRooms}
-                    oldPrice={originPrice}
-                    newPrice={discountPrice}
-                    totalPrice={totalPrice} />
+                    originPrice={originPrice}
+                    discountedPrice={discountedPrice}
+                    taxPercentage={taxPercentage}
+                     />
             </div>
 
             <div className={styles.extraInfoContainer}>
                 <div className={styles.breakfast}>
-                    <div className={styles.row1}>
+                    {extraOptions ? <div className={styles.row1}>
                         <h6>Bổ sung</h6>
                         <text className='body5'>Giá mỗi đêm</text>
-                    </div>
+                    </div> : null}
 
                     <div className={styles.row2}>
-                        <RadioGroup defaultValue="breakfast" className="w-full">
-                            <div className="flex justify-between">
-                                <Radio value="breakfast">                                    
-                                    <text className='body3'>Bữa sáng</text>                                                                          
-                                </Radio>
-                                <h6 className='text-right'>+ {breakfastPrice.toLocaleString('en-US')}đ</h6>
-                            </div>
-
-                            <div className="flex justify-between">
-                                <Radio value="breakfast-for2">
-                                    <text className='body3'>Bữa sáng cho 2 người</text>
-                                </Radio>
-                                <h6>+ {breakfastFor2Price.toLocaleString('en-US')}đ</h6>
-                            </div>
+                        <RadioGroup 
+                            value={selectedValue}
+                            onValueChange={handleOptionChange}
+                            className="w-full"
+                        >
+                            {extraOptions && extraOptions.map((option, index) => (
+                                <div key={index} className="flex justify-between">
+                                    <Radio key={`option${index}`} value={`option${index}`}>                                    
+                                        <text className='body3'>{option.optionName}</text>                                                                          
+                                    </Radio>
+                                    <h6 className='text-right'>+ {option.optionPrice?.toLocaleString('en-US')}đ</h6>
+                                </div>
+                            ))}
                         </RadioGroup>
                     </div>
                 </div>
@@ -67,13 +88,13 @@ export default function RoomCardHigh({
                 <div className={styles.price}>
                     <div className={styles.row3}>
                         <Discount discountPercentage={discountPercentage}/>
-                        <text className='h7 text-[var(--secondary-red-100)]'>Còn {numOfRemainingRooms} phòng</text>
+                        {/* <text className='h7 text-[var(--secondary-red-100)]'>Còn {numOfRemainingRooms} phòng</text> */}
                     </div>
 
                     <div className={styles.row4}>
                         <div className={styles.price}>
                             <div className={styles.priceDetails}>
-                                <h4>{discountPrice?.toLocaleString('en-US')}đ</h4>
+                                <h4>{discountedPrice?.toLocaleString('en-US')}đ</h4>
                                 <text className='body2 line-through text-[var(--primary-blue-50)]'>{originPrice?.toLocaleString('en-US')}đ</text>
                             </div>
 
