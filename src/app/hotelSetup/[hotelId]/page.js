@@ -5,6 +5,7 @@ import getHotelById from "../../../api/hotel/getHotelById";
 import updateHotel from "../../../api/hotel/updateHotel";
 import { auth } from "@clerk/nextjs/server";
 import getHotelsByUserId from "../../../api/hotel/getHotelsByUserId";
+import CancelPartnershipModal from "../../../components/views/cancelPartnershipModal";
 
 export default async function HotelSetup({params}) {
     const {userId} = auth();
@@ -15,7 +16,8 @@ export default async function HotelSetup({params}) {
     const hotelToGet = hotels.filter(hotel => hotel.id === params.hotelId)[0];
     console.log(hotelToGet);
 
-
+    console.log(userId)
+    
     async function handleUpdateHotel(formData) {
         'use server'
         
@@ -53,7 +55,7 @@ export default async function HotelSetup({params}) {
 
     return(
         <div>
-            <h2 className="mt-[1.75rem] mb-[2.5rem] text-center mx-auto">Thiết lập Khách sạn</h2>
+            <h2 className="mt-[1.75rem] mb-[2.5rem] text-center mx-auto">Quản lý khách sạn Khách sạn</h2>
 
             <div className="flex flex-row gap-[1.875rem]">
                 <div className="flex flex-col w-[63rem] gap-[1.25rem]">
@@ -67,7 +69,7 @@ export default async function HotelSetup({params}) {
                 <div className="flex flex-col gap-[1.875rem] w-[19rem]">
                     <RectangleButton2 href={`/roomManagement/${hotelToGet.id}`}> Quản lý Phòng </RectangleButton2>
                     <RectangleButton2 href={`/bookingManagement/${hotelToGet.id}`}> Quản lý Đơn đặt phòng </RectangleButton2>
-                    <RectangleButton2 href={"/cancelParnership"}> Hủy Đối tác </RectangleButton2>
+                    <CancelPartnershipModal />
                 </div>
             </div>
         </div>
