@@ -274,8 +274,7 @@ export default function HotelInfoForm({title, action, hotel}) {
                                     className="hidden"
                                     ref={fileInputRef}
                                     onChange={handleImageUpload}
-                                    name="images"
-                                    
+                                    name="images"                                    
                                 />
                                 <Button 
                                     className="mb-[1.875rem]" 
