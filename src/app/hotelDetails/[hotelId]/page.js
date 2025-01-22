@@ -17,17 +17,34 @@ import Link from "next/link";
 import getHotelById from "../../../api/hotel/getHotelById";
 import getRoomsInHotel from "../../../api/room/getRoomsInHotel";
 import getReviewsByHotelId from "../../../api/review/getReviewsByHotelId";
+import recommendRoomsWithinHotel from "../../../api/recommend/recommendRoomsWithinHotel";
+import getRoomById from "../../../api/room/getRoomById";
 
-
-export default async function HotelDetails({ params}) {
+export default async function HotelDetails({ params, searchParams }) {
     const hotelDetails = await getHotelById(params.hotelId);
-
     const roomsInHotel = await getRoomsInHotel(params.hotelId);
-    // console.log(roomsInHotel);
-
     const reviewsOfHotel = await getReviewsByHotelId(params.hotelId);
+    const recommendationData = await recommendRoomsWithinHotel(params.hotelId);
+    
+    // Transform recommendation data into room objects with error handling
+    const recommendedRooms = await Promise.all(
+        recommendationData.map(async ([roomId]) => {
+            try {
+                const room = await getRoomById(roomId);
+                return room;
+            } catch (error) {
+                console.error(`Error fetching room ${roomId}:`, error);
+                return null;
+            }
+        })
+    ).then(rooms => rooms.filter(room => room !== null)); // Remove any failed requests
 
-    // console.log(roomsInHotel.extraOptions);
+    console.log('recommendedRooms', recommendedRooms);
+
+    // Update date parameter names
+    const from = searchParams.from;
+    const to = searchParams.to;
+
     console.log(hotelDetails.policies);
     return (
         <>
@@ -79,7 +96,10 @@ export default async function HotelDetails({ params}) {
                     <h2 className="text-[var(--primary-gold-120)]">Chọn phòng</h2>
 
                     <div className={styles.searchAgain}>
-                        <DatePicker/>
+                        <DatePicker 
+                            defaultCheckinDate={from}
+                            defaultCheckoutDate={to}
+                        />
                         <PopOver/>                        
                     </div>        
 
@@ -103,12 +123,37 @@ export default async function HotelDetails({ params}) {
                                     extraOptions={room.extraOptions || []}
                                     amenityType={room.amenityType}
                                     amenityName={room.amenityName}
+                                    checkinDate={from}
+                                    checkoutDate={to}
                                 />
                             ))
                         ) : (
                             <h5 className="text-[var(--secondary-red-100)]">Hiện tại khách sạn chưa có phòng nào. Quý khách vui lòng quay lại sau!</h5>
                         )}
                     </div>
+
+                    {recommendedRooms && recommendedRooms.length > 0 && (
+                        <div className="flex flex-col gap-4 mt-8">
+                            <h2 className="text-[var(--primary-gold-120)]">Phòng được đề xuất cho bạn</h2>
+                            <div className={styles.roomCards}>
+                                {recommendedRooms.map((room) => (
+                                    <RoomCardHigh
+                                        key={room.id}
+                                        id={room.id}
+                                        images={room.images[0]}
+                                        roomName={room.roomName}
+                                        originPrice={room.originPrice}
+                                        discountPercentage={room.discountPercentage}
+                                        discountedPrice={room.discountedPrice}
+                                        taxPercentage={room.taxPercentage}
+                                        extraOptions={room.extraOptions || []}
+                                        amenityType={room.amenityType}
+                                        amenityName={room.amenityName}
+                                    />
+                                ))}
+                            </div>
+                        </div>
+                    )}
                 </div>
 
                 <div id="policy" className="h-[3.125rem]"/>
