@@ -16,7 +16,7 @@ export default async function HotelManagement({params}) {
                 <h2 className="text-center">Quản lý Khách sạn</h2>
             </div>
 
-            <div className="flex flex-row gap-4">                        
+            <div className="flex flex-row gap-4 flex-wrap justify-stretch">                        
                 {hotels.map(hotel => (
                     hotel.hotelName &&
                     <EditHotelCard key={hotel.id} hotelName={hotel.hotelName} href={`/hotelSetup/${hotel.id}`}/>

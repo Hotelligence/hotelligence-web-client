@@ -14,6 +14,9 @@ export default async function Header() {
 
     const count = await getCountByUserId(userId);
     
+    console.log(userId)
+    console.log(count)
+    
     return (
         <div className={styles.headerWrapper}>
             <div className={styles.leftSide}>

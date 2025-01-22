@@ -14,7 +14,10 @@ export default async function Home({searchParams}) {
 
   const keys = Object.keys(searchParams)
   const values = Object.values(searchParams)
-  const paramsStr = keys.map((key, index) => `${key}=${values[index]}`).join('&')
+  // Update date parameter names to match across pages
+  const dateParams = searchParams.from && searchParams.to ? 
+    `&from=${searchParams.from}&to=${searchParams.to}` : '';
+  const paramsStr = keys.map((key, index) => `${key}=${values[index]}`).join('&') + dateParams;
 
   console.log("searchparam: ", Object.keys(searchParams));
 
@@ -41,7 +44,20 @@ export default async function Home({searchParams}) {
         </CustomButton>
       </div>
 
-      <h2 className={styles.heading2}>Tìm kiếm gần đây</h2>
+      <h2 className="mt-10 text-center mb-8">Hãy để Hotelligence dẫn lối!</h2>
+      <div className="flex justify-center w-full"> 
+        <iframe 
+          className="w-full aspect-video"
+          src="https://www.youtube.com/embed/UJEUwEJ6gH4?si=8LxHc86Owcw8AkCq&amp;controls=0&amp;start=5&amp;autoplay=1&amp;mute=1&amp;modestbranding=1&amp;rel=0" 
+          title="YouTube video player" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          referrerpolicy="strict-origin-when-cross-origin" 
+          allowfullscreen
+        ></iframe>
+      </div>
+      
+      {/* <h2 className={styles.heading2}>Tìm kiếm gần đây</h2>
       <div className={styles.cardContainer}>
         <RecentSearchCard cityName="Hà Nội" />
         <RecentSearchCard cityName="Đà Nẵng" />
@@ -83,7 +99,7 @@ export default async function Home({searchParams}) {
             totalPrice={hotel.totalPrice}
           />
         ))}
-      </div>
+      </div> */}
     
     </main>
   );
