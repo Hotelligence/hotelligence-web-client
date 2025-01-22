@@ -9,12 +9,18 @@
 
 .imgContainer {
     height: 13.75rem;
+    overflow: hidden;
+    border-radius: 1.25rem 1.25rem 0 0;
+    position: relative;
 }
 
 .imgWrapper {
     object-fit: cover;
-    border-radius: 1.25rem 1.25rem 0 0;
     height: 100%;
+    width: 100%;
+    transition: transform 0.3s ease;
+    transform-origin: center;
+    border-radius: 1.25rem 1.25rem 0 0;
 }
 
 .infoContainer, .extraInfoContainer {
@@ -66,4 +72,8 @@
     flex-direction: row;
     gap: 0.625rem;
     align-items: baseline;
+}
+
+.zoomedImage {
+    transform: scale(1.1);
 }

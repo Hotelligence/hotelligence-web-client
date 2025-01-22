@@ -23,6 +23,7 @@ export default function RoomCardHigh({
     }) {
     const [selectedOptions, setSelectedOptions] = useState([]);
     const [selectedValue, setSelectedValue] = useState("option0");
+    const [isZoomed, setIsZoomed] = useState(false);
     const searchParams = useSearchParams();
     
     useEffect(() => {
@@ -56,8 +57,18 @@ export default function RoomCardHigh({
 
     return (
         <div className={styles.roomCardHighContainer}>
-            <div className={styles.imgContainer}>
-                <Image className={styles.imgWrapper} src={images} width={500} height={500} priority/>
+            <div 
+                className={`${styles.imgContainer} ${isZoomed ? styles.zoomed : ''}`}
+                onMouseEnter={() => setIsZoomed(true)}
+                onMouseLeave={() => setIsZoomed(false)}
+            >
+                <Image 
+                    className={`${styles.imgWrapper} ${isZoomed ? styles.zoomedImage : ''}`} 
+                    src={images} 
+                    width={500} 
+                    height={500} 
+                    priority
+                />
             </div>
 
             <div className={styles.infoContainer}>
