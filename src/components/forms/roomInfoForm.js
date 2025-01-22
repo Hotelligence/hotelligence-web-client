@@ -5,8 +5,9 @@ import DangerButton from "../buttons/dangerButton"
 import AmenityForm from "./amenityForm"
 import { useEffect, useState, useRef } from "react"
 import { ImagePlus, X } from "lucide-react";
+import DeleteRoomModal from "../views/deleteRoomModal"
 
-export default function RoomInfoForm({action, room, allRoomAmenitiesInHotel}) {
+export default function RoomInfoForm({action, room, allRoomAmenitiesInHotel, deleteAction, roomIdName}) {
     const [isDirty, setIsDirty] = useState(false);
     const [lastSaveTime, setLastSaveTime] = useState(null);
     const [images, setImages] = useState([]);
@@ -298,7 +299,7 @@ export default function RoomInfoForm({action, room, allRoomAmenitiesInHotel}) {
 
                 <div className="grid grid-cols-3 mt-10">
                     <div className="flex justify-start">
-                        {room ? <DangerButton>Xóa phòng</DangerButton> : null}
+                        {room ? <DeleteRoomModal action={deleteAction} roomId={room.id} roomIdName={roomIdName}/> : null}
                     </div>
 
                     <div className="flex justify-center">

@@ -3,6 +3,7 @@ import BackButton from "../../../components/buttons/backButton"
 import getRoomById from "../../../api/room/getRoomById";
 import getAllRoomAmenitiesByHotelId from "../../../api/hotel/getAllRoomAmenitiesByHotelId";
 import { handleUpdateRoom } from "../actions";
+import deleteRoom from "../../../api/room/deleteRoom"
 
 export default async function EditRoom({params}) {
     const roomId = params.roomId;
@@ -22,6 +23,11 @@ export default async function EditRoom({params}) {
         return handleUpdateRoom(roomId, allAmenities, formData);
     };
 
+    const handleDeleteRoom = async () => {
+        'use server'
+        return deleteRoom(roomId);
+    };
+
     return (
         <>
             <div className="grid grid-cols-3 mb-[2.5rem]">
@@ -33,6 +39,9 @@ export default async function EditRoom({params}) {
                 action={boundAction}
                 room={room} 
                 allRoomAmenitiesInHotel={allAmenities}
+                deleteAction={handleDeleteRoom}
+                roomId={roomId}
+                roomIdName="roomId"
             />
         </>
     )
