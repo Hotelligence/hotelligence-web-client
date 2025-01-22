@@ -5,11 +5,11 @@ import { useRouter } from "next/navigation";
 import { useSearchParams, usePathname } from "next/navigation";
 import secureLocalStorage from "react-secure-storage";
 
-export default function Searchbar() {    
+export default function Searchbar({ defaultValue, isRequired }) {    
     const searchParams = useSearchParams();
     const pathname = usePathname();
     const { replace } = useRouter();
-    const [value, setValue] = useState("");
+    const [value, setValue] = useState(defaultValue || "");
     const debounceTimeout = useRef(null);
 
     const handleSearch = (term) => {
@@ -48,6 +48,7 @@ export default function Searchbar() {
                 variant="bordered"
                 onChange={handleChange}
                 value={value}
+                defaultValue={defaultValue}
                 clearable
             >
             </Input>

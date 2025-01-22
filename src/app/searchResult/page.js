@@ -16,12 +16,12 @@ import Link from "next/link"
 
 export default async function SearchResult({searchParams}) {
     const query = searchParams?.query || "";
-    console.log("query: ", query);
     const from = searchParams?.from || "";
-    console.log("from: ", from);
     const to = searchParams?.to || "";
-    console.log("to: ",to);
     const guests = searchParams?.guests || "";
+    console.log("query: ", query);
+    console.log("from: ", from);
+    console.log("to: ",to);
     console.log("guests: ", guests);
     const sortBy = searchParams?.sortBy;
     console.log("sortBy: ", sortBy);
@@ -38,7 +38,7 @@ export default async function SearchResult({searchParams}) {
 
     const keys = Object.keys(searchParams)
     const values = Object.values(searchParams)
-    const paramsStr = keys.map((key, index) => `${key}=${values[index]}`).join('&')
+    const paramsStr = keys.map((key, index) => `${key}=${values[index]}`).join('&');
 
     // Create params object excluding undefined/empty values
     const apiParams = {
@@ -75,9 +75,12 @@ export default async function SearchResult({searchParams}) {
     return (
         <>
             <div className={styleHome.searchContainer}>
-                <Searchbar isRequired/>
-                <DatePicker />
-                <PopOver />
+                <Searchbar defaultValue={query} isRequired/>
+                <DatePicker 
+                    defaultCheckinDate={from}
+                    defaultCheckoutDate={to}
+                />
+                <PopOver defaultValue={guests}/>
                 <CustomButton isDisabled={!searchParams.query || searchParams.query === ""} >
                     <Link href={`/searchResult?${paramsStr}`}>Tìm</Link>
                 </CustomButton>
@@ -126,7 +129,9 @@ export default async function SearchResult({searchParams}) {
                                 roomLowestDiscountedPrice={hotel.roomLowestDiscountedPrice}
                                 roomLowestTotalPrice={hotel.roomLowestTotalPrice}
                                 reviewAverageOverallPoint={hotel.reviewAverageOverallPoint}
-                                />
+                                from={searchParams.from}
+                                to={searchParams.to}
+                            />
                         </div>
                     ))}
 

@@ -5,9 +5,9 @@ import OverallRatingScore from "../../components/views/overallRatingScore"
 import Link from 'next/link'
 import { ImageOff } from 'lucide-react'
 
-export default function HotelCardLong({id, img, hotelName, city, reviewAverageOverallPoint, star, reviewCount, roomLowestOriginPrice, roomLowestDiscountPercentage, roomLowestDiscountedPrice, roomLowestTotalPrice}) {
+export default function HotelCardLong({id, img, hotelName, city, reviewAverageOverallPoint, star, reviewCount, roomLowestOriginPrice, roomLowestDiscountPercentage, roomLowestDiscountedPrice, roomLowestTotalPrice, from, to}) {
     return (
-        <Link href={`/hotelDetails/${id}`}>
+        <Link href={`/hotelDetails/${id}?from=${from || ''}&to=${to || ''}`}>
             <div className={styles.hotelCardLongWrapper}>
                 <div className={styles.leftSide}>
                     {img ? (

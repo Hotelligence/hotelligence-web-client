@@ -6,7 +6,7 @@ import { User } from "lucide-react"
 import { useSearchParams, usePathname } from "next/navigation"
 import { useRouter } from "next/navigation"
 
-export default function PopOver() {
+export default function PopOver({ defaultValue }) {
     const searchParams = useSearchParams();
     const pathname = usePathname();
     const { replace } = useRouter();
@@ -25,6 +25,7 @@ export default function PopOver() {
     const [adultCount, setAdultCount] = useState(1);
     const [childCount, setChildCount] = useState(0);
     const [totalGuests, setTotalGuests] = useState(1);
+    const [value, setValue] = useState(defaultValue || '1');
     useEffect(() => {
         const guests = searchParams.get("guests")?.toString();
         setTotalGuests(guests);
@@ -66,7 +67,8 @@ export default function PopOver() {
                         label="Chọn số lượng khách"                       
                         endContent={<User size={20} color="var(--primary-blue-50)"/>}
                         variant="bordered"
-                        value={`${totalGuests || 1} khách`}
+                        value={value}
+                        defaultValue={defaultValue}
                         onValueChange={setTotalGuests}
                         onChange={(e) => handleSearch(e.target.value) }
                         classNames={{input: ["text: text-left"]}}
