@@ -1,4 +1,4 @@
-import { Button } from '@nextui-org/react'
+import { Button } from "@heroui/react"
 import styles from './buttonOutlineGold.module.css'
 
 export default function CustomButton({ children, onPress }) {

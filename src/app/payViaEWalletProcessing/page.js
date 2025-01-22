@@ -1,7 +1,7 @@
 import styles from './payViaEWalletProcessing.module.css'
 import { ArrowLeft } from "lucide-react";
-import { Button } from '@nextui-org/react';
-import { CircularProgress } from '@nextui-org/react';
+import { Button } from "@heroui/react";
+import { CircularProgress } from "@heroui/react";
 
 export default function PayViaEWalletProcessing() {
     return (

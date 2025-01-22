@@ -1,5 +1,5 @@
 'use client'
-import { Button, Link } from '@nextui-org/react'
+import { Button, Link } from "@heroui/react"
 import styles from './button.module.css'
 // import Link from 'next/link'
 

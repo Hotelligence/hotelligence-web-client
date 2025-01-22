@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useState } from "react"
-import { Radio, RadioGroup } from "@nextui-org/react"
+import { Radio, RadioGroup } from "@heroui/react"
 import { useSearchParams, usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 

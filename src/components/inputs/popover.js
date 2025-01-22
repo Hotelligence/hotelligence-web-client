@@ -1,6 +1,6 @@
 'use client'
 import React, { useState, useEffect, use } from "react"
-import { Button, Input, Popover, PopoverContent, PopoverTrigger } from "@nextui-org/react"
+import { Button, Input, Popover, PopoverContent, PopoverTrigger } from "@heroui/react"
 import styles from "./popover.module.css"
 import { User } from "lucide-react"
 import { useSearchParams, usePathname } from "next/navigation"

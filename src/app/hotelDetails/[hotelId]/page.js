@@ -24,22 +24,23 @@ export default async function HotelDetails({ params, searchParams }) {
     const hotelDetails = await getHotelById(params.hotelId);
     const roomsInHotel = await getRoomsInHotel(params.hotelId);
     const reviewsOfHotel = await getReviewsByHotelId(params.hotelId);
-    const recommendationData = await recommendRoomsWithinHotel(params.hotelId);
     
-    // Transform recommendation data into room objects with error handling
-    const recommendedRooms = await Promise.all(
-        recommendationData.map(async ([roomId]) => {
-            try {
-                const room = await getRoomById(roomId);
-                return room;
-            } catch (error) {
-                console.error(`Error fetching room ${roomId}:`, error);
-                return null;
-            }
-        })
-    ).then(rooms => rooms.filter(room => room !== null)); // Remove any failed requests
-
-    console.log('recommendedRooms', recommendedRooms);
+    let recommendedRooms = [];
+    try {
+        const recommendationData = await recommendRoomsWithinHotel(params.hotelId);
+        recommendedRooms = await Promise.all(
+            recommendationData.map(async ([roomId]) => {
+                try {
+                    return await getRoomById(roomId);
+                } catch (error) {
+                    console.error(`Error fetching room ${roomId}:`, error);
+                    return null;
+                }
+            })
+        ).then(rooms => rooms.filter(room => room !== null));
+    } catch (error) {
+        console.error('Error fetching recommendations:', error);
+    }
 
     // Update date parameter names
     const from = searchParams.from;
@@ -149,6 +150,8 @@ export default async function HotelDetails({ params, searchParams }) {
                                         extraOptions={room.extraOptions || []}
                                         amenityType={room.amenityType}
                                         amenityName={room.amenityName}
+                                        checkinDate={from}
+                                        checkoutDate={to}
                                     />
                                 ))}
                             </div>

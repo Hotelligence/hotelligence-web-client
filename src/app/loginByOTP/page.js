@@ -1,7 +1,7 @@
 'use client'
 import styles from "./loginByOTP.module.css";
 import styleLogin from "../loginOrSignUp/loginOrSignUp.module.css";
-import { Checkbox, Input } from "@nextui-org/react";
+import { Checkbox, Input } from "@heroui/react";
 import CustomButton from "../../components/buttons/button";
 import CustomButtonOutline from "../../components/buttons/buttonOutline";
 import Link from 'next/link';

@@ -1,7 +1,7 @@
 'use client'
 import styles from "./loginOrSignUp.module.css";
 import googleLogo from "../../images/google_logo.png";
-import { Button, Input } from "@nextui-org/react";
+import { Button, Input } from "@heroui/react";
 import Image from "next/image";
 import CustomButton from "../../components/buttons/button";
 import { useState } from "react";

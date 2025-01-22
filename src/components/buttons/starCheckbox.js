@@ -1,5 +1,5 @@
 'use client'
-import { Checkbox, CheckboxGroup } from "@nextui-org/react";
+import { Checkbox, CheckboxGroup } from "@heroui/react";
 import React, {useState, useEffect} from "react"
 import { useSearchParams, usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";

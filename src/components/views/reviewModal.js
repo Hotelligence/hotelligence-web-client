@@ -1,6 +1,6 @@
 'use client'
 import React from 'react';
-import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, Slider, Textarea} from "@nextui-org/react";
+import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, Slider, Textarea} from "@heroui/react";
 import CustomButton from "../buttons/button";
 import ButtonOutlineGold from "../buttons/buttonOutlineGold"
 

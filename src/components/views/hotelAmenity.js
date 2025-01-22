@@ -1,7 +1,7 @@
 import { CarFront, Coffee, Utensils, Waves, Wifi, Wine } from "lucide-react";
 import ViewAllButton from "../buttons/viewAllButton";
 import RoomDetailsModal from "./roomDetailsModal";
-import { useDisclosure } from "@nextui-org/react";
+import { useDisclosure } from "@heroui/react";
 
 export default function HotelAmenity({
     isVertical, 

@@ -1,6 +1,6 @@
 'use client'
 import React, {useState, useEffect} from "react"
-import { Select, SelectItem } from "@nextui-org/react"
+import { Select, SelectItem } from "@heroui/react"
 import { ArrowDownUp } from "lucide-react"
 import { useSearchParams, usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";

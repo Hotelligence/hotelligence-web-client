@@ -1,7 +1,7 @@
 'use client'
 import styles from './nameRegister.module.css'
 import { ArrowLeft, Eye, EyeOff } from "lucide-react";
-import { Button, Input } from '@nextui-org/react';
+import { Button, Input } from "@heroui/react";
 import CustomButton from '../../components/buttons/button';
 import BackButtonIconOnly from "../../components/buttons/backButtonIconOnly";
 import { useState } from "react";

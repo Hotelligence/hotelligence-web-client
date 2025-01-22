@@ -1,6 +1,6 @@
 import styles from './payViaEWallet.module.css'
 import { ArrowLeft } from "lucide-react";
-import { Button } from '@nextui-org/react';
+import { Button } from "@heroui/react";
 import ButtonWithImage from '../../../components/buttons/buttonWithImage';
 import ButtonOutline from '../../../components/buttons/buttonOutline';
 import MomoLogoBig from '../../../images/Momo_Logo_Big.png'

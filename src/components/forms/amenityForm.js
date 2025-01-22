@@ -1,5 +1,5 @@
 'use client'
-import { CheckboxGroup, Checkbox } from "@nextui-org/react"
+import { CheckboxGroup, Checkbox } from "@heroui/react"
 
 export default function AmenityForm({allRoomAmenitiesInHotel, selectedAmenities, onAmenitiesChange}) {
     console.log('AmenityForm - Available amenities:', allRoomAmenitiesInHotel);

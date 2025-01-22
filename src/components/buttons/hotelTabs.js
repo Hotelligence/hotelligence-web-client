@@ -1,6 +1,6 @@
 'use client'
 import React from "react";
-import { Tab, Tabs } from "@nextui-org/react";
+import { Tab, Tabs } from "@heroui/react";
 import Link from "next/link";
 
 export default function HotelTabs({href1, href2, href3, href4, href5}) {

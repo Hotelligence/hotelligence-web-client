@@ -2,7 +2,7 @@
 import styles from './roomCardHigh.module.css';
 import Image from 'next/image';
 import HotelAmenity from '../views/hotelAmenity';
-import { RadioGroup, Radio } from '@nextui-org/react';
+import { RadioGroup, Radio } from "@heroui/react";
 import Discount from './discount';
 import CustomButton from '../buttons/button';
 import Link from 'next/link';

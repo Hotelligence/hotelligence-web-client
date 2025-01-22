@@ -1,6 +1,6 @@
 import { ArrowLeft } from "lucide-react";
 import styles from "./forgetPasswordByOTP.module.css";
-import { Checkbox, Input,Button } from "@nextui-org/react";
+import { Checkbox, Input,Button } from "@heroui/react";
 import CustomButton from "../../components/buttons/button";
 import CustomButtonOutline from "../../components/buttons/buttonOutline";
 import Link from 'next/link';

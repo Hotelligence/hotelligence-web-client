@@ -1,6 +1,6 @@
 import styles from './bookingConfirm.module.css'
 import BackButton from '../../components/buttons/backButton'
-import { Input } from '@nextui-org/react'
+import { Input } from "@heroui/react"
 import CustomButton from '../../components/buttons/button'
 
 export default function BookingConfirmPage() {

@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useState } from "react"
-import { Slider, Input } from "@nextui-org/react"
+import { Slider, Input } from "@heroui/react"
 import { useSearchParams, usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 

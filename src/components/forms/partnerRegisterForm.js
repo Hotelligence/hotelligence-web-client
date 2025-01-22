@@ -1,5 +1,5 @@
 'use client'
-import { Input, Select, SelectItem, Autocomplete, AutocompleteItem } from "@nextui-org/react"
+import { Input, Select, SelectItem, Autocomplete, AutocompleteItem } from "@heroui/react"
 import { useEffect, useState } from "react"
 import CustomButton from "../buttons/button"
 

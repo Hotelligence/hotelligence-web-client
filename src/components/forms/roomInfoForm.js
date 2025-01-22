@@ -1,5 +1,5 @@
 'use client'
-import { Input, Textarea, Button, ScrollShadow, Image, Autocomplete, AutocompleteItem } from "@nextui-org/react"
+import { Input, Textarea, Button, ScrollShadow, Image, Autocomplete, AutocompleteItem } from "@heroui/react"
 import CustomButton from "../buttons/button"
 import DangerButton from "../buttons/dangerButton"
 import AmenityForm from "./amenityForm"

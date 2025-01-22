@@ -3,7 +3,7 @@ import React from 'react';
 import styleLoginByOTP from '../loginByOTP/loginByOTP.module.css';
 import styleLogin from '../loginOrSignUp/loginOrSignUp.module.css';
 import { Eye, EyeOff } from "lucide-react";
-import { Button, Input, Checkbox } from "@nextui-org/react";
+import { Button, Input, Checkbox } from "@heroui/react";
 import CustomButton from "../../components/buttons/button";
 import CustomButtonOutline from "../../components/buttons/buttonOutline";
 import Link from 'next/link';

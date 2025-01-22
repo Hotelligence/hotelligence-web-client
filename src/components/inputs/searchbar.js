@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useState, useRef } from "react";
-import { Input } from "@nextui-org/react";
+import { Input } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import { useSearchParams, usePathname } from "next/navigation";
 import secureLocalStorage from "react-secure-storage";

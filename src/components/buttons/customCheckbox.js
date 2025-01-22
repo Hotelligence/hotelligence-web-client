@@ -1,4 +1,4 @@
-import { Checkbox, CheckboxGroup } from "@nextui-org/react";
+import { Checkbox, CheckboxGroup } from "@heroui/react";
 
 export default function CustomCheckbox({label}) {
     
@@ -20,7 +20,7 @@ export default function CustomCheckbox({label}) {
         //         </Checkbox>
         //     ))}       
         // </CheckboxGroup>
-        <>
-        </>
-    )
+        (<>
+        </>)
+    );
 }

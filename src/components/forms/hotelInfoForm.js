@@ -1,6 +1,6 @@
 'use client'
 import styles from "./bookingForm.module.css";
-import { Input, Autocomplete, AutocompleteItem, Select, SelectItem, Textarea, Button, ScrollShadow, Image } from "@nextui-org/react"
+import { Input, Autocomplete, AutocompleteItem, Select, SelectItem, Textarea, Button, ScrollShadow, Image } from "@heroui/react"
 import { useEffect, useState, useRef } from "react"
 import CustomButton from "../buttons/button"
 import { ImagePlus, X } from "lucide-react";

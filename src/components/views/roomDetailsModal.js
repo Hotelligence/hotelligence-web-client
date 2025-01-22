@@ -1,13 +1,13 @@
 'use client'
 import { useState, useEffect } from "react";
 import React from "react";
-import {Modal, ModalContent, ModalHeader, ModalBody, useDisclosure} from "@nextui-org/react";
+import {Modal, ModalContent, ModalHeader, ModalBody, useDisclosure} from "@heroui/react";
 import ViewAllButton from "../buttons/viewAllButton";
 import styles from "./roomDetailsModal.module.css"
 import Image from "next/image";
 import fusion3 from "../../images/fusion3.webp";
 import HotelAmenity from "./hotelAmenity";
-import { RadioGroup, Radio } from "@nextui-org/react";
+import { RadioGroup, Radio } from "@heroui/react";
 import Discount from "../cards/discount";
 import CustomButton from "../buttons/button";
 import stylesRoomCardHigh from "../cards/roomCardHigh.module.css";

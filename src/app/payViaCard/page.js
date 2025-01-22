@@ -1,6 +1,6 @@
 import styles from './payViaCard.module.css'
 import { ArrowLeft } from "lucide-react";
-import { Button } from '@nextui-org/react';
+import { Button } from "@heroui/react";
 import CustomButton from '../../components/buttons/button';
 import ButtonOutline from '../../components/buttons/buttonOutline';
 

@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import styles from "./bookingForm.module.css";
 import CustomButton from "../buttons/button"
-import { Textarea } from "@nextui-org/react";
+import { Textarea } from "@heroui/react";
 
 export default function PolicyForm({title, action, hotel}) {
     const [isClient, setIsClient] = useState(false)

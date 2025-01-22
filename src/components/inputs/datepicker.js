@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useEffect } from "react";
-import { DateRangePicker } from "@nextui-org/react";
+import { DateRangePicker } from "@heroui/react";
 import { getLocalTimeZone, today, parseDate } from "@internationalized/date";
 import { I18nProvider } from "@react-aria/i18n";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";

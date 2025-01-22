@@ -1,5 +1,5 @@
 import React from "react";
-import {useRadio, Chip, VisuallyHidden, tv} from "@nextui-org/react";
+import {useRadio, Chip, VisuallyHidden, tv} from "@heroui/react";
 
 const radio = tv({
   slots: {
