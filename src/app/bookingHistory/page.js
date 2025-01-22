@@ -17,20 +17,19 @@ export default async function BookingHistory() {
     const user = await clerkClient.users.getUser(userId)
     const username = `${user.firstName || ''}${user.lastName ? ' ' + user.lastName : ''}`;
     
+    const bookings = await getBookingsByUserId(userId) || [];
+    console.log(bookings);
+    
 
-    const hotels = await getAllHotels();
-    const rooms = await getAllRooms();
-    const bookings = await getBookingsByUserId(userId);
-
-    const joinedData = await Promise.all(bookings.map(async (booking) => {
-        const room = await getRoomById(booking.roomId);
-        const hotel = hotels.find(h => h.id === room.hotelId);
-        return {
-            booking,
-            ...hotel,
-            ...room
-        };
-    }));
+    // const joinedData = await Promise.all(bookings.map(async (booking) => {
+    //     const room = await getRoomById(booking.roomId);
+    //     const hotel = hotels.find(h => h.id === room.hotelId);
+    //     return {
+    //         booking,
+    //         ...hotel,
+    //         ...room
+    //     };
+    // }));
 
     console.log(joinedData);
     // console.log(user)
