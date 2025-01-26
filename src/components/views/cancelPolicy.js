@@ -1,5 +1,3 @@
-import styles from "./cancelPolicy.module.css"
-
 export default function CancelPolicy({ cancelDue, unCancelDue }) {
 
     function formatDate(date) {
@@ -14,7 +12,7 @@ export default function CancelPolicy({ cancelDue, unCancelDue }) {
     }
       
     return (
-        <div className={styles.cancelPolicyContainer}>
+        <div className="flex flex-col p-5 items-start border border-[var(--primary-blue-50)] rounded-[0.625rem] gap-2">
             <h5>Chính sách hủy</h5>
 
             <ol className="body3">

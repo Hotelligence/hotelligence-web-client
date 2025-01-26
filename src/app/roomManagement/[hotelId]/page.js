@@ -38,7 +38,8 @@ export default async function RoomManagement ({params}) {
                             
                             {rooms.map(room => (
                                 room.roomName &&
-                                <EditRoomCard key={room.id} 
+                                <EditRoomCard 
+                                    key={room.id} 
                                     image={room.images[0]}
                                     roomName={room.roomName} 
                                     roomType={room.roomType} 

@@ -41,28 +41,28 @@ export default function BookingCard({
                     <div className="w-[8rem]">
                         <h6 className="w-[8rem]">Mã đặt phòng</h6>
                     </div>
-                    <text className="body3 text-justify">{`#${bookingId}`}</text>
+                    <p className="body3 text-justify">{`#${bookingId}`}</p>
                 </div>
 
                 <div className="flex flex-row">
                     <div className="w-[8rem]">
                         <h6 className="w-[8rem]">Đặt phòng</h6>
                     </div>
-                    <text className="body3 text-justify">{formatDate(bookingDate)}</text>
+                    <p className="body3 text-justify">{formatDate(bookingDate)}</p>
                 </div>
 
                 <div className="flex flex-row">
                     <div className="w-[8rem]">
                         <h6 className="w-[8rem]">Nhận phòng</h6>
                     </div>
-                    <text className="body3 text-justify">{formatDate(checkinDate)}</text>
+                    <p className="body3 text-justify">{formatDate(checkinDate)}</p>
                 </div>
 
                 <div className="flex flex-row">
                     <div className="w-[8rem]">
                         <h6 className="w-[8rem]">Trả phòng</h6>
                     </div>
-                    <text className="body3 text-justify">{formatDate(checkoutDate)}</text>
+                    <p className="body3 text-justify">{formatDate(checkoutDate)}</p>
                 </div>
 
                 <div className="flex flex-row mt-2">

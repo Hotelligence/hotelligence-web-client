@@ -1,10 +1,9 @@
 import CustomButton from '../../components/buttons/button'
-import styles from './bookingStatus.module.css'
 import ButtonOutline from '../../components/buttons/buttonOutline'
 
 export default function BookingStatusPage() {
     return (
-        <div className={styles.pageContainer}>
+        <div className="flex flex-col mt-[1.75rem] w-1/3 items-center mx-auto gap-[1.25rem]">
             <h2>Đặt phòng thành công!</h2>
 
             <h6>Chúc mừng Quý khách đã đặt phòng thành công!</h6>

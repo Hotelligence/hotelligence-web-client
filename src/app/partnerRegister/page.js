@@ -1,5 +1,4 @@
 import CustomButton from '../../components/buttons/button'
-import styles from './partnerRegister.module.css'
 import Link from 'next/link'
 import ButtonOutline from '../../components/buttons/buttonOutline'
 import { auth } from '@clerk/nextjs/server';
@@ -36,7 +35,7 @@ export default async function PartnerRegister() {
     }
 
     return (
-        <div className={styles.pageContainer}>
+        <div className="flex flex-col w-1/3 mx-auto mt-7 items-center gap-5">
             <h2>Đăng ký trở thành Đối tác</h2>
             { !userId ? (
             <>
@@ -45,12 +44,12 @@ export default async function PartnerRegister() {
                     Đăng ký trở thành đối tác của Hotelligence!
                 </h6>
 
-                <div className='flex mt-[1.25rem] gap-[2.5rem]'>
+                <div className='flex mt-5 gap-10'>
                     <CustomButton><Link href="/loginOrSignUp">Đăng ký</Link></CustomButton>
                     <CustomButton><Link href="/loginOrSignUp">Đăng nhập</Link></CustomButton>
                 </div>
 
-                <div className='mt-[1.25rem]'>
+                <div className='mt-5'>
                     <ButtonOutline><Link href="/">Quay về trang chủ</Link></ButtonOutline>
                 </div>
             </>

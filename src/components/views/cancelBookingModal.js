@@ -20,7 +20,7 @@ export default function CancelBookingModal({action, bookingId, bookingIdName}) {
                             <ModalBody>
                                 <input type="hidden" name={bookingIdName} value={bookingId}/>
                                 <h6 className="text-center">Quý khách chắn chắn muốn hủy phòng?</h6>
-                                <text className="body3 text-center">Bằng việc bấm “Đồng ý”, Quý khách xác nhận cho phép hệ thống hủy đặt phòng của quý khách, các khoản đã thanh toán có thể không được hoàn nếu đã quá thời hạn trong điều khoản </text>
+                                <p className="body3 text-center">Bằng việc bấm “Đồng ý”, Quý khách xác nhận cho phép hệ thống hủy đặt phòng của quý khách, các khoản đã thanh toán có thể không được hoàn nếu đã quá thời hạn trong điều khoản </p>
                             </ModalBody>
                             
                             <ModalFooter className="flex justify-between w-2/3 mx-auto mb-4">

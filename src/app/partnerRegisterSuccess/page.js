@@ -1,4 +1,3 @@
-import styles from '../partnerRegister/partnerRegister.module.css'
 import CustomButton from '../../components/buttons/button'
 import Link from 'next/link'
 import ButtonOutline from '../../components/buttons/buttonOutline'
@@ -18,7 +17,7 @@ export default async function PartnerRegister () {
     console.log(hotel);
 
     return (
-        <div className={styles.pageContainer}>
+        <div className="flex flex-col items-center mt-7 w-1/3 mx-auto gap-5">
             <h2>Đăng ký trở thành Đối tác</h2>
             <>
                 <h6 className='text-center'>

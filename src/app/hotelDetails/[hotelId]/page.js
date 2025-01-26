@@ -1,5 +1,4 @@
-import React from "react";
-import styles from "./hotelDetails.module.css";
+import React, { Suspense } from "react";
 import HotelTabs from "../../../components/buttons/hotelTabs";
 import CustomButton from "../../../components/buttons/button";
 import HotelOverview from "../../../components/views/hotelOverview";
@@ -12,7 +11,7 @@ import RatingScoreInReview from "../../../components/views/ratingScoreInReview";
 import Comment from "../../../components/views/comment";
 import ViewAllButton from "../../../components/buttons/viewAllButton";
 import BackButton from "../../../components/buttons/backButton";
-import ZoomableImage from "../../../components/buttons/ZoomableImage";
+import ZoomableImage from "../../../components/buttons/zoomableImage";
 import Link from "next/link";
 import getHotelById from "../../../api/hotel/getHotelById";
 import getRoomsInHotel from "../../../api/room/getRoomsInHotel";
@@ -51,23 +50,34 @@ export default async function HotelDetails({ params, searchParams }) {
         <>
             <BackButton label="Xem tất cả khách sạn"/>
 
-            <div className={styles.pageContainer}>
-                <div id="overview" className={styles.imagesContainer}>                       
-                    <ZoomableImage src={hotelDetails.images && hotelDetails.images.length > 0 ? hotelDetails.images[0] : ""} className={styles.firstOne} width={500} height={500} priority/>                        
+            <div className="flex flex-col mt-8">
+                <div id="overview" className="grid grid-cols-3 gap-0.5">                       
+                    <ZoomableImage 
+                        src={hotelDetails.images && hotelDetails.images.length > 0 ? hotelDetails.images[0] : ""} 
+                        className="h-[17.6rem] object-cover" 
+                        width={500} 
+                        height={500} 
+                        priority
+                    />                        
 
-                    <div className={styles.others}>
+                    <div className="col-span-2 grid grid-cols-3 grid-rows-2 gap-0.5">
                         {hotelDetails.images && hotelDetails.images.length > 0 && hotelDetails.images.slice(1, 7).map((image, index) => (
-                            <ZoomableImage key={index} src={image || ""} className={styles.item} width={500} height={500} priority/>
+                            <ZoomableImage 
+                                key={index} 
+                                src={image || ""} 
+                                className="h-[8.75rem] object-cover" 
+                                width={500} 
+                                height={500} 
+                                priority
+                            />
                         ))}
                     </div>
                 </div>             
 
-                <div className={styles.tabs}>
+                <div className="flex justify-between mt-5 sticky top-0 bg-white">
                     <HotelTabs href1="#overview" href2="#amenity" href3="#room" href4="#policy" href5="#review"/>
                     <CustomButton>
-                        <Link href="#room">
-                            Đặt phòng
-                        </Link>                        
+                        <Link href="#room">Đặt phòng</Link>                        
                     </CustomButton>
                 </div> 
 
@@ -85,31 +95,33 @@ export default async function HotelDetails({ params, searchParams }) {
                         />
                 </div>
 
-                <div id="amenity" className="h-[3.125rem]"/>
+                <div id="amenity" className="h-20"/>
 
-                <div className={styles.amenity}>
+                <div className="flex flex-col gap-4">
                     <h2 className="text-[var(--primary-gold-120)]">Tiện nghi, dịch vụ nổi bật</h2>
                     <HotelAmenity isVertical="false"/>
                 </div>
 
-                <div id="room" className="h-[3.125rem]"/>
-                <div className={styles.room}>
+                <div id="room" className="h-20"/>
+                <div className="flex flex-col gap-4">
                     <h2 className="text-[var(--primary-gold-120)]">Chọn phòng</h2>
 
-                    <div className={styles.searchAgain}>
+                    <div className="flex gap-[1.875rem] w-[50vw]">
+                        <Suspense fallback={<div>Loading...</div>}>
                         <DatePicker 
                             defaultCheckinDate={from}
                             defaultCheckoutDate={to}
                         />
-                        <PopOver/>                        
+                        <PopOver/>    
+                        </Suspense>                    
                     </div>        
 
-                    <div className={styles.numOfRooms}>
+                    <div className="flex justify-between items-center">
                         <NumRoomRadio/>
-                        <text className="body3 text-[var(--primary-blue-50)]">Hiển thị  trên {hotelDetails.roomCount} phòng</text>
+                        <p className="body3 text-[var(--primary-blue-50)]">Hiển thị  trên {hotelDetails.roomCount} phòng</p>
                     </div>
 
-                    <div className={styles.roomCards}>
+                    <div className="flex flex-row flex-wrap justify-between gap-y-5">
                         {roomsInHotel.length > 0 ? (
                             roomsInHotel.map((room) => (
                                 <RoomCardHigh
@@ -136,7 +148,7 @@ export default async function HotelDetails({ params, searchParams }) {
                     {recommendedRooms && recommendedRooms.length > 0 && (
                         <div className="flex flex-col gap-4 mt-8">
                             <h2 className="text-[var(--primary-gold-120)]">Phòng được đề xuất cho bạn</h2>
-                            <div className={styles.roomCards}>
+                            <div className="flex flex-row flex-wrap justify-between gap-y-5">
                                 {recommendedRooms.map((room) => (
                                     <RoomCardHigh
                                         key={room.id}
@@ -159,55 +171,37 @@ export default async function HotelDetails({ params, searchParams }) {
                     )}
                 </div>
 
-                <div id="policy" className="h-[3.125rem]"/>
-                <div className={styles.policy}>
+                <div id="policy" className="h-20"/>
+                <div className="flex flex-row gap-[3.125rem]">
                     <h2 className="text-[var(--primary-gold-120)] w-fit text-nowrap">Phí & Chính sách</h2>
 
-                    <div className={styles.policyDetails}>
+                    <div className="flex flex-col gap-5 pt-[0.6rem]">
                         <div>
                             <h4>Phí tùy chọn</h4>
-                            {/* <menu>
-                                <li>Khách có thể dùng bữa sáng buffet với phụ phí ước tính 290000 VND mỗi người</li>
-                                <li>Khách có thể nhận phòng sớm với khoản phụ phí nhỏ (tùy theo tình hình thực tế)</li>
-                                <li>Khách có thể trả phòng muộn với khoản phụ phí nhỏ (tùy theo tình hình thực tế)</li>
-                            </menu> */}
                             <p>{hotelDetails.optionalFees}</p>
                         </div>
 
                         <div>
                             <h4>Hồ bơi, spa & gym (nếu có)</h4>
-                            {/* <menu>
-                                <li>Cần đăng ký trước để sử dụng dịch vụ massage và dịch vụ spa. Khách có thể đặt trước khi đến bằng cách liên hệ nơi lưu trú qua số điện thoại được cung cấp trong xác nhận đặt phòng.</li>
-                            </menu> */}
                             <p>{hotelDetails.amenities}</p>
                         </div>
 
                         <div>
                             <h4>Chính sách </h4>
-                            {/* <menu>
-                                <li>Chỉ khách đã đăng ký được lưu trú tại phòng.</li>
-                                <li>Khách có thể an tâm nghỉ ngơi khi biết rằng có bình cứu hỏa và hệ thống an ninh trong khuôn viên.</li>
-                                <li>Nơi lưu trú này nhận thanh toán bằng thẻ tín dụng và tiền mặt.</li>
-                            </menu> */}
                             <p>{hotelDetails.policies}</p>
                         </div>
 
                         <div>
                             <h4>Tên khác </h4>
-                            {/* <ul>
-                                <li>Fusion Suites Vung Tau Hotel</li>
-                                <li>Fusion Suites Vung Tau Vung Tau</li>
-                                <li>Fusion Suites Vung Tau Hotel Vung Tau</li>
-                            </ul> */}
                             <p>{hotelDetails.otherNames}</p>
                         </div>
                     </div>
                 </div>
 
-                <div id="review" className="h-[3.125rem]"/>
-                <div className={styles.review}>
+                <div id="review" className="h-20"/>
+                <div className="flex flex-col gap-4">
                     <h2 className="text-[var(--primary-gold-120)]">Đánh giá</h2>
-                    <div className={styles.ratingAndComment}>
+                    <div className="flex flex-row gap-[1.875rem]">
                         <RatingScoreInReview 
                             reviewAverageOverallPoint={hotelDetails.reviewAverageOverallPoint}
                             reviewAveragePointCategory={hotelDetails.reviewAveragePointCategory}
@@ -218,7 +212,7 @@ export default async function HotelDetails({ params, searchParams }) {
                             reviewAverageFacilityPoint={hotelDetails.reviewAverageFacilityPoint}
                             reviewAverageEnvironmentPoint={hotelDetails.reviewAverageEnvironmentPoint}
                             />
-                        <div className={styles.comments}>  
+                        <div className="flex flex-col gap-4 items-start w-full">  
                             {reviewsOfHotel.length > 0 ? reviewsOfHotel.map((review) => (
                                 <Comment
                                     key={review.id}
@@ -232,7 +226,6 @@ export default async function HotelDetails({ params, searchParams }) {
                             )) : (
                                 <h5 className="text-[var(--secondary-red-100)]">Hiện tại chưa có đánh giá nào!</h5>
                             )}
-                            {/* <ViewAllButton category="Đánh giá"/> */}
                         </div>
                     </div>
                 </div>

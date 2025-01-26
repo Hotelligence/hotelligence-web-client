@@ -1,7 +1,6 @@
 'use client'
 import React, { useState, useEffect, use } from "react"
 import { Button, Input, Popover, PopoverContent, PopoverTrigger } from "@heroui/react"
-import styles from "./popover.module.css"
 import { User } from "lucide-react"
 import { useSearchParams, usePathname } from "next/navigation"
 import { useRouter } from "next/navigation"
@@ -76,13 +75,13 @@ export default function PopOver({ defaultValue }) {
                 </PopoverTrigger>
 
                 <PopoverContent>
-                    <div className={styles.popoverContainer}>
-                        <div className={styles.row}>
-                            <div className={styles.txt}>
+                    <div className="flex flex-col gap-4 p-4">
+                        <div className="flex justify-between items-center gap-8">
+                            <div className="flex justify-start text-left w-40">
                                 <h6>Người lớn</h6>
                             </div> 
 
-                            <div className={styles.btnContainer}>
+                            <div className="flex gap-4 items-center justify-between w-32">
                                 <Button 
                                     radius="full"
                                     isIconOnly
@@ -103,12 +102,12 @@ export default function PopOver({ defaultValue }) {
                             </div>
                         </div>
 
-                        <div className={styles.row}>
-                            <div className={styles.txt}>
+                        <div className="flex justify-between items-center gap-8">
+                            <div className="flex justify-start text-left w-40">
                                 <h6>Trẻ em (dưới 12 tuổi)</h6>
                             </div> 
 
-                            <div className={styles.btnContainer}>
+                            <div className="flex gap-4 items-center justify-between w-32">
                                 <Button 
                                     radius="full"
                                     isIconOnly

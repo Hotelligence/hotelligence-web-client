@@ -1,5 +1,4 @@
 'use client'
-import styles from "./bookingForm.module.css";
 import { Input, Autocomplete, AutocompleteItem, Select, SelectItem, Textarea, Button, ScrollShadow, Image } from "@heroui/react"
 import { useEffect, useState, useRef } from "react"
 import CustomButton from "../buttons/button"
@@ -147,13 +146,13 @@ export default function HotelInfoForm({title, action, hotel}) {
     }
 
     return (
-        <div className={styles.formContainer}>
-            <div className={styles.title}>
+        <div className="flex flex-col w-full bg-white rounded-[0.625rem] border border-[var(--primary-blue-50)]">
+            <div className="flex justify-between items-center bg-[var(--primary-blue-100)] text-[var(--primary-gold-100)] px-5 py-[1.06rem] w-full rounded-t-[0.625rem]">
                 <h4>{title}</h4>
                 
             </div>
 
-            <div className={styles.content}>
+            <div className="p-5 flex flex-col items-start gap-5">
                 <form action={handleSubmit} onChange={handleFormChange}>
                     <div className="grid grid-cols-2 gap-x-[3.125rem] gap-y-[1.875rem] w-max mt-[1.25rem] mb-[2.5rem]" >
                         <Input defaultValue={hotel?.hotelName || ""} className="w-auto" label="Tên khách sạn" labelPlacement="outside" variant="bordered" placeholder=" " size="lg" isRequired name="hotelName"/>

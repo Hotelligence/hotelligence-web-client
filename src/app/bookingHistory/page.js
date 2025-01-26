@@ -1,14 +1,13 @@
-import styles from "./bookingHistory.module.css"
 import BookingHistoryCard from "../../components/cards/bookingHistoryCard"
 import getBookingsByUserId from "../../api/booking/getBookingsByUserId"
 import { auth } from '@clerk/nextjs/server';
 import getRoomById from "../../api/room/getRoomById";
+import getHotelById from "../../api/hotel/getHotelById";
 import getAllRooms from "../../api/room/getAllRooms";
 import getAllHotels from "../../api/hotel/getAllHotels";
 import cancelBooking from "../../api/booking/cancelBooking";
 import writeReview from "../../api/review/writeReview"
 import { clerkClient } from "@clerk/nextjs/server";
-import next from "next";
 import updateBookingStatus from "../../api/booking/updateBookingStatus";
 
 export default async function BookingHistory() {
@@ -18,18 +17,17 @@ export default async function BookingHistory() {
     const username = `${user.firstName || ''}${user.lastName ? ' ' + user.lastName : ''}`;
     
     const bookings = await getBookingsByUserId(userId) || [];
-    console.log(bookings);
-    
+    console.log(bookings);    
 
-    // const joinedData = await Promise.all(bookings.map(async (booking) => {
-    //     const room = await getRoomById(booking.roomId);
-    //     const hotel = hotels.find(h => h.id === room.hotelId);
-    //     return {
-    //         booking,
-    //         ...hotel,
-    //         ...room
-    //     };
-    // }));
+    const joinedData = await Promise.all(bookings.map(async (booking) => {
+        const room = await getRoomById(booking.roomId);
+        const hotel = await getHotelById(room.hotelId);
+        return {
+            booking,
+            ...hotel,
+            ...room
+        };
+    }));
 
     console.log(joinedData);
     // console.log(user)
@@ -78,17 +76,17 @@ export default async function BookingHistory() {
     }
 
     return (
-        <div className={styles.pageContainer}>
+        <div className="mt-10 flex flex-col gap-[1.875rem] items-start">
             <h2>Lịch sử đặt phòng</h2>
             
                 {(joinedData.map(((data, index) => 
-                <div className={styles.cards} key={data.booking[index]}>
+                <div className="w-full flex flex-col gap-10" key={data.booking[index]}>
                     <BookingHistoryCard 
-                    key={data.booking.id}
+                    key={data.id}
                     roomId={data.booking.roomId}
                     roomName={data.roomName}
                     hotelId={data.hotelId}
-                    image={data.image}
+                    image={data.images[0]}
                     hotelName={data.hotelName}
                     city={data.city}
                     ratingScore={data.ratingScore}

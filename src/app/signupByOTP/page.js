@@ -1,6 +1,4 @@
 'use client'
-import styles from "../loginByOTP/loginByOTP.module.css";
-import styleLogin from "../loginOrSignUp/loginOrSignUp.module.css";
 import { Checkbox, Input } from "@heroui/react";
 import CustomButton from "../../components/buttons/button";
 import CustomButtonOutline from "../../components/buttons/buttonOutline";
@@ -34,19 +32,19 @@ export default function SignUpByOTP() {
 
     return (
         <>
-            <div className={styles.header}>
+            <div className="flex items-center mb-[0.94rem]">
                 <BackButtonIconOnly/>
-                <h2 className={styles.title}>Hãy xác nhận đó là bạn</h2>
+                <h2 className="flex text-center justify-center items-center m-0 mr-auto">Hãy xác nhận đó là bạn</h2>
             </div>
 
-            <div className={styles.descriptionWrapper}>
-                <div className={styles.description}>
-                    <text className="body4">Hãy nhập mã bảo mật chúng tôi đã gửi qua email. Nếu không thấy email này trong hộp thư đến, hãy kiểm tra hộp thư rác.</text>
+            <div className="flex justify-center flex-wrap text-center mb-6 text-[var(--primary-blue-50)]">
+                <div className="flex max-w-[22.5rem]">
+                    <p className="body4">Hãy nhập mã bảo mật chúng tôi đã gửi qua email. Nếu không thấy email này trong hộp thư đến, hãy kiểm tra hộp thư rác.</p>
                 </div>
             </div>
 
-            <div className={styleLogin.buttonContainer}>
-                    <div className={styleLogin.buttonWrapper}>
+            <div className="flex justify-center">
+                    <div className="w-[22.5rem] h-[3.13rem]">
                         <Input 
                             color="white" 
                             variant="bordered" 
@@ -62,21 +60,21 @@ export default function SignUpByOTP() {
                     </div>
             </div>
             
-            <div className={styleLogin.buttonContainer}>
-                <div className={styles.buttonWrapper2}>
+            <div className="flex justify-center">
+                <div className="w-[22.5rem] h-[3.13rem] flex justify-left">
                     <Checkbox color="var(--primary-blue-100)" size="sm">
-                        <text className="body4">Giữ tôi luôn đăng nhập</text>
+                        <p className="body4">Giữ tôi luôn đăng nhập</p>
                     </Checkbox>
                 </div>
             </div>
 
-            <div className={styles.buttonContainer}>
+            <div className="flex justify-center">
                 <CustomButton onPress={onPressVerify}>Xác nhận</CustomButton>
             </div>
 
-            <div className={styleLogin.buttonContainer}>
-                <div className={styles.countdown}>
-                    <text className="body4">Gửi lại mã sau 30 giây</text>
+            <div className="flex justify-center">
+                <div className="text-primary-blue-50">
+                    <p className="body4">Gửi lại mã sau 30 giây</p>
                 </div>
             </div>
         </>

@@ -1,10 +1,9 @@
-import styles from './payOffline.module.css'
 import ButtonOutline from '../../components/buttons/buttonOutline'
 import Link from 'next/link'
 
 export default function PayOffline() {
     return (
-        <div className={styles.pageContainer}>
+        <div className='flex flex-col mt-7 w-[35%] items-center mx-auto gap-5'>
             <h2>Thanh toán tại khách sạn</h2>
 
             <h6>Quý khách đã chọn phương thức thanh toán tại khách sạn!</h6>

@@ -1,16 +1,14 @@
 import { TicketPercent } from 'lucide-react'
-import styles from './discount.module.css'
 
 export default function Discount({discountPercentage}) {
     return (
-        <div className={styles.discountWrapper}>
-            <div className={styles.leftSide}>
+        <div className="flex items-center bg-[var(--secondary-green-100)] p-[0.44rem_0.64rem] rounded-[0.3125rem] w-fit h-[1.875rem] gap-[0.31rem]">
+            <div className="text-[var(--primary-white-100)]">
                 <TicketPercent size={15}/>
             </div>
 
-            <div className={styles.rightSide}>
-                <text className='h8'>Giảm {discountPercentage}%</text>
-
+            <div className="flex items-center text-[var(--primary-white-100)]">
+                <p className="h8">Giảm {discountPercentage}%</p>
             </div>
         </div>
     )

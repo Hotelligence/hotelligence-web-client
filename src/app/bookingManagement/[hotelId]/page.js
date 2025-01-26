@@ -64,6 +64,7 @@ export default async function BookingManagement({params}) {
                         {bookings.map(booking => (
                             booking &&
                             <BookingCard 
+                                key={booking.id}
                                 roomName={booking.roomName}
                                 numOfNights={booking.numOfNights}
                                 bookingId={booking.id}

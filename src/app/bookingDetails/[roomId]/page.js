@@ -1,5 +1,4 @@
 import BackButton from "../../../components/buttons/backButton";
-import styles from "./bookingDetails.module.css";
 import BookingForm from "../../../components/forms/bookingForm";
 import { Input, RadioGroup, Radio } from "@heroui/react";
 import Image from "next/image";
@@ -91,8 +90,8 @@ export default async function BookingDetails({ params, searchParams }) {
 
             <h2 className="mt-[1.875rem]">Chi tiết đặt phòng</h2>
 
-            <div className={styles.pageContainer}>
-                <form className={styles.forms} action={handlePlaceBooking}>            
+            <div className="flex flex-row justify-between mt-5">
+                <form className="flex flex-col w-2/3 gap-5" action={handlePlaceBooking}>            
                     <BookingForm step={1} title="Thông tin cá nhân">
                         <p className="body4 text-justify">Vui lòng cho chúng tôi biết tên khách sẽ lưu trú tại phòng này chính xác như trên giấy tờ tùy thân sẽ sử dụng khi nhận phòng. Vui lòng nhập đầy đủ nếu khách mang họ kép (như Nguyễn Phước, Tôn Nữ, Lê Đoàn, v.v.).</p>
 
@@ -165,7 +164,7 @@ export default async function BookingDetails({ params, searchParams }) {
                     </div>
                 </form>
 
-                <div className={styles.receipt}>
+                <div className="flex flex-col w-1/3 gap-5">
                     <Receipt 
                         hotelName={hotelDetails.hotelName} 
                         roomName={roomDetails.roomName}

@@ -21,7 +21,7 @@ export default function CancelPartnershipModal() {
 
                             <ModalBody>                                
                                 <h6 className="text-center">Quý Đối tác chắn chắn muốn hủy đối tác?</h6>
-                                <text className="body3 text-center">Quý Đối tác vui lòng liên hệ với bộ phận CSKH để được hỗ trợ các thủ tục Hủy đối tác</text>
+                                <p className="body3 text-center">Quý Đối tác vui lòng liên hệ với bộ phận CSKH để được hỗ trợ các thủ tục Hủy đối tác</p>
                             </ModalBody>
                             
                             <ModalFooter className="flex w-full mx-auto mb-4 items-center justify-center">

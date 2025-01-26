@@ -1,7 +1,5 @@
 'use client'
 import React from 'react';
-import styleLoginByOTP from '../loginByOTP/loginByOTP.module.css';
-import styleLogin from '../loginOrSignUp/loginOrSignUp.module.css';
 import { Eye, EyeOff } from "lucide-react";
 import { Button, Input, Checkbox } from "@heroui/react";
 import CustomButton from "../../components/buttons/button";
@@ -59,7 +57,7 @@ export default function LoginByPassword() {
             <div className="flex justify-center">
                 <div className={styleLoginByOTP.buttonWrapper2}>
                     <Checkbox color="var(--primary-blue-100)" size="sm">
-                        <text className="body4">Giữ tôi luôn đăng nhập</text>
+                        <p className="body4">Giữ tôi luôn đăng nhập</p>
                     </Checkbox>
                 </div>
             </div>

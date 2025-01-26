@@ -29,7 +29,7 @@ export default function ZoomableImage({ src, alt, width, height, className }) {
         className={className}
       />) : (
         <div className="flex flex-col items-center gap-1">
-            <text className='body5 italic'>Chưa có hình ảnh</text>
+            <p className='body5 italic'>Chưa có hình ảnh</p>
             <ImageOff size={60} />
         </div>
     )}

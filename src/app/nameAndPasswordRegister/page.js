@@ -1,5 +1,5 @@
 'use client'
-import styles from './nameRegister.module.css'
+// remove styles import
 import { ArrowLeft, Eye, EyeOff } from "lucide-react";
 import { Button, Input } from "@heroui/react";
 import CustomButton from '../../components/buttons/button';
@@ -50,13 +50,13 @@ export default function NameAndPasswordRegister() {
 
     return (
         <>
-            <div className={styles.header}>
+            <div className="flex items-center mb-[0.94rem]">
                 <BackButtonIconOnly/>
-                <h2 className={styles.title}>Tạo tên tài khoản và mật khẩu</h2>
+                <h2 className="flex text-center justify-center items-center m-0 mr-auto pr-10">Tạo tên tài khoản và mật khẩu</h2>
             </div>
 
-            <div className={styles.pageContainer}>
-                <text className='body4 text-[var(--primary-blue-50)] text-center'>Tên tài khoản của Quý khách nên giống với tên trên giấy tờ tùy thân (như Căn cước công dân, Hộ chiếu)</text>
+            <div className="flex flex-col mt-5 w-1/3 items-center mx-auto gap-5">
+                <p className='body4 text-[var(--primary-blue-50)] text-center'>Tên tài khoản của Quý khách nên giống với tên trên giấy tờ tùy thân (như Căn cước công dân, Hộ chiếu)</p>
 
                 <div className='flex flex-row gap-2'>
                     <Input label="Họ " variant="bordered" size="lg" isClearable description='VD: "Lê", "Nguyễn", "Trần", v.v.'
@@ -67,7 +67,7 @@ export default function NameAndPasswordRegister() {
                         onChange={(e) => setFirstName(e.target.value)}/>
                 </div>
 
-                <text className='body4 text-[var(--primary-blue-50)] text-center'>Mật khẩu từ 8-72 kí tự, trong đó ít nhất có 01 chữ cái in hoa và 01 chữ số.</text>
+                <p className='body4 text-[var(--primary-blue-50)] text-center'>Mật khẩu từ 8-72 kí tự, trong đó ít nhất có 01 chữ cái in hoa và 01 chữ số.</p>
 
                 <Input 
                     color="white" 

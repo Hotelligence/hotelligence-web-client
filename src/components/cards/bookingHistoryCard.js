@@ -1,4 +1,3 @@
-import styles from "./bookingHistoryCard.module.css"
 import HotelCardLong from "../cards/hotelCardLong"
 import CustomButton from "../buttons/button"
 import CancelBookingModal from "../views/cancelBookingModal"
@@ -51,11 +50,11 @@ export default async function BookingHistoryCard({
 
 
     return (
-        <div className={styles.cardContainer}>
+        <div className="flex flex-col gap-6">
                 <div>
                     <h4 className="text-[var(--primary-gold-120)]">◆ &nbsp; {roomName}</h4>
 
-                    <div className={styles.mainBody}>
+                    <div className="flex flex-row justify-between gap-[1.875rem] mt-2">
                         <div className="w-full">
                             <HotelCardLong 
                                 id={hotelId}
@@ -71,39 +70,39 @@ export default async function BookingHistoryCard({
                                 totalPrice={totalPrice} />
                         </div>
 
-                        <div className={styles.rightSide}>
-                            <div className={styles.row1}>
-                                <div className={styles.details}>
-                                    <div className={styles.title}>
-                                        <h6 className="w-[6rem]">Mã đặt phòng</h6>
+                        <div className="flex flex-col justify-between w-[37%]">
+                            <div className="flex flex-col gap-0.5 items-start">
+                                <div className="flex flex-row gap-4">
+                                    <div className="w-24">
+                                        <h6>Mã đặt phòng</h6>
                                     </div>
                                     <p className="body3">#{digitsOnlyBookingId}</p>
                                 </div>
 
-                                <div className={styles.details}>
-                                    <div className={styles.title}>
-                                        <h6 className="w-[6rem]">Đặt phòng</h6>
+                                <div className="flex flex-row gap-4">
+                                    <div className="w-24">
+                                        <h6>Đặt phòng</h6>
                                     </div>
                                     <p className="body3">{formatDate(bookingDate)}</p>
                                 </div>
 
-                                <div className={styles.details}>
-                                    <div className={styles.title}>
-                                        <h6 className="w-[6rem]">Nhận phòng</h6>
+                                <div className="flex flex-row gap-4">
+                                    <div className="w-24">
+                                        <h6>Nhận phòng</h6>
                                     </div>
                                     <p className="body3">{formatDate(checkinDate)}</p>
                                 </div>
 
-                                <div className={styles.details}>
-                                    <div className={styles.title}>
-                                        <h6 className="w-[6rem]">Trả phòng</h6>
+                                <div className="flex flex-row gap-4">
+                                    <div className="w-24">
+                                        <h6>Trả phòng</h6>
                                     </div>
                                     <p className="body3">{formatDate(checkoutDate)}</p>
                                 </div>
 
-                                <div className={styles.details2}>
-                                    <div className={styles.title}>
-                                        <h6 className="w-[6rem]">Tình trạng</h6>
+                                <div className="flex flex-row gap-4 mt-2">
+                                    <div className="w-24">
+                                        <h6>Tình trạng</h6>
                                     </div>
                         
                                     {status === "Đang chờ thanh toán" && (
@@ -132,7 +131,7 @@ export default async function BookingHistoryCard({
                                 </div>
                             </div>
 
-                            <div className={styles.row2}>
+                            <div className="flex flex-row-reverse justify-between">
                                 {(status === "Hoàn tất") &&
                                     <ReviewModal 
                                     action={action}

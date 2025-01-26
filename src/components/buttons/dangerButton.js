@@ -1,7 +1,5 @@
 'use client'
 import { Button, Link } from "@heroui/react"
-import styles from './button.module.css'
-// import Link from 'next/link'
 
 export default function CustomButton({ children, onPress, isDisabled, type}) {
     return (

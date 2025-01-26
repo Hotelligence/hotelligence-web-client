@@ -1,5 +1,4 @@
 'use client'
-import styles from "./loginOrSignUp.module.css";
 import googleLogo from "../../images/google_logo.png";
 import { Button, Input } from "@heroui/react";
 import Image from "next/image";
@@ -87,11 +86,10 @@ export default function LoginOrSignUp() {
     
     return (
         <>
-            <h2 className={styles.title}>Đăng nhập hoặc đăng ký</h2>
-            <div className={styles.fieldsContainer}>
-
-                <div className={styles.buttonContainer}>
-                    <div className={styles.buttonWrapper}>
+            <h2 className="text-center mb-12">Đăng nhập hoặc đăng ký</h2>
+            <div className="flex flex-col">
+                <div className="flex justify-center">
+                    <div className="w-[22.5rem] h-[3.13rem]">
                         <Button  
                             color="white" 
                             variant="bordered" 
@@ -104,12 +102,12 @@ export default function LoginOrSignUp() {
                     </div>
                 </div>
 
-                {/* <div className={styles.or}>
+                {/* <div className="flex justify-center text-center my-6">
                     <h5>hoặc</h5>
                 </div>
                 
-                <div className={styles.buttonContainer}>
-                    <div className={styles.buttonWrapper}>
+                <div className="flex justify-center">
+                    <div className="w-[22.5rem] h-[3.13rem]">
                         <Input 
                             color="white" 
                             variant="bordered" 
@@ -125,22 +123,22 @@ export default function LoginOrSignUp() {
                     </div>
                 </div>
 
-                <div className={styles.buttonContainer}>
-                    <div className={styles.buttonWrapper2}>
+                <div className="flex justify-center">
+                    <div className="w-[22.5rem] h-[3.13rem] flex justify-end mt-2">
                         <Button color="transparent" disableAnimation="true" size="sm">
-                            <text className="body4" style={{textDecoration: 'underline'}}>Quên mật khẩu?</text>
+                            <p className="body4 underline">Quên mật khẩu?</p>
                         </Button>
                     </div>
                 </div>
 
-                <div className={styles.buttonContainer}>
+                <div className="flex justify-center">
                     <CustomButton onPress={handleSubmit}>Tiếp tục</CustomButton>
                 </div> */}
 
-                <div className={styles.buttonContainer}>
+                <div className="flex justify-center">
                     <div className="body4">
-                        <p className={styles.txtWrapper}>
-                        Bằng việc tiếp tục, Quý khách đã đọc và đồng ý với Điều khoản & Điều kiện, Tuyên bố bảo mật của Hotelligence.
+                        <p className="flex justify-center text-center mt-5 w-[22.5rem]">
+                        Bằng việc tiếp tục, Quý khách đã đọc và đồng ý với Điều khoản & Điều kiện, Tuyên bố bảo mật của Hotelligence.
                         </p>
                     </div>
                 </div>

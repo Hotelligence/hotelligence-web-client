@@ -286,7 +286,7 @@ export default function RoomInfoForm({action, room, allRoomAmenitiesInHotel, del
                                 <h4>Tiện nghi</h4>
                             </div>
 
-                            <div>
+                            <div className="grid grid-cols-2 gap-x-[3.125rem] gap-y-[1.875rem] w-full mt-[1.25rem] mb-[2.5rem] px-4">
                                 <AmenityForm 
                                     allRoomAmenitiesInHotel={allRoomAmenitiesInHotel}
                                     selectedAmenities={selectedAmenities}

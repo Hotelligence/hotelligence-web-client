@@ -8,11 +8,13 @@ import Image from "next/image";
 import fusion3 from "../../images/fusion3.webp";
 import HotelAmenity from "./hotelAmenity";
 import { RadioGroup, Radio } from "@heroui/react";
-import Discount from "../cards/discount";
+import Discount from "../cards/discount";   
 import CustomButton from "../buttons/button";
-import stylesRoomCardHigh from "../cards/roomCardHigh.module.css";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 export default function RoomDetailsModal({
+    id,
     img, 
     roomName, 
     extraOptions, 
@@ -24,6 +26,7 @@ export default function RoomDetailsModal({
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
     const [selectedOptions, setSelectedOptions] = useState([]);
     const [selectedValue, setSelectedValue] = useState("option0");
+    const searchParams = useSearchParams();
     
     useEffect(() => {
         if (extraOptions && extraOptions.length > 0) {
@@ -41,6 +44,16 @@ export default function RoomDetailsModal({
         setSelectedOptions(selectedOption ? [selectedOption] : []);
     };
 
+    const createBookingUrl = () => {
+        const params = new URLSearchParams();
+        params.set('from', searchParams.get('from'));
+        params.set('to', searchParams.get('to'));
+        if (selectedOptions.length > 0) {
+            params.set('options', JSON.stringify(selectedOptions));
+        }
+        return `/bookingDetails/${id}?${params.toString()}`;
+    };
+    
     return (
         <div>      
             <ViewAllButton onPress={onOpen} category="tiện ích"/>
@@ -59,15 +72,15 @@ export default function RoomDetailsModal({
                                 <HotelAmenity isVertical="true" isRoomDetailModal/>
 
                                 <div className={styles.extraInfoContainer}>
-                                    <div className={stylesRoomCardHigh.breakfast}>
+                                    <div className="flex flex-col gap-2">
                                         <h5>Tùy chọn thêm</h5>
 
-                                        <div className={stylesRoomCardHigh.row1}>
+                                        <div className="flex flex-row justify-between items-baseline">
                                             <h6>Bổ sung</h6>
                                             <text className='body5'>Giá mỗi đêm</text>
                                         </div>
 
-                                        <div className={stylesRoomCardHigh.row2}>
+                                        <div className="flex flex-row justify-between items-baseline">
                                             <RadioGroup 
                                                 value={selectedValue}
                                                 onValueChange={handleOptionChange}
@@ -85,15 +98,15 @@ export default function RoomDetailsModal({
                                         </div>
                                     </div>
 
-                                    <div className={stylesRoomCardHigh.price}>
-                                        <div className={stylesRoomCardHigh.row3}>
-                                            <Discount discountPercentage={discountPercentage}/>
+                                    <div className="flex flex-col">
+                                        <div className="flex flex-row gap-2 items-baseline mt-[1.56rem]">
+                                            {discountPercentage > 0 ? <Discount discountPercentage={discountPercentage}/> : <div className="h-[30px]"/>}
                                             {/* <text className='h7 text-[var(--secondary-red-100)]'>Còn {numOfRemainingRooms} phòng</text> */}
                                         </div>
 
-                                        <div className={stylesRoomCardHigh.row4}>
-                                            <div className={stylesRoomCardHigh.price}>
-                                                <div className={stylesRoomCardHigh.priceDetails}>
+                                        <div className="flex flex-row justify-between items-end mt-2">
+                                            <div className="flex flex-col">
+                                                <div className="flex flex-row gap-[0.625rem] items-baseline">
                                                     <h4>{discountedPrice?.toLocaleString('en-US')}đ</h4>
                                                     <text className='body2 line-through text-[var(--primary-blue-50)]'>{originPrice?.toLocaleString('en-US')}đ</text>
                                                 </div>
@@ -101,7 +114,11 @@ export default function RoomDetailsModal({
                                                 <text className='body5 text-[var(--primary-blue-50)]'>Tổng {totalPrice?.toLocaleString('en-US')}đ bao gồm thuế và phí</text>
                                             </div>
 
-                                            <CustomButton>Đặt</CustomButton>
+                                            <CustomButton>
+                                                <Link href={createBookingUrl()}>
+                                                    Đặt
+                                                </Link>
+                                            </CustomButton>
                                         </div>
                                     </div>      
                                 </div>  

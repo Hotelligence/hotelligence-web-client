@@ -2,8 +2,6 @@ import Searchbar from "../../components/inputs/searchbar"
 import CustomButton from "../../components/buttons/button"
 import DatePicker from "../../components/inputs/datepicker"
 import PopOver from "../../components/inputs/popover"
-import styleHome from "../page.module.css"
-import styles from "./searchResult.module.css"
 import Sort from "../../components/inputs/sort"
 import PriceSlider from "../../components/inputs/priceSlider"
 import RadioButton from "../../components/buttons/radioButton"
@@ -74,7 +72,7 @@ export default async function SearchResult({searchParams}) {
 
     return (
         <>
-            <div className={styleHome.searchContainer}>
+            <div className="flex justify-between mt-5 items-center gap-[1.875rem] w-full">
                 <Searchbar defaultValue={query} isRequired/>
                 <DatePicker 
                     defaultCheckinDate={from}
@@ -86,12 +84,12 @@ export default async function SearchResult({searchParams}) {
                 </CustomButton>
             </div>
 
-            <div className={styles.pageContainer}>
-                <div className={styles.leftSide}>
+            <div className="flex gap-[1.875rem] mt-[1.875rem]">
+                <div className="w-96">
                     <h3>Lọc theo</h3>
 
-                    <div className={styles.filterOptions}>
-                        <div className={styles.nightlyPrice}>
+                    <div className="flex flex-col gap-[1.875rem]">
+                        <div className="flex mt-[1.875rem]">
                             <PriceSlider minValue={100000} maxValue={20000000} defaultMinValue={100000} defaultMaxValue={10000000} step={10000}/>
                         </div>
 
@@ -100,22 +98,22 @@ export default async function SearchResult({searchParams}) {
                     </div>
                 </div>
 
-                <div className={styles.rightSide}>
-                    <div className={styles.topHeading}>
+                <div className="flex flex-col w-[calc(100%-26rem)]">
+                    <div className="flex justify-between items-center">
                         {results && results.length > 0 && 
                             <h5>{results.length} kết quả trả về cho tìm kiếm <span className="text-[var(--primary-gold-120)]">{query}</span> của bạn</h5>
                         }
                         {(!results || results.length === 0) && 
                             <h5>0 kết quả trả về cho tìm kiếm <span className="text-[var(--primary-gold-120)]">{query}</span> của bạn</h5>
                         }
-                        <div className={styles.sort}>
+                        <div className="flex justify-end w-[21.875rem]">
                             <Sort />
                         </div>                    
                     </div>
                     
                     {results && results.length > 0 &&
                      results.map((hotel) => (
-                        <div className={styles.cardContainer} key={hotel.id}>
+                        <div className="flex flex-col mt-5 justify-between" key={hotel.id}>
                             <HotelCardLong 
                                 key={hotel.id}
                                 id={hotel.id}
@@ -134,9 +132,7 @@ export default async function SearchResult({searchParams}) {
                             />
                         </div>
                     ))}
-
                 </div>
-
             </div>
         </>
     )

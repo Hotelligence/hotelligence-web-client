@@ -1,4 +1,3 @@
-import styles from "./page.module.css";
 import Searchbar from "../components/inputs/searchbar";
 import CustomButton from "../components/buttons/button";
 import RecentSearchCard from "../components/cards/recentsearchCard";
@@ -34,8 +33,8 @@ export default async function Home({searchParams}) {
 
   return (
     <main>
-      <h1 className={styles.heading1}>Bạn muốn đi đâu?</h1>
-      <div className={styles.searchContainer}>
+      <h1 className="text-center">Bạn muốn đi đâu?</h1>
+      <div className="flex justify-between mt-5 items-center gap-[1.875rem] w-full">
         <Searchbar isRequired/>        
         <DatePicker/>
         <PopOver/>
@@ -57,8 +56,8 @@ export default async function Home({searchParams}) {
         ></iframe>
       </div>
       
-      {/* <h2 className={styles.heading2}>Tìm kiếm gần đây</h2>
-      <div className={styles.cardContainer}>
+      {/* <h2 className="mt-10 text-left">Tìm kiếm gần đây</h2>
+      <div className="flex gap-5 overflow-x-auto mt-5 pb-[0.7rem] scrollbar-hide">
         <RecentSearchCard cityName="Hà Nội" />
         <RecentSearchCard cityName="Đà Nẵng" />
         <RecentSearchCard cityName="Hồ Chí Minh" />
@@ -70,8 +69,8 @@ export default async function Home({searchParams}) {
         <RecentSearchCard cityName="Hồ Chí Minh" />
       </div>
 
-      <h2 className={styles.heading2}>Các địa điểm nổi bật</h2>
-      <div className={styles.cardContainer}>
+      <h2 className="mt-10 text-left">Các địa điểm nổi bật</h2>
+      <div className="flex gap-5 overflow-x-auto mt-5 pb-[0.7rem] scrollbar-hide">
         <CityCard img={vt}/>
         <CityCard img={vt}/>
         <CityCard img={vt}/>
@@ -82,8 +81,8 @@ export default async function Home({searchParams}) {
         <CityCard img={vt}/>
       </div>
 
-      <h2 className={styles.heading2}>Ưu đãi</h2>
-      <div className={styles.cardContainer}>
+      <h2 className="mt-10 text-left">Ưu đãi</h2>
+      <div className="flex gap-5 overflow-x-auto mt-5 pb-[0.7rem] scrollbar-hide">
         {top10Hotels.map(hotel => (
           <HotelCard
             key={hotel.id}
