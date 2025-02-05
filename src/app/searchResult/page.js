@@ -11,6 +11,7 @@ import getSearchResult from "../../api/getSearchResult"
 import getRoomsInHotel from "../../api/room/getRoomsInHotel"
 import secureLocalStorage from "react-secure-storage"
 import Link from "next/link"
+import CustomPagination from "../../components/buttons/customPagination"
 
 export default async function SearchResult({searchParams}) {
     const query = searchParams?.query || "";
@@ -33,6 +34,8 @@ export default async function SearchResult({searchParams}) {
     console.log("minRatingScore: ", minRatingScore);
     const stars = searchParams?.stars || "";
     console.log("stars: ", stars);
+    const currentPage = parseInt(searchParams?.page) || 1;
+    const itemsPerPage = 10;
 
     const keys = Object.keys(searchParams)
     const values = Object.values(searchParams)
@@ -69,6 +72,12 @@ export default async function SearchResult({searchParams}) {
         stars
     );  
     console.log("results: ", results);
+
+    // Calculate pagination
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const paginatedResults = results ? results.slice(startIndex, endIndex) : [];
+    const totalPages = results ? Math.ceil(results.length / itemsPerPage) : 0;
 
     return (
         <>
@@ -111,8 +120,8 @@ export default async function SearchResult({searchParams}) {
                         </div>                    
                     </div>
                     
-                    {results && results.length > 0 &&
-                     results.map((hotel) => (
+                    {paginatedResults && paginatedResults.length > 0 &&
+                     paginatedResults.map((hotel) => (
                         <div className="flex flex-col mt-5 justify-between" key={hotel.id}>
                             <HotelCardLong 
                                 key={hotel.id}
@@ -132,6 +141,14 @@ export default async function SearchResult({searchParams}) {
                             />
                         </div>
                     ))}
+
+                    <div className="mt-4 justify-items-end">
+                        <CustomPagination 
+                            totalPages={totalPages}
+                            currentPage={currentPage}
+                            paramsStr={paramsStr}
+                        />
+                    </div>
                 </div>
             </div>
         </>
